@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: hackathon-buddy-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hackathon_buddy
+      MYSQL_USER: hackathon_user
+      MYSQL_PASSWORD: hackathon_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  backend:
+    build: 
+      context: ./backend
+    container_name: hackathon-buddy-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/hackathon_buddy?useSSL=false&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=hackathon_user
+      - SPRING_DATASOURCE_PASSWORD=hackathon_password
+      - AI_SERVICE_URL=http://ai-service:8000
+
+  ai-service:
+    build:
+      context: ./ai-service
+    container_name: hackathon-buddy-ai-service
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: hackathon-buddy-frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:

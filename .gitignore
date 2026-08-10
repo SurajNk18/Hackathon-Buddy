@@ -1,0 +1,32 @@
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+dist/
+build/
+.env
+
+# Java
+target/
+*.class
+*.jar
+*.war
+.settings/
+.classpath
+.project
+.factorypath
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+.pytest_cache/
