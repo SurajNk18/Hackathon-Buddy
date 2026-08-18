@@ -1,0 +1,596 @@
+/* ================================
+   CREATE PROFILE PAGE
+================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+.create-profile-page {
+  min-height: 100vh;
+  width: 100%;
+
+  padding: 26px 0 70px;
+
+  background:
+    radial-gradient(
+      circle at 8% 40%,
+      rgba(72, 67, 160, 0.12),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 92% 55%,
+      rgba(123, 50, 170, 0.13),
+      transparent 30%
+    ),
+    #09090f;
+
+  color: #fff;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  overflow-x: hidden;
+}
+
+
+/* ================================
+   BACK
+================================ */
+
+.create-profile-back {
+  position: fixed;
+
+  top: 22px;
+  left: 30px;
+
+  border: none;
+  background: transparent;
+
+  color: #74798a;
+
+  font-size: 15px;
+
+  cursor: pointer;
+
+  z-index: 10;
+
+  transition: 0.2s ease;
+}
+
+.create-profile-back:hover {
+  color: #ffffff;
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
+.create-profile-header {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+
+  margin-bottom: 48px;
+}
+
+
+/* ================================
+   LOGO
+================================ */
+
+.create-profile-logo {
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  margin-bottom: 27px;
+}
+
+.create-profile-logo-icon {
+  width: 58px;
+  height: 58px;
+
+  border-radius: 17px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(
+    135deg,
+    #6258f5,
+    #a34be8
+  );
+
+  font-size: 29px;
+
+  box-shadow:
+    0 0 25px rgba(100, 80, 240, 0.25);
+}
+
+.create-profile-logo-text {
+  font-size: 27px;
+
+  font-weight: 900;
+
+  letter-spacing: -1px;
+
+  line-height: 1;
+
+  color: #ffffff;
+}
+
+.create-profile-logo-text span {
+  color: #6259ee;
+}
+
+
+/* ================================
+   TITLE
+================================ */
+
+.create-profile-header h1 {
+  margin: 0;
+
+  font-size: 34px;
+
+  font-weight: 900;
+
+  line-height: 1;
+
+  letter-spacing: -1px;
+
+  color: #ffffff;
+}
+
+.create-profile-header p {
+  margin: 14px 0 0;
+
+  font-size: 15px;
+
+  font-weight: 500;
+
+  color: #74798a;
+}
+
+
+/* ================================
+   MAIN CARD
+
+   EXACT DESKTOP SIZE
+================================ */
+
+.create-profile-card {
+  width: 786px;
+
+  min-height: 630px;
+
+  margin: 0 auto;
+
+  padding: 31px 29px 28px;
+
+  background: #11111b;
+
+  border: 1px solid #202033;
+
+  border-radius: 17px;
+
+  box-shadow:
+    0 20px 55px rgba(0, 0, 0, 0.25);
+}
+
+
+/* ================================
+   TWO COLUMNS
+
+   349 + 29 + 349 = 727
+================================ */
+
+.create-profile-columns {
+  width: 728px;
+
+  display: grid;
+
+  grid-template-columns: 349px 349px;
+
+  column-gap: 29px;
+}
+
+
+/* ================================
+   COLUMN
+================================ */
+
+.profile-column {
+  width: 349px;
+}
+
+
+/* ================================
+   IDENTITY / STACK
+================================ */
+
+.profile-section-title {
+  margin: 0 0 25px;
+
+  font-size: 13px;
+
+  font-weight: 900;
+
+  line-height: 1;
+
+  letter-spacing: 2px;
+}
+
+.identity-title {
+  color: #7161ff;
+}
+
+.stack-title {
+  color: #13c9d8;
+}
+
+
+/* ================================
+   FIELD
+================================ */
+
+.profile-field {
+  width: 349px;
+
+  margin-bottom: 21px;
+}
+
+
+/* ================================
+   LABEL
+
+   Same small typography
+================================ */
+
+.profile-field label {
+  display: block;
+
+  margin: 0 0 10px 2px;
+
+  font-size: 11px;
+
+  font-weight: 900;
+
+  line-height: 1;
+
+  letter-spacing: 1.2px;
+
+  color: #74798a;
+}
+
+
+/* ================================
+   INPUT
+
+   EXACT:
+   WIDTH 349px
+   HEIGHT 54px
+================================ */
+
+.profile-field input,
+.profile-field select {
+  width: 349px;
+
+  height: 54px;
+
+  padding: 0 19px;
+
+  border: 1px solid #28283e;
+
+  border-radius: 13px;
+
+  outline: none;
+
+  background: #08080e;
+
+  color: #d4d6df;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 14px;
+
+  font-weight: 400;
+
+  line-height: 54px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+
+/* ================================
+   PLACEHOLDER
+
+   Same dark grey appearance
+================================ */
+
+.profile-field input::placeholder {
+  color: #4b5060;
+
+  opacity: 1;
+}
+
+
+/* ================================
+   HOVER
+================================ */
+
+.profile-field input:hover,
+.profile-field select:hover {
+  border-color: #454064;
+
+  background: #090911;
+
+  box-shadow:
+    0 0 0 1px rgba(105, 88, 240, 0.08);
+}
+
+
+/* ================================
+   FOCUS
+================================ */
+
+.profile-field input:focus,
+.profile-field select:focus {
+  border-color: #6558ed;
+
+  background: #09090f;
+
+  box-shadow:
+    0 0 0 2px rgba(101, 87, 237, 0.12),
+    0 0 16px rgba(101, 87, 237, 0.08);
+}
+
+
+/* ================================
+   SELECT
+================================ */
+
+.profile-field select {
+  cursor: pointer;
+
+  line-height: normal;
+}
+
+.profile-field select option {
+  background: #11111b;
+
+  color: #ffffff;
+}
+
+
+/* ================================
+   ERROR
+================================ */
+
+.create-profile-error {
+  width: 100%;
+
+  margin: 0 0 15px;
+
+  padding: 9px 12px;
+
+  border-radius: 8px;
+
+  border: 1px solid rgba(255, 70, 90, 0.25);
+
+  background: rgba(255, 70, 90, 0.06);
+
+  color: #ff7d8b;
+
+  font-size: 12px;
+}
+
+
+/* ================================
+   INITIALIZE BUTTON
+
+   EXACT WIDTH:
+   728px
+
+   EXACT HEIGHT:
+   61px
+================================ */
+
+.initialize-profile-button {
+  width: 728px;
+
+  height: 61px;
+
+  margin-top: 25px;
+
+  border: none;
+
+  border-radius: 32px;
+
+  outline: none;
+
+  background: linear-gradient(
+    100deg,
+    #6258f3 0%,
+    #a84be8 100%
+  );
+
+  color: #ffffff;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 16px;
+
+  font-weight: 900;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+
+  box-shadow:
+    0 10px 28px rgba(96, 78, 235, 0.15);
+}
+
+
+/* ================================
+   BUTTON HOVER
+================================ */
+
+.initialize-profile-button:hover {
+  transform: translateY(-2px);
+
+  filter: brightness(1.06);
+
+  box-shadow:
+    0 15px 35px rgba(103, 81, 240, 0.25);
+}
+
+
+/* ================================
+   BUTTON CLICK
+================================ */
+
+.initialize-profile-button:active {
+  transform: translateY(0);
+}
+
+
+/* ================================
+   DIVIDER
+================================ */
+
+.create-profile-divider {
+  width: 728px;
+
+  height: 1px;
+
+  margin-top: 25px;
+
+  margin-bottom: 24px;
+
+  background: #20202e;
+}
+
+
+/* ================================
+   ALREADY ACCOUNT
+================================ */
+
+.already-account {
+  width: 728px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 4px;
+
+  color: #707689;
+
+  font-size: 13px;
+
+  line-height: 1.4;
+}
+
+.already-account button {
+  border: none;
+
+  background: transparent;
+
+  padding: 0;
+
+  color: #7564ff;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.already-account button:hover {
+  color: #9a8eff;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 850px) {
+
+  .create-profile-card {
+    width: calc(100% - 30px);
+  }
+
+  .create-profile-columns {
+    width: 100%;
+
+    grid-template-columns: 1fr 1fr;
+
+    column-gap: 20px;
+  }
+
+  .profile-column,
+  .profile-field,
+  .profile-field input,
+  .profile-field select {
+    width: 100%;
+  }
+
+  .initialize-profile-button,
+  .create-profile-divider,
+  .already-account {
+    width: 100%;
+  }
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 650px) {
+
+  .create-profile-page {
+    padding: 20px 15px 50px;
+  }
+
+  .create-profile-columns {
+    display: block;
+  }
+
+  .profile-column {
+    margin-bottom: 10px;
+  }
+
+  .create-profile-card {
+    padding: 27px 22px;
+  }
+
+  .create-profile-header h1 {
+    font-size: 29px;
+  }
+
+  .create-profile-logo-text {
+    font-size: 22px;
+  }
+}

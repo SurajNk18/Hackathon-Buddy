@@ -20,4 +20,6 @@ def read_root():
 def health_check():
     return {"status": "up", "service": "ai-service"}
 
-# Additional routes will be imported and included here later
+from app.routers import matching
+
+app.include_router(matching.router)

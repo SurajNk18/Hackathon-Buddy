@@ -2,9 +2,9 @@ spring:
   application:
     name: hackathon-buddy
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/hackathon_buddy?useSSL=false&serverTimezone=UTC}
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/hackathon_buddy?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true}
     username: ${SPRING_DATASOURCE_USERNAME:root}
-    password: ${SPRING_DATASOURCE_PASSWORD:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:Suraj18@}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -15,13 +15,30 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.MySQLDialect
 
+
+
 server:
   port: ${SERVER_PORT:8080}
 
+# ──────────────────────────────────────────────────
+# AI / Python ML Service
+# Spring Boot calls this URL — React NEVER calls it directly
+# ──────────────────────────────────────────────────
 ai:
   service:
     url: ${AI_SERVICE_URL:http://localhost:8000}
 
+# ──────────────────────────────────────────────────
+# CORS — only React dev server is allowed
+# ──────────────────────────────────────────────────
+cors:
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
+
 jwt:
   secret: ${JWT_SECRET:YOUR_SUPER_SECRET_JWT_KEY_REPLACE_ME_IN_PRODUCTION}
   expiration: 86400000 # 24 hours in ms
+
+logging:
+  level:
+    com.hackathonbuddy: INFO
+    com.hackathonbuddy.client: DEBUG  # log all AI service calls

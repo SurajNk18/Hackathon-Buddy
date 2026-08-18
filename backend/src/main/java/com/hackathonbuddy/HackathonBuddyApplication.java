@@ -1,3 +1,4 @@
+
 package com.hackathonbuddy;
 
 import org.springframework.boot.SpringApplication;
