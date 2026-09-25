@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,12 +42,42 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
+    @Transactional
+    public void markAsRead(Long notificationId) {
+        notificationRepository.findById(notificationId).ifPresent(n -> {
+            n.setIsRead(true);
+            notificationRepository.save(n);
+        });
+    }
+
+    @Override
+    @Transactional
+    public void deleteNotification(Long notificationId) {
+        notificationRepository.deleteById(notificationId);
+    }
+
+    @Override
+    @Transactional
+    public void clearAllNotifications(User user) {
+        notificationRepository.deleteByUser(user);
+    }
+
+    @Override
     public void createNotification(User user, String title, String message, String type) {
+        createNotification(user, title, message, type, null, null, null);
+    }
+
+    @Override
+    public void createNotification(User user, String title, String message, String type,
+                                    String icon, String action, String route) {
         Notification notification = Notification.builder()
                 .user(user)
                 .title(title)
                 .message(message)
                 .type(type)
+                .icon(icon)
+                .action(action)
+                .route(route)
                 .build();
         notificationRepository.save(notification);
     }
@@ -57,8 +89,26 @@ public class NotificationServiceImpl implements NotificationService {
                 .message(n.getMessage())
                 .type(n.getType())
                 .isRead(n.getIsRead())
+                .unread(!Boolean.TRUE.equals(n.getIsRead()))
+                .icon(n.getIcon())
+                .action(n.getAction())
+                .route(n.getRoute())
                 .actionUrl(n.getActionUrl())
+                .time(formatRelativeTime(n.getCreatedAt()))
+                .date(n.getCreatedAt() != null && n.getCreatedAt().toLocalDate().equals(LocalDateTime.now().toLocalDate()) ? "Today" : "Earlier")
                 .createdAt(n.getCreatedAt())
                 .build();
+    }
+
+    private String formatRelativeTime(LocalDateTime dateTime) {
+        if (dateTime == null) return "Just now";
+        Duration duration = Duration.between(dateTime, LocalDateTime.now());
+        long minutes = duration.toMinutes();
+        if (minutes < 1) return "Just now";
+        if (minutes < 60) return minutes + " minutes ago";
+        long hours = duration.toHours();
+        if (hours < 24) return hours + " hour" + (hours > 1 ? "s" : "") + " ago";
+        long days = duration.toDays();
+        return days + " day" + (days > 1 ? "s" : "") + " ago";
     }
 }

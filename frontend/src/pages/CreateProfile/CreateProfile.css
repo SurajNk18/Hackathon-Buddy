@@ -1,310 +1,325 @@
-/* ================================
+/* =========================================================
    CREATE PROFILE PAGE
-================================ */
-
-* {
-  box-sizing: border-box;
-}
+========================================================= */
 
 .create-profile-page {
   min-height: 100vh;
   width: 100%;
 
-  padding: 26px 0 70px;
-
-  background:
-    radial-gradient(
-      circle at 8% 40%,
-      rgba(72, 67, 160, 0.12),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 92% 55%,
-      rgba(123, 50, 170, 0.13),
-      transparent 30%
-    ),
-    #09090f;
-
-  color: #fff;
-
-  font-family: Arial, Helvetica, sans-serif;
-
-  overflow-x: hidden;
-}
-
-
-/* ================================
-   BACK
-================================ */
-
-.create-profile-back {
-  position: fixed;
-
-  top: 22px;
-  left: 30px;
-
-  border: none;
-  background: transparent;
-
-  color: #74798a;
-
-  font-size: 15px;
-
-  cursor: pointer;
-
-  z-index: 10;
-
-  transition: 0.2s ease;
-}
-
-.create-profile-back:hover {
-  color: #ffffff;
-}
-
-
-/* ================================
-   HEADER
-================================ */
-
-.create-profile-header {
-  width: 100%;
+  position: relative;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  text-align: center;
+  padding: 36px 24px 50px;
 
-  margin-bottom: 48px;
+  box-sizing: border-box;
+
+  overflow-x: hidden;
+
+  background:
+    radial-gradient(
+      circle at 12% 20%,
+      rgba(91, 61, 214, 0.16),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 88% 80%,
+      rgba(124, 58, 237, 0.12),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #071b3a 0%,
+      #081a35 45%,
+      #080b18 100%
+    );
+
+  color: #ffffff;
 }
 
 
-/* ================================
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.create-profile-back {
+  position: fixed;
+
+  top: 30px;
+  left: 30px;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(148, 163, 184, 0.18);
+
+  border-radius: 10px;
+
+  background: rgba(8, 18, 38, 0.75);
+
+  color: #94a3b8;
+
+  cursor: pointer;
+
+  z-index: 20;
+
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.create-profile-back:hover {
+  color: #ffffff;
+
+  border-color: rgba(139, 92, 246, 0.55);
+
+  background: rgba(124, 58, 237, 0.12);
+
+  transform: translateX(-2px);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.create-profile-header {
+  width: 100%;
+  max-width: 900px;
+
+  text-align: center;
+
+  margin-bottom: 32px;
+
+  position: relative;
+  z-index: 2;
+}
+
+
+/* =========================================================
    LOGO
-================================ */
+========================================================= */
 
 .create-profile-logo {
   display: flex;
 
   align-items: center;
+  justify-content: center;
 
-  gap: 13px;
+  gap: 14px;
 
-  margin-bottom: 27px;
+  margin-bottom: 24px;
 }
 
 .create-profile-logo-icon {
   width: 58px;
   height: 58px;
 
-  border-radius: 17px;
-
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background: linear-gradient(
-    135deg,
-    #6258f5,
-    #a34be8
-  );
+  border-radius: 17px;
 
-  font-size: 29px;
+  background:
+    linear-gradient(
+      135deg,
+      #6d4aff,
+      #9147ff
+    );
+
+  font-size: 28px;
 
   box-shadow:
-    0 0 25px rgba(100, 80, 240, 0.25);
+    0 12px 32px rgba(111, 76, 255, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .create-profile-logo-text {
-  font-size: 27px;
+  font-size: 25px;
 
-  font-weight: 900;
+  font-weight: 850;
 
-  letter-spacing: -1px;
-
-  line-height: 1;
+  letter-spacing: -0.8px;
 
   color: #ffffff;
 }
 
 .create-profile-logo-text span {
-  color: #6259ee;
+  color: #8b5cf6;
 }
 
 
-/* ================================
-   TITLE
-================================ */
+/* =========================================================
+   HEADER TITLE
+========================================================= */
 
 .create-profile-header h1 {
   margin: 0;
 
-  font-size: 34px;
+  font-size: clamp(32px, 5vw, 48px);
 
-  font-weight: 900;
+  line-height: 1.05;
 
-  line-height: 1;
+  font-weight: 850;
 
-  letter-spacing: -1px;
+  letter-spacing: -1.8px;
 
   color: #ffffff;
 }
 
 .create-profile-header p {
-  margin: 14px 0 0;
+  margin: 12px auto 0;
+
+  max-width: 650px;
+
+  color: #94a3b8;
 
   font-size: 15px;
 
-  font-weight: 500;
-
-  color: #74798a;
+  line-height: 1.6;
 }
 
 
-/* ================================
-   MAIN CARD
-
-   EXACT DESKTOP SIZE
-================================ */
+/* =========================================================
+   PROFILE CARD
+========================================================= */
 
 .create-profile-card {
-  width: 786px;
+  width: 100%;
+  max-width: 940px;
 
-  min-height: 630px;
+  position: relative;
+  z-index: 2;
 
-  margin: 0 auto;
+  box-sizing: border-box;
 
-  padding: 31px 29px 28px;
+  padding: 32px;
 
-  background: #11111b;
+  border: 1px solid rgba(148, 163, 184, 0.15);
 
-  border: 1px solid #202033;
+  border-radius: 20px;
 
-  border-radius: 17px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(21, 29, 53, 0.97),
+      rgba(10, 16, 31, 0.98)
+    );
 
   box-shadow:
-    0 20px 55px rgba(0, 0, 0, 0.25);
+    0 25px 70px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.015);
+
+  backdrop-filter: blur(18px);
 }
 
 
-/* ================================
+/* =========================================================
    TWO COLUMNS
-
-   349 + 29 + 349 = 727
-================================ */
+========================================================= */
 
 .create-profile-columns {
-  width: 728px;
-
   display: grid;
 
-  grid-template-columns: 349px 349px;
+  grid-template-columns: 1fr 1fr;
 
-  column-gap: 29px;
+  gap: 36px;
 }
 
 
-/* ================================
+/* =========================================================
    COLUMN
-================================ */
+========================================================= */
 
 .profile-column {
-  width: 349px;
+  min-width: 0;
 }
 
 
-/* ================================
-   IDENTITY / STACK
-================================ */
+/* =========================================================
+   SECTION TITLES
+========================================================= */
 
 .profile-section-title {
   margin: 0 0 25px;
 
-  font-size: 13px;
+  font-size: 12px;
 
-  font-weight: 900;
-
-  line-height: 1;
+  font-weight: 850;
 
   letter-spacing: 2px;
 }
 
 .identity-title {
-  color: #7161ff;
+  color: #8b5cf6;
 }
 
 .stack-title {
-  color: #13c9d8;
+  color: #22d3ee;
 }
 
 
-/* ================================
+/* =========================================================
    FIELD
-================================ */
+========================================================= */
 
 .profile-field {
-  width: 349px;
+  margin-bottom: 19px;
 
-  margin-bottom: 21px;
+  min-width: 0;
 }
-
-
-/* ================================
-   LABEL
-
-   Same small typography
-================================ */
 
 .profile-field label {
   display: block;
 
-  margin: 0 0 10px 2px;
+  margin-bottom: 8px;
+
+  color: #94a3b8;
 
   font-size: 11px;
 
-  font-weight: 900;
-
-  line-height: 1;
+  font-weight: 800;
 
   letter-spacing: 1.2px;
-
-  color: #74798a;
 }
 
 
-/* ================================
-   INPUT
-
-   EXACT:
-   WIDTH 349px
-   HEIGHT 54px
-================================ */
+/* =========================================================
+   INPUTS + SELECT
+========================================================= */
 
 .profile-field input,
 .profile-field select {
-  width: 349px;
+  width: 100%;
 
-  height: 54px;
+  height: 51px;
 
-  padding: 0 19px;
+  box-sizing: border-box;
 
-  border: 1px solid #28283e;
+  padding: 0 15px;
 
-  border-radius: 13px;
+  border: 1px solid #263451;
+
+  border-radius: 11px;
 
   outline: none;
 
-  background: #08080e;
+  background: #0a1224;
 
-  color: #d4d6df;
+  color: #f8fafc;
 
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: inherit;
 
   font-size: 14px;
-
-  font-weight: 400;
-
-  line-height: 54px;
 
   transition:
     border-color 0.2s ease,
@@ -312,285 +327,449 @@
     background 0.2s ease;
 }
 
-
-/* ================================
-   PLACEHOLDER
-
-   Same dark grey appearance
-================================ */
-
 .profile-field input::placeholder {
-  color: #4b5060;
-
-  opacity: 1;
+  color: #475569;
 }
-
-
-/* ================================
-   HOVER
-================================ */
 
 .profile-field input:hover,
 .profile-field select:hover {
-  border-color: #454064;
-
-  background: #090911;
-
-  box-shadow:
-    0 0 0 1px rgba(105, 88, 240, 0.08);
+  border-color: #344563;
 }
-
-
-/* ================================
-   FOCUS
-================================ */
 
 .profile-field input:focus,
 .profile-field select:focus {
-  border-color: #6558ed;
+  border-color: #7c3aed;
 
-  background: #09090f;
+  background: #0c152b;
 
   box-shadow:
-    0 0 0 2px rgba(101, 87, 237, 0.12),
-    0 0 16px rgba(101, 87, 237, 0.08);
+    0 0 0 3px rgba(124, 58, 237, 0.13);
 }
 
 
-/* ================================
+/* =========================================================
    SELECT
-================================ */
+========================================================= */
 
 .profile-field select {
-  cursor: pointer;
+  appearance: auto;
 
-  line-height: normal;
+  cursor: pointer;
 }
 
 .profile-field select option {
-  background: #11111b;
+  background: #0b1222;
 
   color: #ffffff;
 }
 
 
-/* ================================
-   ERROR
-================================ */
+/* =========================================================
+   HELP TEXT
+========================================================= */
 
-.create-profile-error {
-  width: 100%;
+.profile-field small {
+  color: #64748b !important;
 
-  margin: 0 0 15px;
-
-  padding: 9px 12px;
-
-  border-radius: 8px;
-
-  border: 1px solid rgba(255, 70, 90, 0.25);
-
-  background: rgba(255, 70, 90, 0.06);
-
-  color: #ff7d8b;
-
-  font-size: 12px;
-}
-
-
-/* ================================
-   INITIALIZE BUTTON
-
-   EXACT WIDTH:
-   728px
-
-   EXACT HEIGHT:
-   61px
-================================ */
-
-.initialize-profile-button {
-  width: 728px;
-
-  height: 61px;
-
-  margin-top: 25px;
-
-  border: none;
-
-  border-radius: 32px;
-
-  outline: none;
-
-  background: linear-gradient(
-    100deg,
-    #6258f3 0%,
-    #a84be8 100%
-  );
-
-  color: #ffffff;
-
-  font-family: Arial, Helvetica, sans-serif;
-
-  font-size: 16px;
-
-  font-weight: 900;
-
-  cursor: pointer;
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    filter 0.2s ease;
-
-  box-shadow:
-    0 10px 28px rgba(96, 78, 235, 0.15);
-}
-
-
-/* ================================
-   BUTTON HOVER
-================================ */
-
-.initialize-profile-button:hover {
-  transform: translateY(-2px);
-
-  filter: brightness(1.06);
-
-  box-shadow:
-    0 15px 35px rgba(103, 81, 240, 0.25);
-}
-
-
-/* ================================
-   BUTTON CLICK
-================================ */
-
-.initialize-profile-button:active {
-  transform: translateY(0);
-}
-
-
-/* ================================
-   DIVIDER
-================================ */
-
-.create-profile-divider {
-  width: 728px;
-
-  height: 1px;
-
-  margin-top: 25px;
-
-  margin-bottom: 24px;
-
-  background: #20202e;
-}
-
-
-/* ================================
-   ALREADY ACCOUNT
-================================ */
-
-.already-account {
-  width: 728px;
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
-  gap: 4px;
-
-  color: #707689;
-
-  font-size: 13px;
+  font-size: 11px !important;
 
   line-height: 1.4;
 }
 
-.already-account button {
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.create-profile-error {
+  margin-top: 8px;
+
+  margin-bottom: 18px;
+
+  padding: 11px 13px;
+
+  border: 1px solid rgba(248, 113, 113, 0.25);
+
+  border-radius: 9px;
+
+  background: rgba(239, 68, 68, 0.08);
+
+  color: #fca5a5;
+
+  font-size: 12px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   SUCCESS
+========================================================= */
+
+.create-profile-success {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
+
+.initialize-profile-button {
+  width: 100%;
+
+  height: 53px;
+
+  margin-top: 8px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
   border: none;
 
-  background: transparent;
+  border-radius: 11px;
 
-  padding: 0;
+  background:
+    linear-gradient(
+      135deg,
+      #6846e8,
+      #9146ed
+    );
 
-  color: #7564ff;
-
-  font-family: Arial, Helvetica, sans-serif;
+  color: #ffffff;
 
   font-size: 13px;
 
   font-weight: 800;
 
+  letter-spacing: 0.4px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 25px rgba(124, 58, 237, 0.25);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+.initialize-profile-button:hover {
+  transform: translateY(-1px);
+
+  filter: brightness(1.08);
+
+  box-shadow:
+    0 14px 30px rgba(124, 58, 237, 0.35);
+}
+
+.initialize-profile-button:active {
+  transform: translateY(0);
+}
+
+.initialize-profile-button:disabled {
+  opacity: 0.7;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.create-profile-divider {
+  width: 100%;
+
+  height: 1px;
+
+  margin: 25px 0 19px;
+
+  background: #202c43;
+}
+
+
+/* =========================================================
+   ALREADY ACCOUNT
+========================================================= */
+
+.already-account {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  color: #64748b;
+
+  font-size: 12px;
+
+  text-align: center;
+}
+
+.already-account button {
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: #a78bfa;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
   cursor: pointer;
 }
 
 .already-account button:hover {
-  color: #9a8eff;
+  color: #c4b5fd;
+
+  text-decoration: underline;
 }
 
 
-/* ================================
-   RESPONSIVE
-================================ */
+/* =========================================================
+   TABLET
+========================================================= */
 
-@media (max-width: 850px) {
-
-  .create-profile-card {
-    width: calc(100% - 30px);
-  }
-
-  .create-profile-columns {
-    width: 100%;
-
-    grid-template-columns: 1fr 1fr;
-
-    column-gap: 20px;
-  }
-
-  .profile-column,
-  .profile-field,
-  .profile-field input,
-  .profile-field select {
-    width: 100%;
-  }
-
-  .initialize-profile-button,
-  .create-profile-divider,
-  .already-account {
-    width: 100%;
-  }
-}
-
-
-/* ================================
-   MOBILE
-================================ */
-
-@media (max-width: 650px) {
+@media (max-width: 900px) {
 
   .create-profile-page {
-    padding: 20px 15px 50px;
+    padding: 32px 20px 45px;
   }
 
-  .create-profile-columns {
-    display: block;
-  }
-
-  .profile-column {
-    margin-bottom: 10px;
+  .create-profile-back {
+    top: 20px;
+    left: 20px;
   }
 
   .create-profile-card {
-    padding: 27px 22px;
+    max-width: 760px;
+
+    padding: 28px;
   }
 
-  .create-profile-header h1 {
-    font-size: 29px;
+  .create-profile-columns {
+    gap: 25px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .create-profile-page {
+    padding: 25px 15px 35px;
+
+    align-items: stretch;
+  }
+
+  .create-profile-header {
+    max-width: none;
+
+    padding: 0 10px;
+
+    margin-bottom: 24px;
+  }
+
+  .create-profile-logo {
+    margin-bottom: 19px;
+
+    gap: 10px;
+  }
+
+  .create-profile-logo-icon {
+    width: 46px;
+    height: 46px;
+
+    border-radius: 13px;
+
+    font-size: 22px;
   }
 
   .create-profile-logo-text {
-    font-size: 22px;
+    font-size: 19px;
   }
+
+  .create-profile-header h1 {
+    font-size: 32px;
+
+    letter-spacing: -1px;
+  }
+
+  .create-profile-header p {
+    font-size: 13px;
+
+    line-height: 1.5;
+  }
+
+  .create-profile-card {
+    width: 100%;
+
+    padding: 22px 18px;
+
+    border-radius: 16px;
+  }
+
+  .create-profile-columns {
+    grid-template-columns: 1fr;
+
+    gap: 8px;
+  }
+
+  .profile-column {
+    width: 100%;
+  }
+
+  .profile-section-title {
+    margin-top: 5px;
+
+    margin-bottom: 20px;
+  }
+
+  .profile-field {
+    margin-bottom: 17px;
+  }
+
+  .profile-field input,
+  .profile-field select {
+    height: 49px;
+
+    font-size: 14px;
+  }
+
+  .initialize-profile-button {
+    min-height: 52px;
+
+    height: auto;
+
+    padding: 13px 15px;
+
+    font-size: 11px;
+
+    line-height: 1.3;
+
+    text-align: center;
+  }
+
+  .create-profile-back {
+    position: absolute;
+
+    top: 18px;
+    left: 15px;
+
+    width: 38px;
+    height: 38px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+  .create-profile-page {
+    padding: 20px 11px 30px;
+  }
+
+  .create-profile-header {
+    padding-top: 35px;
+  }
+
+  .create-profile-logo {
+    gap: 8px;
+  }
+
+  .create-profile-logo-icon {
+    width: 42px;
+    height: 42px;
+
+    font-size: 20px;
+  }
+
+  .create-profile-logo-text {
+    font-size: 17px;
+  }
+
+  .create-profile-header h1 {
+    font-size: 28px;
+  }
+
+  .create-profile-header p {
+    font-size: 12px;
+  }
+
+  .create-profile-card {
+    padding: 19px 15px;
+
+    border-radius: 15px;
+  }
+
+  .profile-section-title {
+    font-size: 11px;
+
+    letter-spacing: 1.7px;
+  }
+
+  .profile-field label {
+    font-size: 10px;
+  }
+
+  .profile-field input,
+  .profile-field select {
+    height: 47px;
+
+    padding: 0 13px;
+
+    font-size: 13px;
+  }
+
+  .already-account {
+    flex-wrap: wrap;
+
+    font-size: 11px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL DEVICES
+========================================================= */
+
+@media (max-width: 340px) {
+
+  .create-profile-header h1 {
+    font-size: 25px;
+  }
+
+  .create-profile-logo-text {
+    font-size: 15px;
+  }
+
+  .create-profile-card {
+    padding: 17px 13px;
+  }
+
+  .initialize-profile-button {
+    font-size: 10px;
+  }
+
 }

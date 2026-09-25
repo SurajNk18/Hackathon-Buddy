@@ -1,5 +1,6 @@
 package com.hackathonbuddy.controller;
 
+import com.hackathonbuddy.dto.request.CreateHackathonRequest;
 import com.hackathonbuddy.dto.response.ApiResponse;
 import com.hackathonbuddy.dto.response.HackathonResponse;
 import com.hackathonbuddy.entity.User;
@@ -61,5 +62,29 @@ public class HackathonController {
         HackathonResponse hackathon = hackathonService.getHackathonById(id, user);
         return ResponseEntity.ok(ApiResponse.<HackathonResponse>builder()
                 .success(true).message("Hackathon retrieved").data(hackathon).build());
+    }
+
+    @PostMapping
+    public ResponseEntity<ApiResponse<HackathonResponse>> createHackathon(
+            @RequestBody CreateHackathonRequest request) {
+        HackathonResponse hackathon = hackathonService.createHackathon(request);
+        return ResponseEntity.ok(ApiResponse.<HackathonResponse>builder()
+                .success(true).message("Hackathon created").data(hackathon).build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<Void>> deleteHackathon(@PathVariable Long id) {
+        hackathonService.deleteHackathon(id);
+        return ResponseEntity.ok(ApiResponse.<Void>builder()
+                .success(true).message("Hackathon deleted").build());
+    }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<ApiResponse<HackathonResponse>> updateStatus(
+            @PathVariable Long id,
+            @RequestParam String status) {
+        HackathonResponse hackathon = hackathonService.updateHackathonStatus(id, status);
+        return ResponseEntity.ok(ApiResponse.<HackathonResponse>builder()
+                .success(true).message("Hackathon status updated").data(hackathon).build());
     }
 }

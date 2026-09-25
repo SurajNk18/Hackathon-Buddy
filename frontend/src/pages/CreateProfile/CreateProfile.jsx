@@ -1,73 +1,91 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Loader2 } from "lucide-react";
-
-import { registerUser } from "../../api/api";
+import {
+  ArrowLeft,
+  UserPlus,
+  CheckCircle2
+} from "lucide-react";
+import { useApp } from "../../context/AppContext";
 import "./CreateProfile.css";
-
-// Strong-password regex matching the backend's @Pattern
-// Requires: uppercase, lowercase, digit, special char (@$!%*?&), min 8 chars
-const STRONG_PASSWORD_REGEX =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
 function CreateProfile() {
   const navigate = useNavigate();
+  const { registerUser } = useApp();
 
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    fullName: "",
     email: "",
     password: "",
-    primaryRole: "Full Stack",
+    primaryRole: "Full Stack Developer",
     techSkills: "",
     projectDomains: "",
     githubUrl: "",
+    location: "India",
   });
 
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  // ==========================================
+  // HANDLE INPUT CHANGE
+  // ==========================================
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
+
+  // ==========================================
+  // CREATE ACCOUNT
+  // ==========================================
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     setError("");
 
-    // ── Client-side validation ─────────────────────────────
-    if (
-      !formData.firstName.trim() ||
-      !formData.lastName.trim() ||
-      !formData.email.trim() ||
-      !formData.password.trim()
-    ) {
-      setError("Please fill all required fields.");
-      return;
-    }
+    // ------------------------------------------
+    // VALIDATION
+    // ------------------------------------------
 
-    if (!STRONG_PASSWORD_REGEX.test(formData.password)) {
+    if (
+      !formData.fullName.trim() ||
+      !formData.email.trim() ||
+      !formData.password.trim() ||
+      !formData.techSkills.trim()
+    ) {
       setError(
-        "Password must be at least 8 characters and include an uppercase letter, a lowercase letter, a number, and a special character (@$!%*?&)."
+        "Please fill all required fields (Full Name, Email, Password, Skills)."
       );
       return;
     }
 
-    // ── Call backend ───────────────────────────────────────
-    setLoading(true);
-    try {
-      await registerUser({
-        firstName: formData.firstName.trim(),
-        lastName: formData.lastName.trim(),
-        email: formData.email.trim(),
-        password: formData.password,
-      });
+    if (formData.password.length < 6) {
+      setError("Password must contain at least 6 characters.");
+      return;
+    }
 
-      // Registration success — token + user already stored by api.js
-      navigate("/dashboard");
+    const email = formData.email.trim().toLowerCase();
+    
+    setLoading(true);
+
+    try {
+      const newUser = await registerUser({ ...formData, email });
+      if (newUser) {
+        setSuccess(true);
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 1000);
+      } else {
+        setError("Registration failed.");
+      }
     } catch (err) {
-      setError(err.message || "Registration failed. Please try again.");
+      setError("An error occurred during registration. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -76,22 +94,19 @@ function CreateProfile() {
   return (
     <div className="create-profile-page">
 
-      {/* BACK */}
+      {/* BACK BUTTON */}
       <button
         className="create-profile-back"
         onClick={() => navigate(-1)}
         aria-label="Go back"
-        type="button"
       >
-        <ArrowLeft size={25} />
+        <ArrowLeft size={22} />
       </button>
-
 
       {/* HEADER */}
       <header className="create-profile-header">
 
         <div className="create-profile-logo">
-
           <div className="create-profile-logo-icon">
             🚀
           </div>
@@ -99,18 +114,15 @@ function CreateProfile() {
           <div className="create-profile-logo-text">
             HACKATHON<span>BUDDY</span>
           </div>
-
         </div>
-
 
         <h1>JOIN THE CLUB</h1>
 
         <p>
-          Create your profile to get matched
+          Create your developer profile to match with top hackathon teams
         </p>
 
       </header>
-
 
       {/* CARD */}
       <div className="create-profile-card">
@@ -119,9 +131,9 @@ function CreateProfile() {
 
           <div className="create-profile-columns">
 
-            {/* =====================
+            {/* =====================================
                 LEFT COLUMN
-            ====================== */}
+            ====================================== */}
 
             <div className="profile-column">
 
@@ -129,96 +141,68 @@ function CreateProfile() {
                 IDENTITY
               </h2>
 
-
-              {/* FIRST NAME */}
+              {/* FULL NAME */}
               <div className="profile-field">
 
-                <label htmlFor="firstName">
-                  FIRST NAME <span style={{ color: "var(--accent-purple, #a855f7)" }}>*</span>
+                <label htmlFor="fullName">
+                  FULL NAME *
                 </label>
 
                 <input
-                  id="firstName"
-                  name="firstName"
+                  id="fullName"
+                  name="fullName"
                   type="text"
-                  placeholder="Jane"
-                  value={formData.firstName}
+                  placeholder="Sanika Pandhare"
+                  value={formData.fullName}
                   onChange={handleChange}
-                  autoComplete="given-name"
                   required
                 />
 
               </div>
-
-
-              {/* LAST NAME */}
-              <div className="profile-field">
-
-                <label htmlFor="lastName">
-                  LAST NAME <span style={{ color: "var(--accent-purple, #a855f7)" }}>*</span>
-                </label>
-
-                <input
-                  id="lastName"
-                  name="lastName"
-                  type="text"
-                  placeholder="Doe"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  autoComplete="family-name"
-                  required
-                />
-
-              </div>
-
 
               {/* EMAIL */}
               <div className="profile-field">
 
                 <label htmlFor="email">
-                  EMAIL <span style={{ color: "var(--accent-purple, #a855f7)" }}>*</span>
+                  EMAIL ADDRESS *
                 </label>
 
                 <input
                   id="email"
                   name="email"
                   type="email"
-                  placeholder="jane@example.com"
+                  placeholder="sanika@example.com"
                   value={formData.email}
                   onChange={handleChange}
-                  autoComplete="email"
                   required
                 />
 
               </div>
 
-
               {/* PASSWORD */}
               <div className="profile-field">
 
                 <label htmlFor="password">
-                  PASSWORD <span style={{ color: "var(--accent-purple, #a855f7)" }}>*</span>
+                  PASSWORD *
                 </label>
 
                 <input
                   id="password"
                   name="password"
                   type="password"
-                  placeholder="Min 8 chars, A-Z, 0-9, @$!%*?&"
+                  placeholder="Min 6 characters"
                   value={formData.password}
                   onChange={handleChange}
-                  autoComplete="new-password"
                   required
                 />
 
               </div>
 
-
               {/* PRIMARY ROLE */}
               <div className="profile-field">
 
                 <label htmlFor="primaryRole">
-                  PRIMARY ROLE
+                  PRIMARY ROLE *
                 </label>
 
                 <select
@@ -227,48 +211,60 @@ function CreateProfile() {
                   value={formData.primaryRole}
                   onChange={handleChange}
                 >
-                  <option>Full Stack</option>
-                  <option>Frontend</option>
-                  <option>Backend</option>
-                  <option>AI / ML</option>
-                  <option>UI / UX</option>
-                  <option>DevOps</option>
+                  <option>Full Stack Developer</option>
+                  <option>Frontend Developer</option>
+                  <option>Backend Developer</option>
+                  <option>ML Engineer</option>
+                  <option>Data Scientist</option>
+                  <option>UI / UX Designer</option>
+                  <option>DevOps Engineer</option>
+                  <option>Cyber Security Engineer</option>
+                  <option>Product Manager</option>
                 </select>
 
               </div>
 
             </div>
 
-
-            {/* =====================
+            {/* =====================================
                 RIGHT COLUMN
-            ====================== */}
+            ====================================== */}
 
             <div className="profile-column">
 
               <h2 className="profile-section-title stack-title">
-                STACK
+                STACK & DOMAINS
               </h2>
-
 
               {/* TECH SKILLS */}
               <div className="profile-field">
 
                 <label htmlFor="techSkills">
-                  TECH SKILLS
+                  TECH SKILLS *
                 </label>
 
                 <input
                   id="techSkills"
                   name="techSkills"
                   type="text"
-                  placeholder="React, Node, Python..."
+                  placeholder="React, Node.js, Python, Java, AWS..."
                   value={formData.techSkills}
                   onChange={handleChange}
+                  required
                 />
 
-              </div>
+                <small
+                  style={{
+                    color: "#64748b",
+                    fontSize: "11px",
+                    marginTop: "4px",
+                    display: "block",
+                  }}
+                >
+                  Comma-separated for smart AI matching
+                </small>
 
+              </div>
 
               {/* PROJECT DOMAINS */}
               <div className="profile-field">
@@ -281,13 +277,12 @@ function CreateProfile() {
                   id="projectDomains"
                   name="projectDomains"
                   type="text"
-                  placeholder="AI, Web3, FinTech..."
+                  placeholder="AI / ML, HealthTech, FinTech, Web3..."
                   value={formData.projectDomains}
                   onChange={handleChange}
                 />
 
               </div>
-
 
               {/* GITHUB */}
               <div className="profile-field">
@@ -300,65 +295,92 @@ function CreateProfile() {
                   id="githubUrl"
                   name="githubUrl"
                   type="url"
-                  placeholder="https://github.com/..."
+                  placeholder="https://github.com/username"
                   value={formData.githubUrl}
                   onChange={handleChange}
                 />
 
               </div>
 
-              {/* Password hint */}
-              <div style={{
-                fontSize: "0.72rem",
-                color: "#9ca3af",
-                lineHeight: 1.5,
-                marginTop: "auto",
-                paddingTop: "1rem",
-              }}>
-                <strong style={{ color: "#c4b5fd" }}>Password requirements:</strong>
-                <ul style={{ margin: "0.3rem 0 0 1rem", padding: 0 }}>
-                  <li>At least 8 characters</li>
-                  <li>One uppercase &amp; one lowercase letter</li>
-                  <li>One number (0–9)</li>
-                  <li>One special character: @$!%*?&amp;</li>
-                </ul>
+              {/* LOCATION */}
+              <div className="profile-field">
+
+                <label htmlFor="location">
+                  LOCATION
+                </label>
+
+                <input
+                  id="location"
+                  name="location"
+                  type="text"
+                  placeholder="Pune, India"
+                  value={formData.location}
+                  onChange={handleChange}
+                />
+
               </div>
 
             </div>
 
           </div>
 
+          {/* =====================================
+              ERROR
+          ====================================== */}
 
-          {/* ERROR */}
           {error && (
             <div className="create-profile-error">
               {error}
             </div>
           )}
 
+          {/* =====================================
+              SUCCESS
+          ====================================== */}
 
-          {/* BUTTON */}
+          {success && (
+            <div
+              className="create-profile-success"
+              style={{
+                background: "rgba(16, 185, 129, 0.15)",
+                border: "1px solid #10b981",
+                color: "#34d399",
+                padding: "12px",
+                borderRadius: "8px",
+                marginBottom: "16px",
+                fontSize: "13px",
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+            >
+              <CheckCircle2 size={18} />
+
+              Account created successfully!
+              Redirecting to workspace...
+            </div>
+          )}
+
+          {/* =====================================
+              SUBMIT
+          ====================================== */}
+
           <button
             type="submit"
             className="initialize-profile-button"
-            disabled={loading}
+            disabled={success || loading}
           >
-            {loading ? (
-              <>
-                <Loader2 size={18} style={{ animation: "spin 1s linear infinite", marginRight: "0.5rem" }} />
-                CREATING PROFILE…
-              </>
-            ) : (
-              "INITIALIZE PROFILE"
-            )}
+            <UserPlus size={18} />
+
+            {loading ? "INITIALIZING..." : "INITIALIZE PROFILE & ENTER WORKSPACE"}
           </button>
 
-
-          {/* DIVIDER */}
           <div className="create-profile-divider"></div>
 
+          {/* =====================================
+              LOGIN
+          ====================================== */}
 
-          {/* LOGIN */}
           <div className="already-account">
 
             <span>

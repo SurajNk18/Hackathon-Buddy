@@ -1,185 +1,230 @@
 import React, { useState } from "react";
+import {
+  ArrowRight,
+  Rocket,
+  UserPlus,
+  ShieldCheck,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Loader2 } from "lucide-react";
-
-import { loginUser } from "../../api/api";
+import { useApp } from "../../context/AppContext";
 import "./LoginPage.css";
 
-function LoginPage() {
+const LoginPage = () => {
   const navigate = useNavigate();
+  const { login } = useApp();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     setError("");
-
-    if (!email.trim() || !password.trim()) {
-      setError("Please enter email and password.");
-      return;
-    }
-
     setLoading(true);
+
     try {
-      await loginUser({ email: email.trim(), password });
-      // Token + user stored in localStorage by api.js
-      navigate("/dashboard");
+      const result = await login(email.trim(), password.trim());
+
+      if (result.success) {
+        if (result.isAdmin) {
+          navigate("/admin");
+        } else {
+          navigate("/dashboard");
+        }
+      } else {
+        setError(result.message || "Invalid email or password.");
+      }
     } catch (err) {
-      setError(err.message || "Login failed. Please check your credentials.");
+      setError("Login failed. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="login-page">
+    <main className="login-page">
 
-      {/* BACK BUTTON */}
+      {/* BACKGROUND DECORATION */}
+      <div className="login-bg-glow login-bg-glow-one"></div>
+      <div className="login-bg-glow login-bg-glow-two"></div>
 
-      <button
-        type="button"
-        className="login-back-button"
-        onClick={() => navigate(-1)}
-        aria-label="Go back"
-      >
-        <ArrowLeft size={20} />
-      </button>
+      {/* MAIN CONTENT */}
+      <section className="login-container">
 
+        {/* =====================================
+            BRAND
+        ====================================== */}
 
-      {/* LOGO */}
+        <div className="login-brand">
 
-      <div className="login-logo-section">
+          <div className="login-brand-icon">
+            <Rocket size={28} strokeWidth={2.2} />
+          </div>
 
-        <div className="login-logo-icon">
-          🚀
+          <div className="login-brand-name">
+            HACKATHON<span>BUDDY</span>
+          </div>
+
         </div>
 
-        <div className="login-logo-text">
-          HACKATHON<span>BUDDY</span>
+        {/* =====================================
+            HEADING
+        ====================================== */}
+
+        <div className="login-heading">
+
+          <div className="login-badge">
+            <ShieldCheck size={15} />
+            <span>SECURE WORKSPACE ACCESS</span>
+          </div>
+
+          <h1>
+            WELCOME <span>BACK</span>
+          </h1>
+
+          <p>
+            Sign in to continue building teams, discovering
+            hackathons, and creating amazing projects.
+          </p>
+
         </div>
 
-      </div>
+        {/* =====================================
+            LOGIN CARD
+        ====================================== */}
 
+        <div className="login-card">
 
-      {/* HEADING */}
+          <div className="login-card-header">
 
-      <div className="login-heading">
+            <h2>Sign in to your account</h2>
 
-        <h1>
-          WELCOME BACK
-        </h1>
+            <p>
+              Enter your credentials to access your workspace.
+            </p>
 
-        <p>
-          Continue your hackathon journey
+          </div>
+
+          <form onSubmit={handleSubmit}>
+
+            {/* EMAIL */}
+            <div className="login-field">
+
+              <label htmlFor="email">
+                EMAIL ADDRESS
+              </label>
+
+              <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="name@example.com"
+                autoComplete="username"
+                required
+              />
+
+            </div>
+
+            {/* PASSWORD */}
+            <div className="login-field">
+
+              <div className="login-label-row">
+
+                <label htmlFor="password">
+                  PASSWORD
+                </label>
+
+                <button
+                  type="button"
+                  className="forgot-password"
+                  onClick={() =>
+                    setError(
+                      "Password recovery will be available soon."
+                    )
+                  }
+                >
+                  Forgot password?
+                </button>
+
+              </div>
+
+              <input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                autoComplete="current-password"
+                required
+              />
+
+            </div>
+
+            {/* ERROR */}
+            {error && (
+              <div className="login-error">
+                {error}
+              </div>
+            )}
+
+            {/* LOGIN BUTTON */}
+            <button
+              type="submit"
+              className="login-submit"
+              disabled={loading}
+            >
+              <span>{loading ? "SIGNING IN..." : "SIGN IN TO WORKSPACE"}</span>
+
+              <ArrowRight size={19} />
+            </button>
+
+          </form>
+
+          {/* DIVIDER */}
+          <div className="login-divider">
+            <span>OR</span>
+          </div>
+
+          {/* CREATE ACCOUNT */}
+          <div className="create-account-section">
+
+            <div className="create-account-text">
+
+              <h3>New to HackathonBuddy?</h3>
+
+              <p>
+                Create your developer profile and start
+                finding the right hackathon team.
+              </p>
+
+            </div>
+
+            <button
+              type="button"
+              className="create-account-button"
+              onClick={() => navigate("/create-profile")}
+            >
+              <UserPlus size={18} />
+
+              <span>CREATE ACCOUNT</span>
+            </button>
+
+          </div>
+
+        </div>
+
+        {/* FOOTER */}
+        <p className="login-footer">
+          HackathonBuddy • Build. Match. Ship.
         </p>
 
-      </div>
+      </section>
 
-
-      {/* LOGIN CARD */}
-
-      <div className="login-card">
-
-        <form onSubmit={handleLogin}>
-
-          {/* EMAIL */}
-
-          <div className="login-field">
-
-            <label htmlFor="login-email">
-              EMAIL ADDRESS
-            </label>
-
-            <input
-              id="login-email"
-              type="email"
-              placeholder="name@company.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              autoComplete="email"
-            />
-
-          </div>
-
-
-          {/* PASSWORD */}
-
-          <div className="login-field">
-
-            <label htmlFor="login-password">
-              PASSWORD
-            </label>
-
-            <input
-              id="login-password"
-              type="password"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete="current-password"
-            />
-
-          </div>
-
-
-          {/* ERROR */}
-
-          {error && (
-            <div className="login-error">
-              {error}
-            </div>
-          )}
-
-
-          {/* BUTTON */}
-
-          <button
-            type="submit"
-            className="login-submit-button"
-            disabled={loading}
-          >
-            {loading ? (
-              <>
-                <Loader2 size={18} style={{ animation: "spin 1s linear infinite", marginRight: "0.5rem" }} />
-                SIGNING IN…
-              </>
-            ) : (
-              "SIGN IN TO WORKSPACE"
-            )}
-          </button>
-
-        </form>
-
-
-        {/* DIVIDER */}
-
-        <div className="login-divider"></div>
-
-
-        {/* REGISTER */}
-
-        <div className="login-register">
-
-          <span>
-            Don't have an account?
-          </span>
-
-          <button
-            type="button"
-            onClick={() => navigate("/create-profile")}
-          >
-            Create One
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
+    </main>
   );
-}
+};
 
 export default LoginPage;

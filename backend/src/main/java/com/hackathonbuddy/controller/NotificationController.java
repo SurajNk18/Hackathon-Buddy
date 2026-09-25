@@ -52,4 +52,27 @@ public class NotificationController {
         return ResponseEntity.ok(ApiResponse.<Void>builder()
                 .success(true).message("All notifications marked as read").build());
     }
+
+    @PutMapping("/{id}/mark-read")
+    public ResponseEntity<ApiResponse<Void>> markRead(@PathVariable Long id) {
+        notificationService.markAsRead(id);
+        return ResponseEntity.ok(ApiResponse.<Void>builder()
+                .success(true).message("Notification marked as read").build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<Void>> deleteNotification(@PathVariable Long id) {
+        notificationService.deleteNotification(id);
+        return ResponseEntity.ok(ApiResponse.<Void>builder()
+                .success(true).message("Notification deleted").build());
+    }
+
+    @DeleteMapping
+    public ResponseEntity<ApiResponse<Void>> clearAll(
+            @AuthenticationPrincipal UserDetails userDetails) {
+        User user = getUser(userDetails);
+        notificationService.clearAllNotifications(user);
+        return ResponseEntity.ok(ApiResponse.<Void>builder()
+                .success(true).message("All notifications cleared").build());
+    }
 }

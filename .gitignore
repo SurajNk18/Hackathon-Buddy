@@ -31,3 +31,10 @@ venv/
 env/
 .env
 .pytest_cache/
+
+# Maven installation
+backend/maven/
+backend/maven.zip
+
+# Logs
+*.log

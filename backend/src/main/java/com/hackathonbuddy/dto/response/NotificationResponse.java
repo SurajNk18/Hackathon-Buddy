@@ -13,6 +13,12 @@ public class NotificationResponse {
     private String message;
     private String type;
     private Boolean isRead;
+    private Boolean unread;
+    private String icon;
+    private String action;
+    private String route;
     private String actionUrl;
+    private String time;
+    private String date;
     private LocalDateTime createdAt;
 }

@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import {
   LayoutDashboard,
   Trophy,
@@ -10,309 +9,122 @@ import {
   MessageSquare,
   Bell,
   User,
-  ClipboardList,
-  CalendarDays,
-  Settings,
   Search,
-  ChevronDown,
   Plus,
   UserPlus,
   X,
   Check,
-  UserCheck,
   Sparkles,
-  Target,
-  Code2,
-  Palette,
-  Database,
-  Cloud,
-  Shield,
-  BarChart3,
-  Send,
   SlidersHorizontal,
+  Mail,
+  Trash2,
+  CheckCircle2,
+  MapPin,
+  Code2
 } from "lucide-react";
-
+import { useApp } from "../../context/AppContext";
 import "./Teams.css";
 
 function Teams() {
   const navigate = useNavigate();
-
-  /* =====================================================
-     CURRENT USER
-     ===================================================== */
-
-  const currentUser =
-    JSON.parse(
-      localStorage.getItem("hackathonBuddyCurrentUser")
-    ) || {};
-
-  const userName =
-    currentUser.fullName ||
-    currentUser.name ||
-    "Hackathon User";
-
-  const userRole =
-    currentUser.primaryRole ||
-    currentUser.role ||
-    "Full Stack Developer";
-
-  const userSkills = currentUser.techSkills
-    ? currentUser.techSkills
-        .split(",")
-        .map((skill) => skill.trim())
-        .filter(Boolean)
-    : [
-        "React",
-        "Java",
-        "Spring Boot",
-        "JavaScript",
-      ];
-
-  const firstLetter =
-    userName.charAt(0).toUpperCase();
-
-
-  /* =====================================================
-     STATE
-     ===================================================== */
+  const {
+    currentUser,
+    teamMembers,
+    addTeamMember,
+    removeTeamMember,
+    addNotification
+  } = useApp();
 
   const [search, setSearch] = useState("");
+  const [selectedRole, setSelectedRole] = useState("All Roles");
+  const [selectedSkill, setSelectedSkill] = useState("All Skills");
+  const [showCreateTeam, setShowCreateTeam] = useState(false);
+  const [selectedCandidate, setSelectedCandidate] = useState(null);
+  const [teamName, setTeamName] = useState("CodeCrafters");
 
-  const [selectedRole, setSelectedRole] =
-    useState("All Roles");
+  const userName = currentUser?.fullName || "Developer";
+  const userRole = currentUser?.primaryRole || currentUser?.role || "Full Stack Developer";
 
-  const [selectedSkill, setSelectedSkill] =
-    useState("All Skills");
-
-  const [showCreateTeam, setShowCreateTeam] =
-    useState(false);
-
-  const [selectedMember, setSelectedMember] =
-    useState(null);
-
-  const [teamName, setTeamName] =
-    useState("");
-
-  const [teamMembers, setTeamMembers] =
-    useState([
-      {
-        id: 1,
-        name: userName,
-        role: userRole,
-        skills: userSkills,
-        letter: firstLetter,
-        isYou: true,
-      },
-    ]);
-
-  const [invitedMembers, setInvitedMembers] =
-    useState([]);
-
-
-  /* =====================================================
-     DEMO USERS
-     
-     Later these should come from:
-     GET /api/users/teammate-recommendations
-     ===================================================== */
-
-  const users = [
+  // Candidate pool for AI teammate recommendations
+  const candidates = [
     {
-      id: 2,
+      id: 10,
       name: "Priya Sharma",
       role: "UI/UX Designer",
       location: "Pune, India",
-      skills: [
-        "Figma",
-        "UI/UX",
-        "Prototyping",
-        "Design Systems",
-      ],
-      interests: [
-        "Healthcare",
-        "EdTech",
-        "AI",
-      ],
-      availability: "Available",
-      experience: "Intermediate",
+      skills: ["Figma", "UI/UX", "Prototyping", "Design Systems"],
+      interests: ["Healthcare", "EdTech", "AI"],
       match: 96,
       letter: "P",
-      bio: "Product designer focused on clean and intuitive digital experiences.",
+      bio: "Product designer passionate about accessible and intuitive design systems."
     },
-
     {
-      id: 3,
+      id: 11,
       name: "Rohan Mehta",
       role: "ML Engineer",
       location: "Mumbai, India",
-      skills: [
-        "Python",
-        "Machine Learning",
-        "TensorFlow",
-        "Pandas",
-        "NLP",
-      ],
-      interests: [
-        "AI",
-        "Healthcare",
-        "FinTech",
-      ],
-      availability: "Available",
-      experience: "Advanced",
+      skills: ["Python", "TensorFlow", "Pandas", "NLP", "PyTorch"],
+      interests: ["AI", "Healthcare", "FinTech"],
       match: 94,
       letter: "R",
-      bio: "ML engineer building recommendation and prediction systems.",
+      bio: "ML engineer with focus on large language models and prediction pipelines."
     },
-
     {
-      id: 4,
+      id: 12,
       name: "Aman Khan",
       role: "DevOps Engineer",
       location: "Bangalore, India",
-      skills: [
-        "AWS",
-        "Docker",
-        "Kubernetes",
-        "CI/CD",
-        "Linux",
-      ],
-      interests: [
-        "Cloud",
-        "DevOps",
-        "Cyber Security",
-      ],
-      availability: "Available",
-      experience: "Advanced",
+      skills: ["AWS", "Docker", "Kubernetes", "CI/CD", "Linux"],
+      interests: ["Cloud", "DevOps", "Cyber Security"],
       match: 91,
       letter: "A",
-      bio: "Cloud and DevOps engineer specializing in scalable deployments.",
+      bio: "Cloud specialist ensuring smooth CI/CD pipelines, containerization, and autoscaling."
     },
-
     {
-      id: 5,
+      id: 13,
       name: "Neha Patil",
       role: "Backend Developer",
       location: "Kolhapur, India",
-      skills: [
-        "Node.js",
-        "Express",
-        "MongoDB",
-        "REST API",
-        "PostgreSQL",
-      ],
-      interests: [
-        "SaaS",
-        "FinTech",
-        "EdTech",
-      ],
-      availability: "Available",
-      experience: "Intermediate",
+      skills: ["Node.js", "Express", "MongoDB", "REST API", "PostgreSQL"],
+      interests: ["SaaS", "FinTech", "EdTech"],
       match: 89,
       letter: "N",
-      bio: "Backend developer interested in scalable API development.",
+      bio: "Backend developer specializing in high-throughput APIs and distributed databases."
     },
-
     {
-      id: 6,
+      id: 14,
       name: "Arjun Desai",
       role: "Data Scientist",
       location: "Hyderabad, India",
-      skills: [
-        "Python",
-        "Pandas",
-        "Scikit-learn",
-        "SQL",
-        "Data Analysis",
-      ],
-      interests: [
-        "AI",
-        "Data",
-        "Healthcare",
-      ],
-      availability: "Available",
-      experience: "Intermediate",
+      skills: ["Python", "Pandas", "Scikit-learn", "SQL", "Data Analysis"],
+      interests: ["AI", "Data", "Healthcare"],
       match: 87,
       letter: "A",
-      bio: "Data scientist focused on turning datasets into useful insights.",
+      bio: "Data scientist experienced in cleaning, aggregating, and extracting business insights."
     },
-
     {
-      id: 7,
+      id: 15,
       name: "Sneha Kulkarni",
       role: "Frontend Developer",
       location: "Pune, India",
-      skills: [
-        "React",
-        "TypeScript",
-        "Next.js",
-        "Tailwind CSS",
-        "JavaScript",
-      ],
-      interests: [
-        "Web3",
-        "SaaS",
-        "EdTech",
-      ],
-      availability: "Available",
-      experience: "Intermediate",
-      match: 83,
+      skills: ["React", "TypeScript", "Next.js", "Tailwind CSS", "JavaScript"],
+      interests: ["Web3", "SaaS", "EdTech"],
+      match: 85,
       letter: "S",
-      bio: "Frontend engineer who enjoys building responsive web applications.",
+      bio: "Frontend engineer who creates responsive, accessible, and fast web UIs."
     },
-
     {
-      id: 8,
+      id: 16,
       name: "Vikram Joshi",
       role: "Cyber Security Engineer",
       location: "Delhi, India",
-      skills: [
-        "Cyber Security",
-        "Ethical Hacking",
-        "Network Security",
-        "Linux",
-        "OWASP",
-      ],
-      interests: [
-        "Security",
-        "FinTech",
-        "Cloud",
-      ],
-      availability: "Available",
-      experience: "Advanced",
+      skills: ["Cyber Security", "Ethical Hacking", "OWASP", "Linux"],
+      interests: ["Security", "FinTech", "Cloud"],
       match: 82,
       letter: "V",
-      bio: "Security engineer focused on application and network security.",
-    },
-
-    {
-      id: 9,
-      name: "Kavya Rao",
-      role: "Product Manager",
-      location: "Chennai, India",
-      skills: [
-        "Product Strategy",
-        "Research",
-        "Communication",
-        "Agile",
-        "Documentation",
-      ],
-      interests: [
-        "EdTech",
-        "Healthcare",
-        "SaaS",
-      ],
-      availability: "Available",
-      experience: "Intermediate",
-      match: 79,
-      letter: "K",
-      bio: "Product-focused builder who connects user problems with technical solutions.",
-    },
+      bio: "Penetration tester and security architect securing web applications."
+    }
   ];
-
-
-  /* =====================================================
-     ROLES
-     ===================================================== */
 
   const roles = [
     "All Roles",
@@ -324,1390 +136,606 @@ function Teams() {
     "UI/UX Designer",
     "DevOps Engineer",
     "Cyber Security Engineer",
-    "Product Manager",
   ];
-
-
-  /* =====================================================
-     SKILLS
-     ===================================================== */
 
   const skills = [
     "All Skills",
     "React",
-    "Java",
     "Python",
-    "Machine Learning",
     "Figma",
     "AWS",
     "Docker",
     "Node.js",
-    "MongoDB",
     "PostgreSQL",
-    "Cyber Security",
+    "Kubernetes",
   ];
 
-
-  /* =====================================================
-     TEAM SKILLS
-     ===================================================== */
-
-  const teamSkills = [
-    ...new Set(
-      teamMembers.flatMap(
-        (member) => member.skills
-      )
-    ),
+  const sidebarMenuItems = [
+    { label: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
+    { label: "Hackathons", icon: Trophy, path: "/hackathons" },
+    { label: "Teams", icon: Users, path: "/teams", active: true },
+    { label: "AI Hub", icon: Brain, path: "/ai-hub" },
+    { label: "Projects", icon: FolderKanban, path: "/projects" },
+    { label: "Chat", icon: MessageSquare, path: "/chat" },
+    { label: "Notifications", icon: Bell, path: "/notifications" },
+    { label: "Profile", icon: User, path: "/profile" },
   ];
 
+  // Team skills
+  const teamSkills = Array.from(
+    new Set(teamMembers.flatMap((m) => m.skills || []))
+  );
 
-  /* =====================================================
-     MISSING SKILLS
-     
-     This is where your real ML recommendation
-     can eventually be connected.
-     ===================================================== */
+  const requiredSkills = ["UI/UX", "Machine Learning", "AWS", "Docker", "React", "Node.js"];
+  const missingSkills = requiredSkills.filter(
+    (req) => !teamSkills.some((ts) => ts.toLowerCase() === req.toLowerCase())
+  );
 
-  const requiredSkills = [
-    "UI/UX",
-    "Machine Learning",
-    "AWS",
-    "Docker",
-  ];
-
-  const missingSkills =
-    requiredSkills.filter(
-      (skill) =>
-        !teamSkills.some(
-          (teamSkill) =>
-            teamSkill.toLowerCase() ===
-            skill.toLowerCase()
-        )
-    );
-
-
-  /* =====================================================
-     FILTER USERS
-     ===================================================== */
-
-  const filteredUsers = useMemo(() => {
-
-    return users.filter((user) => {
-
-      const searchText =
-        search.toLowerCase().trim();
-
+  // Filter candidates
+  const filteredCandidates = useMemo(() => {
+    return candidates.filter((candidate) => {
+      const q = search.toLowerCase().trim();
       const matchesSearch =
-        !searchText ||
-        user.name
-          .toLowerCase()
-          .includes(searchText) ||
-        user.role
-          .toLowerCase()
-          .includes(searchText) ||
-        user.skills.some((skill) =>
-          skill
-            .toLowerCase()
-            .includes(searchText)
-        );
+        !q ||
+        candidate.name.toLowerCase().includes(q) ||
+        candidate.role.toLowerCase().includes(q) ||
+        candidate.skills.some((s) => s.toLowerCase().includes(q));
 
       const matchesRole =
-        selectedRole === "All Roles" ||
-        user.role === selectedRole;
+        selectedRole === "All Roles" || candidate.role === selectedRole;
 
       const matchesSkill =
         selectedSkill === "All Skills" ||
-        user.skills.some(
-          (skill) =>
-            skill.toLowerCase() ===
-            selectedSkill.toLowerCase()
-        );
+        candidate.skills.some((s) => s.toLowerCase() === selectedSkill.toLowerCase());
 
-      const alreadyAdded =
-        teamMembers.some(
-          (member) => member.id === user.id
-        );
+      const isAlreadyMember = teamMembers.some((m) => m.name === candidate.name);
 
-      return (
-        matchesSearch &&
-        matchesRole &&
-        matchesSkill &&
-        !alreadyAdded
-      );
+      return matchesSearch && matchesRole && matchesSkill && !isAlreadyMember;
     });
+  }, [candidates, search, selectedRole, selectedSkill, teamMembers]);
 
-  }, [
-    search,
-    selectedRole,
-    selectedSkill,
-    teamMembers,
-  ]);
-
-
-  /* =====================================================
-     ADD MEMBER
-     ===================================================== */
-
-  const handleAddMember = (member) => {
-
-    const alreadyAdded =
-      teamMembers.some(
-        (item) => item.id === member.id
-      );
-
-    if (alreadyAdded) {
-      return;
-    }
-
-    setTeamMembers((prev) => [
-      ...prev,
-      member,
-    ]);
-
-    setInvitedMembers((prev) => [
-      ...prev,
-      member.id,
-    ]);
-
-    setSelectedMember(null);
-
+  const handleInviteCandidate = (candidate) => {
+    addTeamMember({
+      id: Date.now(),
+      name: candidate.name,
+      role: candidate.role,
+      skills: candidate.skills,
+      letter: candidate.letter
+    });
+    setSelectedCandidate(null);
   };
 
-
-  /* =====================================================
-     REMOVE MEMBER
-     ===================================================== */
-
-  const handleRemoveMember = (memberId) => {
-
-    setTeamMembers((prev) =>
-      prev.filter(
-        (member) => member.id !== memberId
-      )
-    );
-
-  };
-
-
-  /* =====================================================
-     CREATE TEAM
-     ===================================================== */
-
-  const handleCreateTeam = (e) => {
-
+  const handleSaveTeamName = (e) => {
     e.preventDefault();
-
-    if (!teamName.trim()) {
-      alert("Please enter a team name.");
-      return;
-    }
-
-    const newTeam = {
-      name: teamName.trim(),
-      members: teamMembers,
-      createdAt: new Date().toISOString(),
-    };
-
-    localStorage.setItem(
-      "hackathonBuddyTeam",
-      JSON.stringify(newTeam)
-    );
-
-    console.log(
-      "========== TEAM CREATED =========="
-    );
-
-    console.log("Team Name:", teamName);
-    console.log("Team Members:", teamMembers);
-
-    console.log(
-      "=================================="
-    );
-
-    alert(
-      `Team "${teamName}" created successfully!`
-    );
-
+    if (!teamName.trim()) return;
+    addNotification({
+      type: "team",
+      icon: "👥",
+      title: "Team Updated",
+      message: `Team renamed to "${teamName.trim()}".`,
+      action: "View Team",
+      route: "/teams"
+    });
     setShowCreateTeam(false);
-
   };
-
-
-  /* =====================================================
-     NAVIGATION
-     ===================================================== */
-
-  const handleNavigation = (path) => {
-    navigate(path);
-  };
-
 
   return (
     <div className="teams-page">
-
-
-      {/* ==================================================
-          SIDEBAR
-          ================================================== */}
-
+      {/* SIDEBAR */}
       <aside className="teams-sidebar">
-
-        <div className="teams-brand">
-
-          <div className="teams-brand-icon">
-            🚀
-          </div>
-
+        <div
+          className="teams-brand"
+          onClick={() => navigate("/dashboard")}
+          style={{ cursor: "pointer" }}
+        >
+          <div className="teams-brand-icon">🚀</div>
           <div className="teams-brand-text">
-            HACKATHON
-            <span>BUDDY</span>
+            HACKATHON<span>BUDDY</span>
           </div>
-
         </div>
 
-
         <nav className="teams-sidebar-menu">
-
-          <button
-            onClick={() =>
-              handleNavigation("/dashboard")
-            }
-          >
-            <LayoutDashboard size={20} />
-            Dashboard
-          </button>
-
-
-          <button
-            onClick={() =>
-              handleNavigation("/hackathons")
-            }
-          >
-            <Trophy size={20} />
-            Hackathons
-          </button>
-
-
-          <button className="active">
-            <Users size={20} />
-            Teams
-          </button>
-
-
-          <button
-            onClick={() =>
-              handleNavigation("/ai-hub")
-            }
-          >
-            <Brain size={20} />
-            AI Hub
-          </button>
-
-
-          <button
-            onClick={() =>
-              handleNavigation("/projects")
-            }
-          >
-            <FolderKanban size={20} />
-            Projects
-          </button>
-
-
-          <button
-            onClick={() =>
-              handleNavigation("/chat")
-            }
-          >
-            <MessageSquare size={20} />
-            Chat
-          </button>
-
-
-          <button
-            onClick={() =>
-              handleNavigation("/notifications")
-            }
-          >
-            <Bell size={20} />
-            Notifications
-          </button>
-
-
-          <button
-            onClick={() =>
-              handleNavigation("/profile")
-            }
-          >
-            <User size={20} />
-            Profile
-          </button>
-
-
-          <button
-            onClick={() =>
-              handleNavigation("/registrations")
-            }
-          >
-            <ClipboardList size={20} />
-            My Registrations
-          </button>
-
-
-          <button
-            onClick={() =>
-              handleNavigation("/calendar")
-            }
-          >
-            <CalendarDays size={20} />
-            Calendar
-          </button>
-
-
-          <button
-            onClick={() =>
-              handleNavigation("/settings")
-            }
-          >
-            <Settings size={20} />
-            Settings
-          </button>
-
+          {sidebarMenuItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <button
+                key={item.label}
+                className={item.active ? "active" : ""}
+                onClick={() => navigate(item.path)}
+              >
+                <Icon size={19} />
+                <span>{item.label}</span>
+              </button>
+            );
+          })}
         </nav>
-
       </aside>
 
-
-      {/* ==================================================
-          MAIN
-          ================================================== */}
-
+      {/* MAIN CONTENT */}
       <main className="teams-main">
-
-
         {/* HEADER */}
-
         <header className="teams-header">
-
           <div>
-
-            <h1>
-              Find Your Team
-            </h1>
-
+            <h1>Find Your Dream Team</h1>
             <p>
-              Build your dream hackathon team
-              with skill-based matching.
+              Build your winning hackathon squad with AI skill-based matching and gap analysis.
             </p>
-
           </div>
-
 
           <div className="teams-header-right">
-
             <button
-              className="teams-header-icon"
-              onClick={() =>
-                handleNavigation(
-                  "/notifications"
-                )
-              }
+              className="create-team-btn"
+              onClick={() => setShowCreateTeam(true)}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "9px 16px",
+                background: "#7c3aed",
+                border: "none",
+                borderRadius: "8px",
+                color: "white",
+                fontWeight: "600",
+                fontSize: "13px",
+                cursor: "pointer"
+              }}
             >
-              <Bell size={21} />
-              <span>5</span>
+              <Plus size={16} />
+              Rename Team
             </button>
-
-
-            <button
-              className="teams-profile"
-              onClick={() =>
-                handleNavigation("/profile")
-              }
-            >
-
-              <div className="teams-profile-avatar">
-                {firstLetter}
-              </div>
-
-              <div>
-
-                <strong>
-                  {userName}
-                </strong>
-
-                <small>
-                  {userRole}
-                </small>
-
-              </div>
-
-              <ChevronDown size={17} />
-
-            </button>
-
           </div>
-
         </header>
 
-
-        {/* ==================================================
-            HERO
-            ================================================== */}
-
+        {/* HERO */}
         <section className="teams-hero">
-
           <div className="teams-hero-content">
-
             <div className="teams-hero-badge">
               <Sparkles size={14} />
-              AI-POWERED TEAM MATCHING
+              AI-POWERED SQUAD BUILDER
             </div>
-
             <h2>
               Find teammates who
               <span> complete your skills.</span>
             </h2>
-
             <p>
-              We recommend people based on your
-              skills, experience, interests and the
-              skills your team is missing.
+              We calculate compatibility based on role balance, missing technical skills,
+              and project domain alignment.
             </p>
-
           </div>
-
 
           <div className="teams-hero-graphic">
-
-            <div className="hero-avatar one">
-              P
-            </div>
-
-            <div className="hero-avatar two">
-              R
-            </div>
-
-            <div className="hero-avatar three">
-              A
-            </div>
-
-            <div className="hero-center-icon">
-              🤝
-            </div>
-
+            <div className="hero-avatar one">P</div>
+            <div className="hero-avatar two">R</div>
+            <div className="hero-avatar three">A</div>
+            <div className="hero-center-icon">🤝</div>
           </div>
-
         </section>
 
-
-        {/* ==================================================
-            MY TEAM
-            ================================================== */}
-
-        <section className="my-team-section">
-
-          <div className="section-heading">
-
+        {/* ACTIVE TEAM SECTION */}
+        <section className="active-team-card" style={{
+          background: "linear-gradient(145deg, #111726, #0e1320)",
+          border: "1px solid #1e293b",
+          borderRadius: "16px",
+          padding: "24px",
+          marginBottom: "32px"
+        }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "18px" }}>
             <div>
-
-              <h2>
-                My Team
+              <span style={{ color: "#a78bfa", fontSize: "11px", fontWeight: "800", letterSpacing: "1px" }}>CURRENT SQUAD</span>
+              <h2 style={{ color: "#f8fafc", fontSize: "20px", margin: "4px 0 0" }}>
+                {teamName} ({teamMembers.length} Members)
               </h2>
-
-              <p>
-                Manage your current team
-                and identify missing skills.
-              </p>
-
             </div>
-
-
             <button
-              className="create-team-button"
-              onClick={() =>
-                setShowCreateTeam(true)
-              }
+              onClick={() => navigate("/chat")}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
+                padding: "8px 14px",
+                background: "rgba(139, 92, 246, 0.15)",
+                border: "1px solid #8b5cf6",
+                color: "#c4b5fd",
+                borderRadius: "8px",
+                fontSize: "13px",
+                fontWeight: "600",
+                cursor: "pointer"
+              }}
             >
-
-              <Plus size={18} />
-
-              Create New Team
-
+              <MessageSquare size={16} />
+              Team Chat
             </button>
-
           </div>
 
-
-          <div className="my-team-card">
-
-
-            {/* TEAM HEADER */}
-
-            <div className="my-team-header">
-
-              <div className="team-title-area">
-
-                <div className="team-main-icon">
-                  🚀
+          {/* Members list */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: "16px" }}>
+            {teamMembers.map((member) => (
+              <div
+                key={member.id}
+                style={{
+                  background: "#0a0e1a",
+                  border: "1px solid #1f293d",
+                  borderRadius: "12px",
+                  padding: "16px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between"
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                  <div style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    background: member.isYou ? "linear-gradient(135deg, #7c3aed, #a855f7)" : "#1e293b",
+                    color: "white",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontWeight: "700"
+                  }}>
+                    {member.letter || member.name.charAt(0)}
+                  </div>
+                  <div>
+                    <strong style={{ color: "#f8fafc", fontSize: "14px", display: "block" }}>
+                      {member.name} {member.isYou && <small style={{ color: "#a78bfa" }}>(You)</small>}
+                    </strong>
+                    <span style={{ color: "#64748b", fontSize: "12px" }}>{member.role}</span>
+                  </div>
                 </div>
 
-                <div>
-
-                  <h3>
-                    {teamName ||
-                      "Your Hackathon Team"}
-                  </h3>
-
-                  <p>
-                    {teamMembers.length}
-                    {" "}
-                    member
-                    {teamMembers.length !== 1
-                      ? "s"
-                      : ""}
-                  </p>
-
-                </div>
-
+                {!member.isYou && (
+                  <button
+                    onClick={() => removeTeamMember(member.id)}
+                    title="Remove from team"
+                    style={{
+                      background: "transparent",
+                      border: "none",
+                      color: "#64748b",
+                      cursor: "pointer",
+                      padding: "6px"
+                    }}
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                )}
               </div>
+            ))}
+          </div>
 
-
-              <div className="team-status">
-                <span></span>
-                Open for Members
+          {/* Skill Gap Banner */}
+          <div style={{
+            marginTop: "20px",
+            padding: "16px",
+            background: "rgba(124, 58, 237, 0.08)",
+            border: "1px solid rgba(139, 92, 246, 0.25)",
+            borderRadius: "10px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "12px"
+          }}>
+            <div>
+              <strong style={{ color: "#e2e8f0", fontSize: "13.5px" }}>Skills Covered:</strong>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: "6px" }}>
+                {teamSkills.slice(0, 8).map((sk) => (
+                  <span key={sk} style={{ background: "rgba(16, 185, 129, 0.15)", color: "#34d399", padding: "3px 8px", borderRadius: "6px", fontSize: "11px", fontWeight: "600" }}>
+                    ✓ {sk}
+                  </span>
+                ))}
               </div>
-
             </div>
 
+            {missingSkills.length > 0 && (
+              <div>
+                <strong style={{ color: "#fbbf24", fontSize: "13.5px" }}>Missing Skills Needed:</strong>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: "6px" }}>
+                  {missingSkills.map((sk) => (
+                    <span key={sk} style={{ background: "rgba(245, 158, 11, 0.15)", color: "#fbbf24", padding: "3px 8px", borderRadius: "6px", fontSize: "11px", fontWeight: "600" }}>
+                      + {sk}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
 
-            {/* MEMBERS */}
+        {/* SEARCH & FILTERS FOR TEAMMATES */}
+        <section className="teams-filter-bar" style={{
+          display: "flex",
+          gap: "12px",
+          alignItems: "center",
+          flexWrap: "wrap",
+          marginBottom: "24px"
+        }}>
+          <div style={{
+            flex: 1,
+            minWidth: "260px",
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            background: "#111726",
+            border: "1px solid #1e293b",
+            borderRadius: "10px",
+            padding: "0 14px",
+            height: "44px"
+          }}>
+            <Search size={18} color="#64748b" />
+            <input
+              type="text"
+              placeholder="Search hackers by name, role, or skills..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              style={{
+                width: "100%",
+                background: "transparent",
+                border: "none",
+                outline: "none",
+                color: "#f8fafc",
+                fontSize: "13.5px"
+              }}
+            />
+          </div>
 
-            <div className="team-member-grid">
+          <select
+            value={selectedRole}
+            onChange={(e) => setSelectedRole(e.target.value)}
+            style={{
+              height: "44px",
+              background: "#111726",
+              border: "1px solid #1e293b",
+              borderRadius: "10px",
+              color: "#f8fafc",
+              padding: "0 14px",
+              fontSize: "13px"
+            }}
+          >
+            {roles.map((r) => (
+              <option key={r} value={r}>{r}</option>
+            ))}
+          </select>
 
-              {teamMembers.map(
-                (member) => (
+          <select
+            value={selectedSkill}
+            onChange={(e) => setSelectedSkill(e.target.value)}
+            style={{
+              height: "44px",
+              background: "#111726",
+              border: "1px solid #1e293b",
+              borderRadius: "10px",
+              color: "#f8fafc",
+              padding: "0 14px",
+              fontSize: "13px"
+            }}
+          >
+            {skills.map((s) => (
+              <option key={s} value={s}>{s}</option>
+            ))}
+          </select>
+        </section>
 
-                  <div
-                    className="current-member"
-                    key={member.id}
-                  >
-
-                    <div className="current-member-avatar">
-                      {member.letter}
-                    </div>
-
-                    <div className="current-member-info">
-
-                      <strong>
-                        {member.name}
-                      </strong>
-
-                      <span>
-                        {member.role}
-                      </span>
-
-                      <div className="member-skills">
-
-                        {member.skills
-                          .slice(0, 3)
-                          .map(
-                            (skill) => (
-                              <span
-                                key={skill}
-                              >
-                                {skill}
-                              </span>
-                            )
-                          )}
-
+        {/* CANDIDATES GRID */}
+        <section style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: "20px" }}>
+          {filteredCandidates.length === 0 ? (
+            <div style={{
+              gridColumn: "1 / -1",
+              textAlign: "center",
+              padding: "48px 20px",
+              background: "#0c101c",
+              borderRadius: "16px",
+              border: "1px dashed #1e293b"
+            }}>
+              <Users size={40} color="#64748b" style={{ marginBottom: "12px" }} />
+              <h3 style={{ color: "#f8fafc" }}>No candidates found</h3>
+              <p style={{ color: "#64748b", fontSize: "13px" }}>Try broadening your search or role filters.</p>
+            </div>
+          ) : (
+            filteredCandidates.map((cand) => (
+              <div
+                key={cand.id}
+                style={{
+                  background: "linear-gradient(145deg, #111726, #0d121e)",
+                  border: "1px solid #1e293b",
+                  borderRadius: "14px",
+                  padding: "20px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  transition: "transform 0.2s, border-color 0.2s"
+                }}
+              >
+                <div>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "12px" }}>
+                    <div style={{ display: "flex", gap: "12px" }}>
+                      <div style={{
+                        width: "44px",
+                        height: "44px",
+                        borderRadius: "10px",
+                        background: "linear-gradient(135deg, #6366f1, #a855f7)",
+                        color: "white",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontWeight: "700",
+                        fontSize: "16px"
+                      }}>
+                        {cand.letter}
                       </div>
-
+                      <div>
+                        <strong style={{ color: "#f8fafc", fontSize: "15px", display: "block" }}>{cand.name}</strong>
+                        <span style={{ color: "#38bdf8", fontSize: "12.5px" }}>{cand.role}</span>
+                      </div>
                     </div>
 
-
-                    {member.isYou ? (
-
-                      <span className="you-badge">
-                        You
-                      </span>
-
-                    ) : (
-
-                      <button
-                        className="remove-member-button"
-                        onClick={() =>
-                          handleRemoveMember(
-                            member.id
-                          )
-                        }
-                      >
-                        <X size={15} />
-                      </button>
-
-                    )}
-
+                    <div style={{
+                      padding: "4px 8px",
+                      background: "rgba(16, 185, 129, 0.15)",
+                      border: "1px solid rgba(16, 185, 129, 0.3)",
+                      borderRadius: "6px",
+                      color: "#34d399",
+                      fontSize: "12px",
+                      fontWeight: "700"
+                    }}>
+                      {cand.match}% MATCH
+                    </div>
                   </div>
 
-                )
-              )}
+                  <p style={{ color: "#94a3b8", fontSize: "13px", lineHeight: "1.5", margin: "0 0 14px" }}>
+                    {cand.bio}
+                  </p>
 
+                  <div style={{ display: "flex", alignItems: "center", gap: "6px", color: "#64748b", fontSize: "12px", marginBottom: "12px" }}>
+                    <MapPin size={14} />
+                    <span>{cand.location}</span>
+                  </div>
 
-              {/* ADD MEMBER */}
-
-              <button
-                className="add-team-member"
-                onClick={() =>
-                  document
-                    .getElementById(
-                      "find-teammates"
-                    )
-                    ?.scrollIntoView({
-                      behavior: "smooth",
-                    })
-                }
-              >
-
-                <div>
-                  <UserPlus size={23} />
-                </div>
-
-                <strong>
-                  Add Member
-                </strong>
-
-                <span>
-                  Find someone
-                </span>
-
-              </button>
-
-            </div>
-
-
-            {/* TEAM SKILLS */}
-
-            <div className="team-skills-section">
-
-              <div className="team-skill-column">
-
-                <div className="skill-column-title">
-
-                  <Check
-                    size={17}
-                  />
-
-                  <strong>
-                    Skills Covered
-                  </strong>
-
-                </div>
-
-                <div className="team-skill-list">
-
-                  {teamSkills.map(
-                    (skill) => (
-                      <span
-                        className="covered-skill"
-                        key={skill}
-                      >
-                        {skill}
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "16px" }}>
+                    {cand.skills.map((sk) => (
+                      <span key={sk} style={{
+                        background: "#182236",
+                        border: "1px solid #27354d",
+                        color: "#cbd5e1",
+                        padding: "3px 8px",
+                        borderRadius: "6px",
+                        fontSize: "11px"
+                      }}>
+                        {sk}
                       </span>
-                    )
-                  )}
-
+                    ))}
+                  </div>
                 </div>
 
-              </div>
-
-
-              <div className="team-skill-column missing">
-
-                <div className="skill-column-title">
-
-                  <Target
-                    size={17}
-                  />
-
-                  <strong>
-                    Skills Needed
-                  </strong>
-
-                </div>
-
-                <div className="team-skill-list">
-
-                  {missingSkills.length > 0 ? (
-
-                    missingSkills.map(
-                      (skill) => (
-                        <span
-                          className="missing-skill"
-                          key={skill}
-                        >
-                          + {skill}
-                        </span>
-                      )
-                    )
-
-                  ) : (
-
-                    <span className="all-covered">
-                      ✓ All key skills covered
-                    </span>
-
-                  )}
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </section>
-
-
-        {/* ==================================================
-            FIND TEAMMATES
-            ================================================== */}
-
-        <section
-          className="find-team-section"
-          id="find-teammates"
-        >
-
-          <div className="section-heading">
-
-            <div>
-
-              <h2>
-                Recommended Teammates
-              </h2>
-
-              <p>
-                People who can strengthen
-                your team.
-              </p>
-
-            </div>
-
-            <div className="recommendation-label">
-
-              <Sparkles size={15} />
-
-              AI Recommended
-
-            </div>
-
-          </div>
-
-
-          {/* SEARCH + FILTERS */}
-
-          <div className="team-filters">
-
-            <div className="team-search">
-
-              <Search size={19} />
-
-              <input
-                type="text"
-                placeholder="Search by name, role or skill..."
-                value={search}
-                onChange={(e) =>
-                  setSearch(
-                    e.target.value
-                  )
-                }
-              />
-
-            </div>
-
-
-            <div className="team-select">
-
-              <SlidersHorizontal
-                size={17}
-              />
-
-              <select
-                value={selectedRole}
-                onChange={(e) =>
-                  setSelectedRole(
-                    e.target.value
-                  )
-                }
-              >
-
-                {roles.map(
-                  (role) => (
-                    <option
-                      key={role}
-                      value={role}
-                    >
-                      {role}
-                    </option>
-                  )
-                )}
-
-              </select>
-
-            </div>
-
-
-            <div className="team-select">
-
-              <Code2 size={17} />
-
-              <select
-                value={selectedSkill}
-                onChange={(e) =>
-                  setSelectedSkill(
-                    e.target.value
-                  )
-                }
-              >
-
-                {skills.map(
-                  (skill) => (
-                    <option
-                      key={skill}
-                      value={skill}
-                    >
-                      {skill}
-                    </option>
-                  )
-                )}
-
-              </select>
-
-            </div>
-
-          </div>
-
-
-          {/* USERS */}
-
-          <div className="recommended-grid">
-
-            {filteredUsers.length === 0 ? (
-
-              <div className="no-members">
-
-                <Users size={35} />
-
-                <h3>
-                  No teammates found
-                </h3>
-
-                <p>
-                  Try another role,
-                  skill or search.
-                </p>
-
-                <button
-                  onClick={() => {
-                    setSearch("");
-                    setSelectedRole(
-                      "All Roles"
-                    );
-                    setSelectedSkill(
-                      "All Skills"
-                    );
-                  }}
-                >
-                  Clear Filters
-                </button>
-
-              </div>
-
-            ) : (
-
-              filteredUsers.map(
-                (member) => (
-
-                  <article
-                    className="teammate-card"
-                    key={member.id}
+                <div style={{ display: "flex", gap: "10px" }}>
+                  <button
+                    onClick={() => handleInviteCandidate(cand)}
+                    style={{
+                      flex: 1,
+                      padding: "9px 14px",
+                      background: "#7c3aed",
+                      border: "none",
+                      borderRadius: "8px",
+                      color: "white",
+                      fontSize: "13px",
+                      fontWeight: "600",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "6px"
+                    }}
                   >
-
-                    {/* MATCH */}
-
-                    <div className="match-badge">
-
-                      <Sparkles size={12} />
-
-                      {member.match}%
-                      Match
-
-                    </div>
-
-
-                    {/* PROFILE */}
-
-                    <div className="teammate-profile">
-
-                      <div className="teammate-avatar">
-                        {member.letter}
-                      </div>
-
-                      <div>
-
-                        <h3>
-                          {member.name}
-                        </h3>
-
-                        <p>
-                          {member.role}
-                        </p>
-
-                      </div>
-
-                    </div>
-
-
-                    {/* LOCATION */}
-
-                    <div className="teammate-location">
-
-                      📍 {member.location}
-
-                    </div>
-
-
-                    {/* BIO */}
-
-                    <p className="teammate-bio">
-                      {member.bio}
-                    </p>
-
-
-                    {/* SKILLS */}
-
-                    <div className="teammate-skills">
-
-                      {member.skills
-                        .slice(0, 5)
-                        .map(
-                          (skill) => (
-                            <span
-                              key={skill}
-                            >
-                              {skill}
-                            </span>
-                          )
-                        )}
-
-                    </div>
-
-
-                    {/* INTERESTS */}
-
-                    <div className="interest-row">
-
-                      <strong>
-                        Interests
-                      </strong>
-
-                      <div>
-
-                        {member.interests
-                          .slice(0, 2)
-                          .map(
-                            (interest) => (
-                              <span
-                                key={interest}
-                              >
-                                {interest}
-                              </span>
-                            )
-                          )}
-
-                      </div>
-
-                    </div>
-
-
-                    {/* FOOTER */}
-
-                    <div className="teammate-footer">
-
-                      <div className="availability">
-
-                        <span></span>
-
-                        {member.availability}
-
-                      </div>
-
-
-                      <div className="teammate-actions">
-
-                        <button
-                          className="view-profile-button"
-                          onClick={() =>
-                            setSelectedMember(
-                              member
-                            )
-                          }
-                        >
-                          View Profile
-                        </button>
-
-                        <button
-                          className="invite-button"
-                          onClick={() =>
-                            handleAddMember(
-                              member
-                            )
-                          }
-                        >
-
-                          <UserPlus
-                            size={16}
-                          />
-
-                          Invite
-
-                        </button>
-
-                      </div>
-
-                    </div>
-
-                  </article>
-
-                )
-              )
-
-            )}
-
-          </div>
-
+                    <UserPlus size={16} />
+                    Add to Squad
+                  </button>
+                  <button
+                    onClick={() => navigate("/chat")}
+                    style={{
+                      padding: "9px 12px",
+                      background: "rgba(255, 255, 255, 0.05)",
+                      border: "1px solid #1e293b",
+                      borderRadius: "8px",
+                      color: "#94a3b8",
+                      cursor: "pointer"
+                    }}
+                    title="Message candidate"
+                  >
+                    <MessageSquare size={16} />
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
         </section>
-
-
-        {/* ==================================================
-            WHY MATCHING
-            ================================================== */}
-
-        <section className="matching-explanation">
-
-          <div className="matching-icon">
-            <Brain size={27} />
-          </div>
-
-          <div>
-
-            <h3>
-              How HackathonBuddy Matching Works
-            </h3>
-
-            <p>
-              Recommendations consider your
-              team's missing skills, technical
-              expertise, interests and experience.
-              The goal isn't to find someone
-              identical to you — it's to find
-              someone who makes your team stronger.
-            </p>
-
-          </div>
-
-        </section>
-
-
       </main>
 
-
-      {/* ==================================================
-          PROFILE MODAL
-          ================================================== */}
-
-      {selectedMember && (
-
-        <div
-          className="teams-modal-overlay"
-          onClick={() =>
-            setSelectedMember(null)
-          }
-        >
-
-          <div
-            className="member-modal"
-            onClick={(e) =>
-              e.stopPropagation()
-            }
-          >
-
-            <button
-              className="modal-close-button"
-              onClick={() =>
-                setSelectedMember(null)
-              }
-            >
-              <X size={20} />
-            </button>
-
-
-            <div className="modal-profile">
-
-              <div className="modal-avatar">
-                {selectedMember.letter}
-              </div>
-
-              <div>
-
-                <h2>
-                  {selectedMember.name}
-                </h2>
-
-                <p>
-                  {selectedMember.role}
-                </p>
-
-                <span>
-                  {selectedMember.location}
-                </span>
-
-              </div>
-
-            </div>
-
-
-            <div className="modal-match">
-
-              <Sparkles size={17} />
-
-              <strong>
-                {selectedMember.match}%
-              </strong>
-
-              <span>
-                Skill Match
-              </span>
-
-            </div>
-
-
-            <div className="modal-section">
-
-              <h4>
-                About
-              </h4>
-
-              <p>
-                {selectedMember.bio}
-              </p>
-
-            </div>
-
-
-            <div className="modal-section">
-
-              <h4>
-                Skills
-              </h4>
-
-              <div className="modal-skills">
-
-                {selectedMember.skills.map(
-                  (skill) => (
-                    <span key={skill}>
-                      {skill}
-                    </span>
-                  )
-                )}
-
-              </div>
-
-            </div>
-
-
-            <div className="modal-section">
-
-              <h4>
-                Interests
-              </h4>
-
-              <div className="modal-skills">
-
-                {selectedMember.interests.map(
-                  (interest) => (
-                    <span key={interest}>
-                      {interest}
-                    </span>
-                  )
-                )}
-
-              </div>
-
-            </div>
-
-
-            <div className="modal-actions">
-
-              <button
-                className="modal-message-button"
-                onClick={() =>
-                  handleNavigation("/chat")
-                }
-              >
-
-                <MessageSquare
-                  size={17}
-                />
-
-                Message
-
-              </button>
-
-
-              <button
-                className="modal-invite-button"
-                onClick={() =>
-                  handleAddMember(
-                    selectedMember
-                  )
-                }
-              >
-
-                <UserPlus size={17} />
-
-                Invite to Team
-
-              </button>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      )}
-
-
-      {/* ==================================================
-          CREATE TEAM MODAL
-          ================================================== */}
-
+      {/* RENAME / CREATE TEAM MODAL */}
       {showCreateTeam && (
-
         <div
-          className="teams-modal-overlay"
-          onClick={() =>
-            setShowCreateTeam(false)
-          }
+          className="modal-overlay"
+          onClick={() => setShowCreateTeam(false)}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: "rgba(0, 0, 0, 0.75)",
+            backdropFilter: "blur(6px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1100,
+            padding: "20px"
+          }}
         >
-
           <div
-            className="create-team-modal"
-            onClick={(e) =>
-              e.stopPropagation()
-            }
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: "#111726",
+              border: "1px solid #26334a",
+              borderRadius: "16px",
+              padding: "28px",
+              maxWidth: "460px",
+              width: "100%",
+              boxShadow: "0 20px 50px rgba(0, 0, 0, 0.6)"
+            }}
           >
-
-            <button
-              className="modal-close-button"
-              onClick={() =>
-                setShowCreateTeam(false)
-              }
-            >
-              <X size={20} />
-            </button>
-
-
-            <div className="create-team-icon">
-              🚀
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "18px" }}>
+              <h3 style={{ color: "#f8fafc", margin: 0, fontSize: "18px" }}>Edit Team Name</h3>
+              <button
+                onClick={() => setShowCreateTeam(false)}
+                style={{ background: "transparent", border: "none", color: "#64748b", cursor: "pointer" }}
+              >
+                <X size={20} />
+              </button>
             </div>
 
-            <h2>
-              Create Your Team
-            </h2>
-
-            <p>
-              Give your team a name and
-              start inviting teammates.
-            </p>
-
-
-            <form
-              onSubmit={
-                handleCreateTeam
-              }
-            >
-
-              <label>
-                Team Name
-              </label>
-
-              <input
-                type="text"
-                placeholder="e.g. CodeCrafters"
-                value={teamName}
-                onChange={(e) =>
-                  setTeamName(
-                    e.target.value
-                  )
-                }
-                autoFocus
-              />
-
-
-              <div className="create-team-preview">
-
-                <div className="preview-title">
-                  Current Members
-                </div>
-
-                <div className="preview-members">
-
-                  {teamMembers.map(
-                    (member) => (
-
-                      <div
-                        className="preview-member"
-                        key={member.id}
-                      >
-
-                        <span>
-                          {member.letter}
-                        </span>
-
-                        <small>
-                          {member.name}
-                        </small>
-
-                      </div>
-
-                    )
-                  )}
-
-                </div>
-
+            <form onSubmit={handleSaveTeamName}>
+              <div style={{ marginBottom: "18px" }}>
+                <label style={{ display: "block", color: "#94a3b8", fontSize: "12px", fontWeight: "700", marginBottom: "8px" }}>
+                  TEAM / SQUAD NAME
+                </label>
+                <input
+                  type="text"
+                  value={teamName}
+                  onChange={(e) => setTeamName(e.target.value)}
+                  placeholder="e.g. NeuralCoders, CodeCrafters"
+                  required
+                  style={{
+                    width: "100%",
+                    height: "44px",
+                    background: "#090d16",
+                    border: "1px solid #1e293b",
+                    borderRadius: "8px",
+                    color: "#f8fafc",
+                    padding: "0 12px",
+                    fontSize: "14px"
+                  }}
+                />
               </div>
-
 
               <button
                 type="submit"
-                className="create-team-submit"
+                style={{
+                  width: "100%",
+                  height: "44px",
+                  background: "#7c3aed",
+                  border: "none",
+                  borderRadius: "8px",
+                  color: "white",
+                  fontWeight: "600",
+                  fontSize: "14px",
+                  cursor: "pointer"
+                }}
               >
-
-                <Plus size={18} />
-
-                Create Team
-
+                Save Team Changes
               </button>
-
             </form>
-
           </div>
-
         </div>
-
       )}
-
     </div>
   );
 }

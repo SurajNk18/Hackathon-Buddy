@@ -46,6 +46,15 @@ public class User {
     @ManyToOne(fetch = FetchType.EAGER)
     private Role role;
 
+    private String primaryRole;
+    private String location;
+
+    @Column(columnDefinition = "TEXT")
+    private String bio;
+
+    private String githubUrl;
+    private String linkedinUrl;
+
     @Builder.Default
     private Boolean isActive = true;
 

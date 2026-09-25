@@ -54,6 +54,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/notifications/**").authenticated()
                 .requestMatchers("/api/users/**").authenticated()
                 .requestMatchers("/api/projects/**").authenticated()
+                .requestMatchers("/api/admin/**").authenticated()
                 .requestMatchers("/api/profile/**").authenticated()
                 .requestMatchers("/api/skills/**").authenticated()
                 .anyRequest().authenticated()

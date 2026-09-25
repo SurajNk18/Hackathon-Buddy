@@ -1,0 +1,1425 @@
+/* =========================================================
+   ADMIN DASHBOARD - LIGHT THEME
+   Matches HackathonBuddy User Dashboard
+========================================================= */
+
+.admin-page {
+  min-height: calc(100vh - 68px);
+
+  background: #f4f7fb;
+
+  padding: 32px 30px 60px;
+
+  color: #172b4d;
+
+  max-width: 1540px;
+
+  margin: 0 auto;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.admin-topbar {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  flex-wrap: wrap;
+
+  margin-bottom: 30px;
+
+  padding-bottom: 24px;
+
+  border-bottom: 1px solid #e3e8f0;
+}
+
+.admin-brand {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+}
+
+.admin-badge-icon {
+  width: 48px;
+  height: 48px;
+
+  border-radius: 14px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f97316,
+      #f59e0b
+    );
+
+  color: white;
+
+  box-shadow:
+    0 8px 20px rgba(249, 115, 22, 0.22);
+}
+
+.admin-brand h1 {
+  font-size: 26px;
+
+  font-weight: 800;
+
+  margin: 0 0 3px;
+
+  color: #172b4d;
+
+  letter-spacing: -0.5px;
+}
+
+.admin-subtext {
+  color: #64748b;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   TOPBAR ACTIONS
+========================================================= */
+
+.admin-topbar-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+}
+
+.back-hacker-btn {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 44px;
+
+  padding: 10px 17px;
+
+  background: #ffffff;
+
+  border: 1px solid #dce3ed;
+
+  border-radius: 10px;
+
+  color: #334155;
+
+  font-size: 13.5px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.back-hacker-btn:hover {
+  background: #f8fafc;
+
+  border-color: #c4b5fd;
+
+  color: #6d3fe8;
+
+  transform: translateY(-1px);
+}
+
+.create-hackathon-top-btn {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 44px;
+
+  padding: 10px 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6846e8,
+      #9146ed
+    );
+
+  border: none;
+
+  border-radius: 10px;
+
+  color: white;
+
+  font-size: 13.5px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 20px rgba(124, 58, 237, 0.22);
+
+  transition: all 0.2s ease;
+}
+
+.create-hackathon-top-btn:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 12px 25px rgba(124, 58, 237, 0.3);
+}
+
+
+/* =========================================================
+   KPI GRID
+========================================================= */
+
+.admin-kpi-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 20px;
+
+  margin-bottom: 32px;
+}
+
+.admin-kpi-card {
+  min-width: 0;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 16px;
+
+  padding: 22px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  box-shadow:
+    0 3px 12px rgba(15, 23, 42, 0.04);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.admin-kpi-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+.kpi-icon-box {
+  width: 52px;
+  height: 52px;
+
+  border-radius: 14px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+
+/* Purple */
+
+.admin-kpi-card.purple .kpi-icon-box {
+  background: #eee9ff;
+
+  color: #7047e8;
+}
+
+
+/* Blue */
+
+.admin-kpi-card.blue .kpi-icon-box {
+  background: #e1f5fb;
+
+  color: #0891b2;
+}
+
+
+/* Green */
+
+.admin-kpi-card.green .kpi-icon-box {
+  background: #e1f8ef;
+
+  color: #10b981;
+}
+
+
+/* Yellow */
+
+.admin-kpi-card.yellow .kpi-icon-box {
+  background: #fff4dc;
+
+  color: #e9a415;
+}
+
+.kpi-info {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+.kpi-label {
+  font-size: 12.5px;
+
+  color: #64748b;
+
+  font-weight: 500;
+
+  margin-bottom: 2px;
+}
+
+.kpi-value {
+  font-size: 27px;
+
+  font-weight: 850;
+
+  color: #172b4d;
+
+  line-height: 1.2;
+}
+
+.kpi-delta {
+  font-size: 11px;
+
+  font-weight: 600;
+
+  margin-top: 4px;
+}
+
+.kpi-delta.positive {
+  color: #10b981;
+}
+
+
+/* =========================================================
+   TABS
+========================================================= */
+
+.admin-tabs-bar {
+  display: flex;
+
+  gap: 10px;
+
+  margin-bottom: 24px;
+
+  border-bottom: 1px solid #dfe5ee;
+
+  padding-bottom: 10px;
+
+  overflow-x: auto;
+
+  scrollbar-width: thin;
+}
+
+.admin-tab-btn {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 44px;
+
+  padding: 10px 18px;
+
+  background: transparent;
+
+  border: 1px solid transparent;
+
+  border-radius: 10px;
+
+  color: #64748b;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition: all 0.2s ease;
+}
+
+.admin-tab-btn:hover {
+  color: #5f3dd8;
+
+  background: #f1edff;
+}
+
+.admin-tab-btn.active {
+  background: #eee9ff;
+
+  border-color: #7c4ce8;
+
+  color: #623bd1;
+
+  box-shadow:
+    0 3px 10px rgba(124, 58, 237, 0.08);
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.admin-content-section {
+  background: #ffffff;
+
+  border: 1px solid #e1e7ef;
+
+  border-radius: 20px;
+
+  padding: 28px;
+
+  box-shadow:
+    0 4px 18px rgba(15, 23, 42, 0.04);
+}
+
+
+/* =========================================================
+   TABLE TOOLBAR
+========================================================= */
+
+.admin-table-toolbar {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 16px;
+
+  flex-wrap: wrap;
+
+  margin-bottom: 24px;
+}
+
+.admin-search-box {
+  flex: 1;
+
+  min-width: 280px;
+
+  max-width: 480px;
+
+  height: 46px;
+
+  background: #ffffff;
+
+  border: 1px solid #dbe3ed;
+
+  border-radius: 10px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 14px;
+
+  box-sizing: border-box;
+
+  transition: all 0.2s ease;
+}
+
+.admin-search-box:focus-within {
+  border-color: #7c3aed;
+
+  box-shadow:
+    0 0 0 3px rgba(124, 58, 237, 0.08);
+}
+
+.admin-search-box input {
+  width: 100%;
+
+  background: transparent;
+
+  border: none;
+
+  outline: none;
+
+  color: #172b4d;
+
+  font-size: 13.5px;
+}
+
+.admin-search-box input::placeholder {
+  color: #94a3b8;
+}
+
+.admin-primary-btn {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 44px;
+
+  padding: 11px 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6846e8,
+      #9146ed
+    );
+
+  border: none;
+
+  border-radius: 10px;
+
+  color: white;
+
+  font-size: 13.5px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 7px 18px rgba(124, 58, 237, 0.2);
+
+  transition: all 0.2s ease;
+}
+
+.admin-primary-btn:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 10px 23px rgba(124, 58, 237, 0.27);
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.admin-table-wrapper {
+  width: 100%;
+
+  overflow-x: auto;
+
+  border: 1px solid #e6ebf2;
+
+  border-radius: 12px;
+}
+
+.admin-data-table {
+  width: 100%;
+
+  min-width: 850px;
+
+  border-collapse: collapse;
+
+  text-align: left;
+
+  font-size: 13.5px;
+
+  background: #ffffff;
+}
+
+.admin-data-table th {
+  padding: 14px 16px;
+
+  background: #f7f9fc;
+
+  color: #64748b;
+
+  font-weight: 700;
+
+  font-size: 11px;
+
+  letter-spacing: 0.8px;
+
+  border-bottom: 1px solid #e5eaf1;
+}
+
+.admin-data-table td {
+  padding: 16px;
+
+  border-bottom: 1px solid #edf0f4;
+
+  color: #475569;
+
+  vertical-align: middle;
+}
+
+.admin-data-table tbody tr:hover {
+  background: #fafbff;
+}
+
+.admin-data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   TABLE TITLE
+========================================================= */
+
+.table-title-cell {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.table-icon {
+  font-size: 20px;
+}
+
+.table-title-cell strong {
+  display: block;
+
+  color: #172b4d;
+
+  font-weight: 700;
+}
+
+.table-title-cell small {
+  color: #94a3b8;
+
+  font-size: 11.5px;
+}
+
+
+/* =========================================================
+   USER AVATAR
+========================================================= */
+
+.user-table-avatar {
+  width: 36px;
+  height: 36px;
+
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6846e8,
+      #9146ed
+    );
+
+  color: white;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-weight: 700;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   TRACK BADGE
+========================================================= */
+
+.track-badge {
+  display: inline-block;
+
+  padding: 4px 9px;
+
+  background: #e4f7fb;
+
+  border: 1px solid #b7e8f2;
+
+  border-radius: 6px;
+
+  color: #07839c;
+
+  font-size: 11.5px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+.date-cell {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2px;
+
+  color: #475569;
+}
+
+.date-cell small {
+  color: #94a3b8;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status-select {
+  padding: 6px 10px;
+
+  border-radius: 7px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  outline: none;
+
+  background: #ffffff;
+
+  border: 1px solid #dbe3ed;
+
+  color: #334155;
+}
+
+.status-select.open {
+  border-color: #10b981;
+
+  color: #059669;
+
+  background: #f0fdf7;
+}
+
+.status-select.closed {
+  border-color: #ef4444;
+
+  color: #dc2626;
+
+  background: #fff5f5;
+}
+
+.status-select.upcoming {
+  border-color: #f59e0b;
+
+  color: #d97706;
+
+  background: #fffbeb;
+}
+
+
+/* =========================================================
+   USER STATUS
+========================================================= */
+
+.user-status-pill {
+  padding: 4px 9px;
+
+  border-radius: 6px;
+
+  font-size: 11.5px;
+
+  font-weight: 700;
+}
+
+.user-status-pill.active {
+  background: #e6f8f0;
+
+  color: #059669;
+}
+
+.user-status-pill.suspended {
+  background: #feecec;
+
+  color: #dc2626;
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+.table-delete-btn {
+  background: transparent;
+
+  border: none;
+
+  color: #94a3b8;
+
+  cursor: pointer;
+
+  padding: 6px;
+
+  transition: color 0.2s ease;
+}
+
+.table-delete-btn:hover {
+  color: #ef4444;
+}
+
+
+/* =========================================================
+   USER ACTION
+========================================================= */
+
+.user-action-btn {
+  display: flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  padding: 5px 10px;
+
+  border-radius: 6px;
+
+  font-size: 11.5px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  border: none;
+}
+
+.user-action-btn.suspend {
+  background: #fff0f0;
+
+  color: #dc2626;
+}
+
+.user-action-btn.activate {
+  background: #e8f8f0;
+
+  color: #059669;
+}
+
+
+/* =========================================================
+   AI TELEMETRY
+========================================================= */
+
+.analytics-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 24px;
+}
+
+.analytics-card {
+  background: #ffffff;
+
+  border: 1px solid #e1e7ef;
+
+  border-radius: 16px;
+
+  padding: 24px;
+
+  box-shadow:
+    0 3px 12px rgba(15, 23, 42, 0.04);
+}
+
+.analytics-card h3 {
+  font-size: 17px;
+
+  color: #172b4d;
+
+  margin: 0 0 4px;
+}
+
+.analytics-card p {
+  color: #64748b;
+
+  font-size: 12.5px;
+
+  margin: 0 0 20px;
+}
+
+.skill-metric-bars {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+.metric-row {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.metric-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  font-size: 13px;
+
+  color: #334155;
+}
+
+.metric-header small {
+  color: #64748b;
+}
+
+.metric-bar {
+  height: 8px;
+
+  background: #e9edf3;
+
+  border-radius: 999px;
+
+  overflow: hidden;
+}
+
+.metric-bar div {
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      #6846e8,
+      #9146ed
+    );
+
+  border-radius: 999px;
+
+  transition: width 0.4s ease;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.admin-modal-card {
+  background: #ffffff;
+
+  border: 1px solid #e1e7ef;
+
+  border-radius: 20px;
+
+  padding: 32px;
+
+  max-width: 680px;
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  box-shadow:
+    0 25px 70px rgba(15, 23, 42, 0.2);
+}
+
+.modal-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 24px;
+}
+
+.modal-header button {
+  background: transparent;
+
+  border: none;
+
+  color: #64748b;
+
+  cursor: pointer;
+}
+
+.modal-header button:hover {
+  color: #172b4d;
+}
+
+
+/* =========================================================
+   FORM GRIDS
+========================================================= */
+
+.form-grid-2 {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 16px;
+}
+
+.form-grid-3 {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 16px;
+}
+
+.admin-field {
+  margin-bottom: 16px;
+}
+
+.admin-field label {
+  display: block;
+
+  color: #64748b;
+
+  font-size: 11.5px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+
+  margin-bottom: 6px;
+}
+
+.admin-field input,
+.admin-field select,
+.admin-field textarea {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px solid #dbe3ed;
+
+  border-radius: 8px;
+
+  color: #172b4d;
+
+  padding: 10px 12px;
+
+  font-size: 13.5px;
+
+  outline: none;
+}
+
+.admin-field input:focus,
+.admin-field select:focus,
+.admin-field textarea:focus {
+  border-color: #7c3aed;
+
+  box-shadow:
+    0 0 0 3px rgba(124, 58, 237, 0.08);
+}
+
+
+/* =========================================================
+   MODAL SUBMIT
+========================================================= */
+
+.publish-hackathon-submit-btn {
+  width: 100%;
+
+  padding: 13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6846e8,
+      #9146ed
+    );
+
+  border: none;
+
+  border-radius: 10px;
+
+  color: white;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  box-shadow:
+    0 7px 20px rgba(124, 58, 237, 0.22);
+
+  transition: all 0.2s ease;
+}
+
+.publish-hackathon-submit-btn:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 10px 25px rgba(124, 58, 237, 0.3);
+}
+
+
+/* =========================================================
+   LARGE TABLET
+========================================================= */
+
+@media (max-width: 1200px) {
+
+  .admin-page {
+    padding: 28px 22px 50px;
+  }
+
+  .admin-kpi-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .admin-page {
+    padding: 24px 18px 45px;
+  }
+
+  .admin-topbar {
+    align-items: flex-start;
+  }
+
+  .admin-brand h1 {
+    font-size: 23px;
+  }
+
+  .admin-content-section {
+    padding: 22px;
+  }
+
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid-2,
+  .form-grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .admin-page {
+    min-height: calc(100vh - 60px);
+
+    padding: 20px 14px 35px;
+  }
+
+  .admin-topbar {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 16px;
+
+    margin-bottom: 22px;
+
+    padding-bottom: 18px;
+  }
+
+  .admin-brand {
+    gap: 11px;
+  }
+
+  .admin-badge-icon {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 11px;
+  }
+
+  .admin-brand h1 {
+    font-size: 20px;
+  }
+
+  .admin-subtext {
+    font-size: 11px;
+  }
+
+  .admin-topbar-actions {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 8px;
+  }
+
+  .back-hacker-btn,
+  .create-hackathon-top-btn {
+    width: 100%;
+
+    padding: 10px 8px;
+
+    font-size: 11px;
+  }
+
+
+  /* KPI */
+
+  .admin-kpi-grid {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+
+    margin-bottom: 22px;
+  }
+
+  .admin-kpi-card {
+    padding: 17px;
+  }
+
+  .kpi-icon-box {
+    width: 46px;
+    height: 46px;
+  }
+
+  .kpi-value {
+    font-size: 24px;
+  }
+
+
+  /* TABS */
+
+  .admin-tabs-bar {
+    margin-bottom: 18px;
+
+    gap: 7px;
+
+    padding-bottom: 8px;
+  }
+
+  .admin-tab-btn {
+    min-height: 40px;
+
+    padding: 8px 13px;
+
+    font-size: 12px;
+  }
+
+
+  /* CONTENT */
+
+  .admin-content-section {
+    padding: 16px;
+
+    border-radius: 15px;
+  }
+
+
+  /* TOOLBAR */
+
+  .admin-table-toolbar {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 10px;
+
+    margin-bottom: 18px;
+  }
+
+  .admin-search-box {
+    width: 100%;
+
+    min-width: 0;
+
+    max-width: none;
+  }
+
+  .admin-primary-btn {
+    width: 100%;
+  }
+
+
+  /* TABLE */
+
+  .admin-table-wrapper {
+    border-radius: 10px;
+
+    overflow-x: auto;
+
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .admin-data-table {
+    min-width: 820px;
+
+    font-size: 12px;
+  }
+
+  .admin-data-table th {
+    padding: 12px;
+  }
+
+  .admin-data-table td {
+    padding: 13px 12px;
+  }
+
+
+  /* ANALYTICS */
+
+  .analytics-grid {
+    gap: 14px;
+  }
+
+  .analytics-card {
+    padding: 18px;
+
+    border-radius: 14px;
+  }
+
+
+  /* MODAL */
+
+  .admin-modal-card {
+    padding: 22px 17px;
+
+    border-radius: 15px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+  .admin-page {
+    padding: 17px 10px 30px;
+  }
+
+  .admin-brand h1 {
+    font-size: 18px;
+  }
+
+  .admin-subtext {
+    font-size: 10px;
+  }
+
+  .admin-topbar-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-kpi-card {
+    padding: 15px;
+  }
+
+  .kpi-label {
+    font-size: 11px;
+  }
+
+  .kpi-value {
+    font-size: 22px;
+  }
+
+  .admin-content-section {
+    padding: 13px;
+  }
+
+  .admin-tab-btn {
+    font-size: 11px;
+
+    padding: 8px 11px;
+  }
+
+  .admin-modal-card {
+    padding: 18px 14px;
+  }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY / TOUCH
+========================================================= */
+
+@media (hover: none) {
+
+  .admin-kpi-card:hover {
+    transform: none;
+  }
+
+  .create-hackathon-top-btn:hover,
+  .admin-primary-btn:hover,
+  .publish-hackathon-submit-btn:hover {
+    transform: none;
+  }
+
+}

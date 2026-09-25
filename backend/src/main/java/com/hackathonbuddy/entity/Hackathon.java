@@ -43,6 +43,18 @@ public class Hackathon {
     private String imageUrl;
     private String websiteUrl;
 
+    private String duration;
+    private String icon;
+    private String color;
+    private String type;
+    private String level;
+
+    @Builder.Default
+    private String status = "Open";
+
+    @Builder.Default
+    private Integer participantCount = 0;
+
     @Builder.Default
     private Boolean isActive = true;
 

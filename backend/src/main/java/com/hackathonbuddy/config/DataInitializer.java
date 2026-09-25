@@ -3,12 +3,15 @@ package com.hackathonbuddy.config;
 import com.hackathonbuddy.entity.Hackathon;
 import com.hackathonbuddy.entity.Role;
 import com.hackathonbuddy.entity.Skill;
+import com.hackathonbuddy.entity.User;
 import com.hackathonbuddy.repository.HackathonRepository;
 import com.hackathonbuddy.repository.RoleRepository;
 import com.hackathonbuddy.repository.SkillRepository;
+import com.hackathonbuddy.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -23,12 +26,16 @@ public class DataInitializer implements CommandLineRunner {
     private final RoleRepository roleRepository;
     private final HackathonRepository hackathonRepository;
     private final SkillRepository skillRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
         initRoles();
         initSkills();
         initHackathons();
+        initAdminUser();
+        initSampleUsers();
     }
 
     private void initRoles() {
@@ -63,11 +70,15 @@ public class DataInitializer implements CommandLineRunner {
                     Skill.builder().name("Figma").category("Design").build(),
                     Skill.builder().name("MySQL").category("Database").build(),
                     Skill.builder().name("MongoDB").category("Database").build(),
+                    Skill.builder().name("PostgreSQL").category("Database").build(),
                     Skill.builder().name("Java").category("Backend").build(),
                     Skill.builder().name("JavaScript").category("Frontend").build(),
                     Skill.builder().name("TypeScript").category("Frontend").build(),
                     Skill.builder().name("Solidity").category("Blockchain").build(),
-                    Skill.builder().name("Flutter").category("Mobile").build()
+                    Skill.builder().name("Flutter").category("Mobile").build(),
+                    Skill.builder().name("FastAPI").category("Backend").build(),
+                    Skill.builder().name("NLP").category("ML").build(),
+                    Skill.builder().name("CI/CD").category("DevOps").build()
             );
             skillRepository.saveAll(skills);
             log.info("Initialized {} skills", skills.size());
@@ -78,83 +89,178 @@ public class DataInitializer implements CommandLineRunner {
         if (hackathonRepository.count() == 0) {
             List<Hackathon> hackathons = Arrays.asList(
                     Hackathon.builder()
-                            .title("AI Innovation Challenge 2024")
-                            .description("Build cutting-edge AI solutions to solve real-world problems.")
+                            .title("AI Innovation Challenge 2026")
+                            .description("Build innovative AI-powered solutions that solve real-world problems using machine learning and generative AI.")
                             .category("AI/ML")
                             .organizer("Google Developers")
-                            .startDate(LocalDate.of(2024, 8, 18))
-                            .endDate(LocalDate.of(2024, 8, 20))
-                            .registrationDeadline(LocalDate.of(2024, 8, 15))
-                            .prizePool("Rs. 5,00,000")
+                            .startDate(LocalDate.of(2026, 8, 18))
+                            .endDate(LocalDate.of(2026, 8, 20))
+                            .registrationDeadline(LocalDate.of(2026, 8, 15))
+                            .prizePool("₹5,00,000")
                             .location("Online")
                             .mode("ONLINE")
-                            .minTeamSize(2)
-                            .maxTeamSize(4)
-                            .isActive(true)
-                            .build(),
+                            .minTeamSize(2).maxTeamSize(4)
+                            .duration("48 Hours").icon("🤖").color("purple").type("ai")
+                            .level("Intermediate").status("Open").participantCount(1240)
+                            .isActive(true).build(),
                     Hackathon.builder()
                             .title("Smart City Hackathon")
-                            .description("Design smart solutions for urban challenges.")
+                            .description("Create technology solutions for smarter transportation, sustainable cities and better public services.")
                             .category("Smart City")
                             .organizer("Municipal Corporation of India")
-                            .startDate(LocalDate.of(2024, 8, 25))
-                            .endDate(LocalDate.of(2024, 8, 27))
-                            .registrationDeadline(LocalDate.of(2024, 8, 20))
-                            .prizePool("Rs. 3,00,000")
+                            .startDate(LocalDate.of(2026, 8, 25))
+                            .endDate(LocalDate.of(2026, 8, 27))
+                            .registrationDeadline(LocalDate.of(2026, 8, 22))
+                            .prizePool("₹3,00,000")
                             .location("Mumbai")
                             .mode("OFFLINE")
-                            .minTeamSize(2)
-                            .maxTeamSize(5)
-                            .isActive(true)
-                            .build(),
+                            .minTeamSize(2).maxTeamSize(5)
+                            .duration("36 Hours").icon("🏙️").color("blue").type("city")
+                            .level("Intermediate").status("Open").participantCount(860)
+                            .isActive(true).build(),
                     Hackathon.builder()
                             .title("FinTech Challenge")
-                            .description("Revolutionize financial services with innovative tech solutions.")
+                            .description("Build the next generation of financial technology products with secure and scalable solutions.")
                             .category("FinTech")
                             .organizer("RazorPay & PayTM")
-                            .startDate(LocalDate.of(2024, 9, 2))
-                            .endDate(LocalDate.of(2024, 9, 4))
-                            .registrationDeadline(LocalDate.of(2024, 8, 28))
-                            .prizePool("Rs. 4,00,000")
+                            .startDate(LocalDate.of(2026, 9, 2))
+                            .endDate(LocalDate.of(2026, 9, 4))
+                            .registrationDeadline(LocalDate.of(2026, 8, 29))
+                            .prizePool("₹4,00,000")
                             .location("Bangalore")
                             .mode("HYBRID")
-                            .minTeamSize(2)
-                            .maxTeamSize(4)
-                            .isActive(true)
-                            .build(),
+                            .minTeamSize(2).maxTeamSize(4)
+                            .duration("48 Hours").icon("💳").color("orange").type("fintech")
+                            .level("Advanced").status("Open").participantCount(720)
+                            .isActive(true).build(),
                     Hackathon.builder()
-                            .title("Web3 Builders Hackathon")
-                            .description("Build the future of decentralized web — DeFi, NFTs, and DAOs.")
-                            .category("Blockchain")
+                            .title("Web3 Builders Arena")
+                            .description("Build decentralized applications and explore the future of blockchain technology.")
+                            .category("Web3")
                             .organizer("Ethereum Foundation")
-                            .startDate(LocalDate.of(2024, 9, 15))
-                            .endDate(LocalDate.of(2024, 9, 17))
-                            .registrationDeadline(LocalDate.of(2024, 9, 10))
-                            .prizePool("Rs. 6,00,000")
+                            .startDate(LocalDate.of(2026, 9, 10))
+                            .endDate(LocalDate.of(2026, 9, 12))
+                            .registrationDeadline(LocalDate.of(2026, 9, 6))
+                            .prizePool("₹2,50,000")
                             .location("Online")
                             .mode("ONLINE")
-                            .minTeamSize(1)
-                            .maxTeamSize(3)
-                            .isActive(true)
-                            .build(),
+                            .minTeamSize(1).maxTeamSize(3)
+                            .duration("48 Hours").icon("⛓️").color("cyan").type("web3")
+                            .level("Advanced").status("Open").participantCount(530)
+                            .isActive(true).build(),
                     Hackathon.builder()
-                            .title("HealthTech Innovation Sprint")
-                            .description("Use technology to transform healthcare — telemedicine and diagnostics.")
-                            .category("HealthTech")
-                            .organizer("Apollo Hospitals")
-                            .startDate(LocalDate.of(2024, 9, 22))
-                            .endDate(LocalDate.of(2024, 9, 24))
-                            .registrationDeadline(LocalDate.of(2024, 9, 18))
-                            .prizePool("Rs. 2,50,000")
-                            .location("Delhi")
+                            .title("GreenTech Innovation Hack")
+                            .description("Develop technology-driven solutions for climate change, renewable energy and sustainability.")
+                            .category("Environment")
+                            .organizer("GreenTech Foundation")
+                            .startDate(LocalDate.of(2026, 9, 18))
+                            .endDate(LocalDate.of(2026, 9, 19))
+                            .registrationDeadline(LocalDate.of(2026, 9, 14))
+                            .prizePool("₹2,00,000")
+                            .location("Pune")
                             .mode("OFFLINE")
-                            .minTeamSize(2)
-                            .maxTeamSize(5)
-                            .isActive(true)
-                            .build()
+                            .minTeamSize(2).maxTeamSize(5)
+                            .duration("24 Hours").icon("🌱").color("green").type("green")
+                            .level("Beginner").status("Open").participantCount(430)
+                            .isActive(true).build(),
+                    Hackathon.builder()
+                            .title("Healthcare AI Sprint")
+                            .description("Use AI and software technology to create better healthcare experiences and intelligent solutions.")
+                            .category("Healthcare")
+                            .organizer("Apollo Hospitals")
+                            .startDate(LocalDate.of(2026, 9, 25))
+                            .endDate(LocalDate.of(2026, 9, 27))
+                            .registrationDeadline(LocalDate.of(2026, 9, 21))
+                            .prizePool("₹3,50,000")
+                            .location("Online")
+                            .mode("ONLINE")
+                            .minTeamSize(2).maxTeamSize(4)
+                            .duration("48 Hours").icon("🏥").color("pink").type("health")
+                            .level("Intermediate").status("Open").participantCount(650)
+                            .isActive(true).build()
             );
             hackathonRepository.saveAll(hackathons);
             log.info("Initialized {} sample hackathons", hackathons.size());
+        }
+    }
+
+    private void initAdminUser() {
+        if (!userRepository.existsByEmail("admin@hackathonbuddy.com")) {
+            Role adminRole = roleRepository.findByName("ADMIN")
+                    .orElseThrow(() -> new RuntimeException("ADMIN role not found"));
+
+            User admin = User.builder()
+                    .firstName("System")
+                    .lastName("Administrator")
+                    .email("admin@hackathonbuddy.com")
+                    .password(passwordEncoder.encode("admin123"))
+                    .role(adminRole)
+                    .primaryRole("Platform Administrator")
+                    .location("HQ Command Center")
+                    .bio("Platform Administrator with full permissions over hackathon challenges, user moderation, and AI telemetry.")
+                    .isActive(true)
+                    .profileComplete(true)
+                    .build();
+            userRepository.save(admin);
+            log.info("Admin user created: admin@hackathonbuddy.com / admin123");
+        }
+    }
+
+    private void initSampleUsers() {
+        Role studentRole = roleRepository.findByName("STUDENT")
+                .orElseThrow(() -> new RuntimeException("STUDENT role not found"));
+
+        if (!userRepository.existsByEmail("sanika@example.com")) {
+            User sanika = User.builder()
+                    .firstName("Sanika").lastName("Haridas Pandhare")
+                    .email("sanika@example.com")
+                    .password(passwordEncoder.encode("password123"))
+                    .role(studentRole)
+                    .primaryRole("Full Stack Developer")
+                    .location("Pune, India")
+                    .bio("Full Stack Developer passionate about building high-impact web apps, AI integrations, and winning hackathons.")
+                    .githubUrl("https://github.com/sanikapandhare")
+                    .linkedinUrl("https://linkedin.com/in/sanikapandhare")
+                    .isActive(true).profileComplete(true)
+                    .build();
+            userRepository.save(sanika);
+            log.info("Sample user created: sanika@example.com / password123");
+        }
+
+        if (!userRepository.existsByEmail("priya@example.com")) {
+            userRepository.save(User.builder()
+                    .firstName("Priya").lastName("Sharma")
+                    .email("priya@example.com")
+                    .password(passwordEncoder.encode("password123"))
+                    .role(studentRole)
+                    .primaryRole("UI/UX Designer")
+                    .location("Mumbai, India")
+                    .isActive(true).profileComplete(true)
+                    .build());
+        }
+
+        if (!userRepository.existsByEmail("rohan@example.com")) {
+            userRepository.save(User.builder()
+                    .firstName("Rohan").lastName("Mehta")
+                    .email("rohan@example.com")
+                    .password(passwordEncoder.encode("password123"))
+                    .role(studentRole)
+                    .primaryRole("ML Engineer")
+                    .location("Delhi, India")
+                    .isActive(true).profileComplete(true)
+                    .build());
+        }
+
+        if (!userRepository.existsByEmail("aman@example.com")) {
+            userRepository.save(User.builder()
+                    .firstName("Aman").lastName("Khan")
+                    .email("aman@example.com")
+                    .password(passwordEncoder.encode("password123"))
+                    .role(studentRole)
+                    .primaryRole("DevOps Engineer")
+                    .location("Bangalore, India")
+                    .isActive(true).profileComplete(true)
+                    .build());
         }
     }
 }

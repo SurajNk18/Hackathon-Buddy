@@ -1,0 +1,633 @@
+.aihub-page {
+  min-height: 100vh;
+  padding: 36px 42px 60px;
+  background: #f4f6fb;
+  color: #14213d;
+  box-sizing: border-box;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.aihub-header {
+  background: #ffffff;
+  border: 1px solid #e4e7f0;
+  border-radius: 18px;
+  padding: 30px 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 26px;
+  box-shadow: 0 4px 16px rgba(31, 41, 55, 0.04);
+}
+
+.aihub-breadcrumb {
+  color: #7a8295;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.aihub-header h1 {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+}
+
+.aihub-header h1 span {
+  color: #6653e8;
+}
+
+.aihub-header p {
+  margin: 8px 0 0;
+  color: #7a8295;
+  font-size: 15px;
+}
+
+.aihub-header-icon {
+  width: 68px;
+  height: 68px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eeeaff;
+  color: #6653e8;
+}
+
+/* =========================
+   MODULE CARDS
+========================= */
+
+.aihub-module-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 26px;
+}
+
+.aihub-module-card {
+  border: 1px solid #e3e6ef;
+  background: #ffffff;
+  border-radius: 17px;
+  padding: 23px;
+  display: flex;
+  gap: 17px;
+  align-items: flex-start;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.aihub-module-card:hover {
+  transform: translateY(-3px);
+  border-color: #8a78f3;
+  box-shadow: 0 10px 25px rgba(102, 83, 232, 0.1);
+}
+
+.aihub-module-card.active {
+  border-color: #6653e8;
+  box-shadow: 0 8px 25px rgba(102, 83, 232, 0.12);
+  background: #faf9ff;
+}
+
+.module-icon {
+  min-width: 52px;
+  width: 52px;
+  height: 52px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.module-icon.matching {
+  color: #6653e8;
+  background: #eeeaff;
+}
+
+.module-icon.skills {
+  color: #16a878;
+  background: #e4f8f0;
+}
+
+.module-icon.ideas {
+  color: #e19a17;
+  background: #fff2d7;
+}
+
+.aihub-module-card h3 {
+  margin: 1px 0 7px;
+  font-size: 17px;
+}
+
+.aihub-module-card p {
+  margin: 0;
+  color: #7a8295;
+  line-height: 1.5;
+  font-size: 13px;
+}
+
+/* =========================
+   WORKSPACE
+========================= */
+
+.aihub-workspace {
+  background: #ffffff;
+  border: 1px solid #e3e6ef;
+  border-radius: 18px;
+  padding: 30px;
+  margin-bottom: 28px;
+  box-shadow: 0 4px 15px rgba(31, 41, 55, 0.03);
+}
+
+.workspace-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+}
+
+.workspace-label {
+  color: #6653e8;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.workspace-heading h2 {
+  margin: 7px 0;
+  font-size: 26px;
+}
+
+.workspace-heading p {
+  margin: 0;
+  color: #7a8295;
+  font-size: 14px;
+}
+
+.heading-sparkle {
+  color: #6653e8;
+}
+
+/* =========================
+   MATCHING LAYOUT
+========================= */
+
+.matching-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 22px;
+}
+
+.aihub-form-card {
+  border: 1px solid #e4e6ef;
+  border-radius: 15px;
+  padding: 25px;
+  background: #fafbfe;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  color: #697287;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.form-group input,
+.form-group select {
+  height: 48px;
+  border: 1px solid #dce0ea;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 0 14px;
+  font-size: 14px;
+  color: #18233c;
+  outline: none;
+  transition: 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #6653e8;
+  box-shadow: 0 0 0 3px rgba(102, 83, 232, 0.1);
+}
+
+.form-group small {
+  color: #969dad;
+  font-size: 11px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 17px;
+  margin-top: 19px;
+}
+
+.ai-primary-button {
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 10px;
+  margin-top: 22px;
+  background: linear-gradient(135deg, #6955e9, #5842d8);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.ai-primary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 83, 232, 0.25);
+}
+
+.ai-info-card {
+  border-radius: 15px;
+  padding: 25px;
+  background: #f5f2ff;
+  color: #6653e8;
+}
+
+.ai-info-card h3 {
+  color: #18233c;
+  margin: 15px 0 9px;
+}
+
+.ai-info-card p {
+  color: #6d7487;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.matching-points {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.matching-points span {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: #4e596d;
+  font-size: 12px;
+}
+
+/* =========================
+   RESULTS
+========================= */
+
+.results-section {
+  margin-top: 28px;
+}
+
+.results-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.results-heading h3 {
+  margin: 0;
+  font-size: 19px;
+}
+
+.results-heading span {
+  color: #6653e8;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.teammate-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 17px;
+  margin-top: 16px;
+}
+
+.teammate-card {
+  border: 1px solid #e3e6ef;
+  border-radius: 14px;
+  padding: 19px;
+  transition: 0.2s;
+}
+
+.teammate-card:hover {
+  border-color: #8172ed;
+  transform: translateY(-2px);
+}
+
+.teammate-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #e9e4ff;
+  color: #6653e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.teammate-top h3 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.teammate-top p {
+  margin: 3px 0 0;
+  color: #7b8395;
+  font-size: 11px;
+}
+
+.match-score {
+  margin-left: auto;
+  color: #16a878;
+  font-size: 17px;
+  font-weight: 800;
+  text-align: right;
+}
+
+.match-score span {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: #8991a2;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 18px;
+}
+
+.skill-tags span {
+  background: #f1efff;
+  color: #6653e8;
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.connect-button,
+.view-idea-button {
+  border: 1px solid #cfc7ff;
+  background: #ffffff;
+  color: #6653e8;
+  border-radius: 8px;
+  height: 38px;
+  width: 100%;
+  margin-top: 17px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.connect-button:hover,
+.view-idea-button:hover {
+  background: #6653e8;
+  color: #ffffff;
+}
+
+/* =========================
+   SKILL ANALYSIS
+========================= */
+
+.skill-analysis-card {
+  border: 1px solid #e4e6ef;
+  border-radius: 15px;
+  padding: 25px;
+  background: #fafbfe;
+}
+
+.analysis-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.analysis-top h3 {
+  margin: 0 0 5px;
+}
+
+.analysis-top p {
+  margin: 0;
+  color: #8991a2;
+  font-size: 13px;
+}
+
+.coverage-score {
+  font-size: 32px;
+  font-weight: 800;
+  color: #16a878;
+}
+
+.coverage-bar {
+  height: 9px;
+  background: #e8ebf1;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 22px;
+}
+
+.coverage-bar div {
+  height: 100%;
+  background: #16a878;
+  border-radius: 20px;
+}
+
+.analysis-button {
+  max-width: 220px;
+}
+
+.analysis-result {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 22px;
+}
+
+.analysis-column {
+  border: 1px solid #e3e6ef;
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.analysis-column h3 {
+  margin-top: 0;
+}
+
+.analysis-skill {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+.analysis-skill.available {
+  color: #14845f;
+  background: #e9f9f3;
+}
+
+.analysis-skill.missing {
+  color: #c78216;
+  background: #fff5df;
+}
+
+/* =========================
+   IDEA GENERATOR
+========================= */
+
+.idea-generator-card {
+  border: 1px solid #e3e6ef;
+  background: #fafbfe;
+  border-radius: 15px;
+  padding: 25px;
+}
+
+.idea-generator-card .form-row {
+  margin-top: 0;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.ideas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.idea-card {
+  border: 1px solid #e3e6ef;
+  border-radius: 14px;
+  padding: 22px;
+  background: #ffffff;
+  transition: 0.2s;
+}
+
+.idea-card:hover {
+  transform: translateY(-3px);
+  border-color: #8272ed;
+  box-shadow: 0 8px 20px rgba(102, 83, 232, 0.08);
+}
+
+.idea-number {
+  color: #6653e8;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.idea-card h3 {
+  font-size: 17px;
+  margin: 0 0 10px;
+}
+
+.idea-card p {
+  color: #737c8e;
+  line-height: 1.6;
+  font-size: 13px;
+  min-height: 65px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.aihub-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  color: #8c93a3;
+  font-size: 12px;
+  margin-top: 30px;
+}
+
+.aihub-footer span {
+  color: #6653e8;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1100px) {
+
+  .aihub-module-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .matching-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .teammate-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ideas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+
+  .aihub-page {
+    padding: 20px;
+  }
+
+  .aihub-header {
+    padding: 22px;
+  }
+
+  .aihub-header-icon {
+    display: none;
+  }
+
+  .form-row,
+  .idea-generator-card .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .teammate-grid,
+  .ideas-grid,
+  .analysis-result {
+    grid-template-columns: 1fr;
+  }
+
+  .aihub-workspace {
+    padding: 20px;
+  }
+
+  .workspace-heading h2 {
+    font-size: 22px;
+  }
+}

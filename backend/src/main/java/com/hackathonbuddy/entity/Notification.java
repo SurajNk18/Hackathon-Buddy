@@ -26,11 +26,14 @@ public class Notification {
     @Column(columnDefinition = "TEXT")
     private String message;
 
-    private String type; // INFO, SUCCESS, WARNING, ERROR
+    private String type; // hackathon, team, project, message, skill
 
     @Builder.Default
     private Boolean isRead = false;
 
+    private String icon;
+    private String action;
+    private String route;
     private String actionUrl;
 
     private LocalDateTime createdAt;

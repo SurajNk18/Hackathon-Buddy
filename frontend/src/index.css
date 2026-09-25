@@ -8,14 +8,6 @@
   box-sizing: border-box;
 }
 
-/* ─────────────────────────────────────────────────────────
-   GLOBAL UTILITY: spinner animation used by Loader2 icons
-───────────────────────────────────────────────────────── */
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
 html {
   scroll-behavior: smooth;
 }
