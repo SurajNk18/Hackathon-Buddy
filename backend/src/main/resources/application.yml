@@ -2,9 +2,9 @@ spring:
   application:
     name: hackathon-buddy
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/hackathon_buddy?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true}
-    username: ${SPRING_DATASOURCE_USERNAME:root}
-    password: ${SPRING_DATASOURCE_PASSWORD:Suraj18@}
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://gateway01.ap-northeast-1.prod.aws.tidbcloud.com:4000/test?sslMode=VERIFY_IDENTITY}
+    username: ${SPRING_DATASOURCE_USERNAME:4HfiL5GrXTF1yhA.root}
+    password: ${SPRING_DATASOURCE_PASSWORD:L5MuaILLvqbXplME}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
