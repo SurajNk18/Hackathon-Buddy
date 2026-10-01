@@ -15,4 +15,5 @@ public interface RegistrationRepository extends JpaRepository<Registration, Long
     Optional<Registration> findByUserAndHackathon(User user, Hackathon hackathon);
     boolean existsByUserAndHackathon(User user, Hackathon hackathon);
     long countByUser(User user);
+    long countByHackathonId(Long hackathonId);
 }

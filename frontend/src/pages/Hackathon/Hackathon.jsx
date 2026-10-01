@@ -36,6 +36,8 @@ function Hackathon() {
   const [category, setCategory] = useState("All");
   const [status, setStatus] = useState("All");
   const [selectedHackathon, setSelectedHackathon] = useState(null);
+  const [showRegForm, setShowRegForm] = useState(false);
+  const [formData, setFormData] = useState({ teamName: "", role: "", motivation: "" });
 
   const categories = [
     "All",
@@ -275,7 +277,14 @@ function Hackathon() {
 
                     <button
                       className={`register-button ${isRegistered ? "registered" : ""}`}
-                      onClick={() => toggleHackathonRegistration(hackathon.id)}
+                      onClick={() => {
+                        if (isRegistered) {
+                          toggleHackathonRegistration(hackathon.id);
+                        } else {
+                          setSelectedHackathon(hackathon);
+                          setShowRegForm(true);
+                        }
+                      }}
                     >
                       {isRegistered ? "✓ Registered" : "Register"}
                     </button>
@@ -291,7 +300,7 @@ function Hackathon() {
       {selectedHackathon && (
         <div
           className="modal-overlay"
-          onClick={() => setSelectedHackathon(null)}
+          onClick={() => { setSelectedHackathon(null); setShowRegForm(false); }}
         >
           <div
             className="hackathon-modal"
@@ -299,85 +308,164 @@ function Hackathon() {
           >
             <button
               className="modal-close"
-              onClick={() => setSelectedHackathon(null)}
+              onClick={() => { setSelectedHackathon(null); setShowRegForm(false); }}
               aria-label="Close modal"
             >
               <X size={20} />
             </button>
 
-            <div className={`modal-icon ${selectedHackathon.color}`}>
-              {selectedHackathon.icon}
-            </div>
+            {!showRegForm ? (
+              <>
+                <div className={`modal-icon ${selectedHackathon.color}`}>
+                  {selectedHackathon.icon}
+                </div>
 
-            <div className="modal-category">
-              {selectedHackathon.category}
-            </div>
+                <div className="modal-category">
+                  {selectedHackathon.category}
+                </div>
 
-            <h2>{selectedHackathon.title}</h2>
-            <p className="modal-description">
-              {selectedHackathon.description}
-            </p>
+                <h2>{selectedHackathon.title}</h2>
+                <p className="modal-description">
+                  {selectedHackathon.description}
+                </p>
 
-            <div className="modal-details">
-              <div>
-                <Calendar size={17} />
-                <span>
-                  <small>Event Date</small>
-                  {selectedHackathon.date}
-                </span>
+                <div className="modal-details">
+                  <div>
+                    <Calendar size={17} />
+                    <span>
+                      <small>Event Date</small>
+                      {selectedHackathon.date}
+                    </span>
+                  </div>
+                  <div>
+                    <Clock3 size={17} />
+                    <span>
+                      <small>Duration</small>
+                      {selectedHackathon.duration}
+                    </span>
+                  </div>
+                  <div>
+                    <MapPin size={17} />
+                    <span>
+                      <small>Location</small>
+                      {selectedHackathon.location}
+                    </span>
+                  </div>
+                  <div>
+                    <UsersRound size={17} />
+                    <span>
+                      <small>Participants</small>
+                      {selectedHackathon.participants.toLocaleString()}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="modal-prize">
+                  <span>Total Prize Pool</span>
+                  <strong>{selectedHackathon.prize}</strong>
+                </div>
+
+                <button
+                  className={`modal-register ${
+                    registeredHackathons.includes(selectedHackathon.id)
+                      ? "registered"
+                      : ""
+                  }`}
+                  onClick={() => {
+                    if (registeredHackathons.includes(selectedHackathon.id)) {
+                      toggleHackathonRegistration(selectedHackathon.id);
+                    } else {
+                      setShowRegForm(true);
+                    }
+                  }}
+                >
+                  {registeredHackathons.includes(selectedHackathon.id)
+                    ? "✓ You are Registered (Click to unregister)"
+                    : "Register for Hackathon"}
+                </button>
+
+                <button
+                  className="modal-external"
+                  onClick={() => {
+                    alert(`Redirecting to official portal for: ${selectedHackathon.title}`);
+                  }}
+                >
+                  Visit Hackathon Website
+                  <ExternalLink size={15} />
+                </button>
+              </>
+            ) : (
+              <div className="registration-form">
+                <h2>Register for {selectedHackathon.title}</h2>
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    toggleHackathonRegistration(selectedHackathon.id, {
+                      teamName: formData.teamName,
+                      role: formData.role,
+                      motivation: formData.motivation,
+                    });
+                    setShowRegForm(false);
+                    setSelectedHackathon(null);
+                    setFormData({ teamName: "", role: "", motivation: "" });
+                  }}
+                  style={{ display: "flex", flexDirection: "column", gap: "15px", marginTop: "20px" }}
+                >
+                  <div>
+                    <label style={{ display: "block", marginBottom: "5px", fontSize: "14px", color: "#e2e8f0" }}>Team Name (Optional)</label>
+                    <input
+                      type="text"
+                      value={formData.teamName}
+                      onChange={(e) => setFormData({ ...formData, teamName: e.target.value })}
+                      placeholder="e.g. HackSprint"
+                      style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #334155", background: "#0f172a", color: "white" }}
+                    />
+                  </div>
+                  <div>
+                    <label style={{ display: "block", marginBottom: "5px", fontSize: "14px", color: "#e2e8f0" }}>Your Primary Role</label>
+                    <select
+                      value={formData.role}
+                      onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                      required
+                      style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #334155", background: "#0f172a", color: "white" }}
+                    >
+                      <option value="">Select a role...</option>
+                      <option value="Frontend">Frontend Developer</option>
+                      <option value="Backend">Backend Developer</option>
+                      <option value="Fullstack">Fullstack Developer</option>
+                      <option value="AI/ML">AI/ML Engineer</option>
+                      <option value="Design">UI/UX Designer</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style={{ display: "block", marginBottom: "5px", fontSize: "14px", color: "#e2e8f0" }}>Why do you want to join?</label>
+                    <textarea
+                      value={formData.motivation}
+                      onChange={(e) => setFormData({ ...formData, motivation: e.target.value })}
+                      placeholder="Share your motivation..."
+                      required
+                      rows="3"
+                      style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #334155", background: "#0f172a", color: "white", resize: "vertical" }}
+                    />
+                  </div>
+                  <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
+                    <button
+                      type="button"
+                      onClick={() => setShowRegForm(false)}
+                      style={{ flex: 1, padding: "12px", background: "transparent", border: "1px solid #334155", borderRadius: "8px", color: "#e2e8f0", cursor: "pointer" }}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      style={{ flex: 1, padding: "12px", background: "#7c3aed", border: "none", borderRadius: "8px", color: "white", fontWeight: "bold", cursor: "pointer" }}
+                    >
+                      Submit Registration
+                    </button>
+                  </div>
+                </form>
               </div>
-              <div>
-                <Clock3 size={17} />
-                <span>
-                  <small>Duration</small>
-                  {selectedHackathon.duration}
-                </span>
-              </div>
-              <div>
-                <MapPin size={17} />
-                <span>
-                  <small>Location</small>
-                  {selectedHackathon.location}
-                </span>
-              </div>
-              <div>
-                <UsersRound size={17} />
-                <span>
-                  <small>Participants</small>
-                  {selectedHackathon.participants.toLocaleString()}
-                </span>
-              </div>
-            </div>
-
-            <div className="modal-prize">
-              <span>Total Prize Pool</span>
-              <strong>{selectedHackathon.prize}</strong>
-            </div>
-
-            <button
-              className={`modal-register ${
-                registeredHackathons.includes(selectedHackathon.id)
-                  ? "registered"
-                  : ""
-              }`}
-              onClick={() => {
-                toggleHackathonRegistration(selectedHackathon.id);
-              }}
-            >
-              {registeredHackathons.includes(selectedHackathon.id)
-                ? "✓ You are Registered (Click to unregister)"
-                : "Register for Hackathon"}
-            </button>
-
-            <button
-              className="modal-external"
-              onClick={() => {
-                alert(`Redirecting to official portal for: ${selectedHackathon.title}`);
-              }}
-            >
-              Visit Hackathon Website
-              <ExternalLink size={15} />
-            </button>
+            )}
           </div>
         </div>
       )}

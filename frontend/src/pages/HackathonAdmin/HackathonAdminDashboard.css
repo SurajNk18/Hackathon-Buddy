@@ -1,0 +1,981 @@
+/* =========================================================
+   HACKATHON ADMIN DASHBOARD
+   Teal/Emerald accent theme for hackathon organizers
+========================================================= */
+
+.hackadmin-page {
+  min-height: calc(100vh - 68px);
+  background: #f4f7fb;
+  padding: 32px 30px 60px;
+  color: #172b4d;
+  max-width: 1540px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* ─── TOPBAR ──────────────────────────────────────── */
+
+.hackadmin-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e3e8f0;
+}
+
+.hackadmin-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.hackadmin-badge-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #0d9488, #14b8a6);
+  color: white;
+  box-shadow: 0 8px 20px rgba(13, 148, 136, 0.25);
+}
+
+.hackadmin-brand h1 {
+  font-size: 26px;
+  font-weight: 800;
+  margin: 0 0 3px;
+  color: #172b4d;
+  letter-spacing: -0.5px;
+}
+
+.hackadmin-subtext {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.hackadmin-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.hackadmin-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 42px;
+  padding: 9px 16px;
+  background: #ffffff;
+  border: 1px solid #dce3ed;
+  border-radius: 10px;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.hackadmin-back-btn:hover {
+  background: #f0fdfa;
+  border-color: #99f6e4;
+  color: #0d9488;
+  transform: translateY(-1px);
+}
+
+.hackadmin-announce-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 42px;
+  padding: 9px 16px;
+  background: linear-gradient(135deg, #d97706, #f59e0b);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.25);
+  transition: all 0.2s ease;
+}
+
+.hackadmin-announce-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(245, 158, 11, 0.35);
+}
+
+.hackadmin-create-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 42px;
+  padding: 9px 18px;
+  background: linear-gradient(135deg, #0d9488, #14b8a6);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(13, 148, 136, 0.25);
+  transition: all 0.2s ease;
+}
+
+.hackadmin-create-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(13, 148, 136, 0.35);
+}
+
+/* ─── KPI GRID ────────────────────────────────────── */
+
+.hackadmin-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 30px;
+}
+
+.hackadmin-kpi-card {
+  min-width: 0;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hackadmin-kpi-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+.hackadmin-kpi-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hackadmin-kpi-card.teal .hackadmin-kpi-icon {
+  background: #ccfbf1;
+  color: #0d9488;
+}
+
+.hackadmin-kpi-card.indigo .hackadmin-kpi-icon {
+  background: #e0e7ff;
+  color: #6366f1;
+}
+
+.hackadmin-kpi-card.amber .hackadmin-kpi-icon {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.hackadmin-kpi-card.emerald .hackadmin-kpi-icon {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.hackadmin-kpi-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.hackadmin-kpi-label {
+  font-size: 12.5px;
+  color: #64748b;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.hackadmin-kpi-value {
+  font-size: 27px;
+  font-weight: 850;
+  color: #172b4d;
+  line-height: 1.2;
+}
+
+.hackadmin-kpi-delta {
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 4px;
+  color: #10b981;
+}
+
+/* ─── TABS ────────────────────────────────────────── */
+
+.hackadmin-tabs-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #dfe5ee;
+  padding-bottom: 10px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.hackadmin-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 18px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.hackadmin-tab-btn:hover {
+  color: #0d9488;
+  background: #f0fdfa;
+}
+
+.hackadmin-tab-btn.active {
+  background: #ccfbf1;
+  border-color: #14b8a6;
+  color: #0d9488;
+  box-shadow: 0 3px 10px rgba(20, 184, 166, 0.12);
+}
+
+/* ─── CONTENT SECTION ─────────────────────────────── */
+
+.hackadmin-content-section {
+  background: #ffffff;
+  border: 1px solid #e1e7ef;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.04);
+}
+
+.section-title-text {
+  font-size: 18px;
+  font-weight: 700;
+  color: #172b4d;
+  margin: 0;
+}
+
+/* ─── TOOLBAR ─────────────────────────────────────── */
+
+.hackadmin-table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.hackadmin-search-box {
+  flex: 1;
+  min-width: 280px;
+  max-width: 480px;
+  height: 46px;
+  background: #ffffff;
+  border: 1px solid #dbe3ed;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.hackadmin-search-box:focus-within {
+  border-color: #14b8a6;
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+}
+
+.hackadmin-search-box input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #172b4d;
+  font-size: 13.5px;
+}
+
+.hackadmin-search-box input::placeholder {
+  color: #94a3b8;
+}
+
+.hackadmin-primary-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 11px 18px;
+  background: linear-gradient(135deg, #0d9488, #14b8a6);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 7px 18px rgba(13, 148, 136, 0.2);
+  transition: all 0.2s ease;
+}
+
+.hackadmin-primary-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(13, 148, 136, 0.3);
+}
+
+/* ─── EVENT CARDS GRID ────────────────────────────── */
+
+.hackadmin-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+.hackadmin-event-card {
+  background: #ffffff;
+  border: 1px solid #e5eaf1;
+  border-radius: 16px;
+  padding: 22px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hackadmin-event-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+}
+
+.event-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.event-icon {
+  font-size: 28px;
+}
+
+.event-status-pill {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.event-status-pill.open {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.event-status-pill.closed {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.event-status-pill.upcoming {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.event-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #172b4d;
+  margin: 0 0 8px;
+}
+
+.event-desc {
+  color: #64748b;
+  font-size: 13px;
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+
+.event-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.event-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: #475569;
+}
+
+.event-meta-item svg {
+  color: #94a3b8;
+}
+
+.event-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.event-status-select {
+  padding: 6px 10px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+  background: #ffffff;
+  border: 1px solid #dbe3ed;
+  color: #334155;
+  flex: 1;
+}
+
+.event-status-select.open {
+  border-color: #10b981;
+  color: #059669;
+  background: #f0fdf7;
+}
+
+.event-status-select.closed {
+  border-color: #ef4444;
+  color: #dc2626;
+  background: #fff5f5;
+}
+
+.event-action-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid #e5eaf1;
+  background: #ffffff;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.event-action-btn.announce:hover {
+  background: #fef3c7;
+  border-color: #f59e0b;
+  color: #d97706;
+}
+
+.event-action-btn.delete:hover {
+  background: #fee2e2;
+  border-color: #ef4444;
+  color: #dc2626;
+}
+
+/* ─── ANNOUNCEMENTS ───────────────────────────────── */
+
+.announcements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.announcement-card {
+  background: #fafbff;
+  border: 1px solid #e5eaf1;
+  border-radius: 14px;
+  padding: 20px;
+  transition: all 0.2s ease;
+}
+
+.announcement-card:hover {
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+}
+
+.announcement-card.info {
+  border-left: 4px solid #3b82f6;
+}
+
+.announcement-card.warning {
+  border-left: 4px solid #f59e0b;
+}
+
+.announcement-card.success {
+  border-left: 4px solid #10b981;
+}
+
+.announcement-card.error {
+  border-left: 4px solid #ef4444;
+}
+
+.announcement-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.announcement-type-icon {
+  font-size: 22px;
+}
+
+.announcement-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.announcement-meta strong {
+  display: block;
+  font-size: 15px;
+  color: #172b4d;
+}
+
+.announcement-meta small {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.announcement-recipients {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.announcement-body {
+  margin: 0;
+  color: #475569;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #94a3b8;
+}
+
+.empty-state svg {
+  margin-bottom: 12px;
+  opacity: 0.3;
+}
+
+.empty-state h3 {
+  color: #64748b;
+  margin: 0 0 6px;
+}
+
+.empty-state p {
+  font-size: 13px;
+  margin: 0;
+}
+
+/* ─── REGISTRATION TABLE ──────────────────────────── */
+
+.hackadmin-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #e6ebf2;
+  border-radius: 12px;
+  margin-top: 20px;
+}
+
+.hackadmin-data-table {
+  width: 100%;
+  min-width: 750px;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13.5px;
+  background: #ffffff;
+}
+
+.hackadmin-data-table th {
+  padding: 14px 16px;
+  background: #f7f9fc;
+  color: #64748b;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  border-bottom: 1px solid #e5eaf1;
+}
+
+.hackadmin-data-table td {
+  padding: 16px;
+  border-bottom: 1px solid #edf0f4;
+  color: #475569;
+  vertical-align: middle;
+}
+
+.hackadmin-data-table tbody tr:hover {
+  background: #fafbff;
+}
+
+.hackadmin-data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table-title-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.table-icon {
+  font-size: 20px;
+}
+
+.table-title-cell strong {
+  color: #172b4d;
+  font-weight: 700;
+}
+
+.track-badge {
+  display: inline-block;
+  padding: 4px 9px;
+  background: #e4f7fb;
+  border: 1px solid #b7e8f2;
+  border-radius: 6px;
+  color: #07839c;
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.fill-rate-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fill-rate-bar .fill-rate-progress {
+  height: 8px;
+  flex: 1;
+  background: #e9edf3;
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.fill-rate-bar .fill-rate-progress::after {
+  content: "";
+}
+
+.fill-rate-bar span {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0d9488;
+  min-width: 35px;
+}
+
+.fill-rate-progress {
+  background: linear-gradient(90deg, #0d9488, #14b8a6) !important;
+  height: 8px;
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+/* ─── ANALYTICS ───────────────────────────────────── */
+
+.hackadmin-analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.hackadmin-analytics-card {
+  background: #ffffff;
+  border: 1px solid #e1e7ef;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
+}
+
+.hackadmin-analytics-card h3 {
+  font-size: 17px;
+  color: #172b4d;
+  margin: 0 0 4px;
+}
+
+.hackadmin-analytics-card p {
+  color: #64748b;
+  font-size: 12.5px;
+  margin: 0 0 20px;
+}
+
+.skill-metric-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.metric-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.metric-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #334155;
+}
+
+.metric-header small {
+  color: #64748b;
+}
+
+.metric-bar {
+  height: 8px;
+  background: #e9edf3;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.metric-bar div {
+  height: 100%;
+  background: linear-gradient(90deg, #0d9488, #14b8a6);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+/* ─── MODAL ───────────────────────────────────────── */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.hackadmin-modal-card {
+  background: #ffffff;
+  border: 1px solid #e1e7ef;
+  border-radius: 20px;
+  padding: 32px;
+  max-width: 700px;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 25px 70px rgba(15, 23, 42, 0.2);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.modal-header h3 {
+  color: #172b4d;
+}
+
+.modal-header button {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+}
+
+.modal-header button:hover {
+  color: #172b4d;
+}
+
+/* ─── FORM ────────────────────────────────────────── */
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.hackadmin-field {
+  margin-bottom: 16px;
+}
+
+.hackadmin-field label {
+  display: block;
+  color: #64748b;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.hackadmin-field input,
+.hackadmin-field select,
+.hackadmin-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #dbe3ed;
+  border-radius: 8px;
+  color: #172b4d;
+  padding: 10px 12px;
+  font-size: 13.5px;
+  outline: none;
+}
+
+.hackadmin-field input:focus,
+.hackadmin-field select:focus,
+.hackadmin-field textarea:focus {
+  border-color: #14b8a6;
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+}
+
+.hackadmin-submit-btn {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, #0d9488, #14b8a6);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 7px 20px rgba(13, 148, 136, 0.22);
+  transition: all 0.2s ease;
+  margin-top: 8px;
+}
+
+.hackadmin-submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px rgba(13, 148, 136, 0.32);
+}
+
+.hackadmin-submit-btn.announce-submit {
+  background: linear-gradient(135deg, #d97706, #f59e0b);
+  box-shadow: 0 7px 20px rgba(245, 158, 11, 0.22);
+}
+
+.hackadmin-submit-btn.announce-submit:hover {
+  box-shadow: 0 10px 28px rgba(245, 158, 11, 0.32);
+}
+
+/* ─── RESPONSIVE ──────────────────────────────────── */
+
+@media (max-width: 1200px) {
+  .hackadmin-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .hackadmin-analytics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .hackadmin-page {
+    padding: 24px 18px 45px;
+  }
+  .hackadmin-content-section {
+    padding: 22px;
+  }
+  .form-grid-2,
+  .form-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .hackadmin-page {
+    padding: 20px 14px 35px;
+  }
+  .hackadmin-topbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+  .hackadmin-topbar-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .hackadmin-create-btn {
+    grid-column: 1 / -1;
+  }
+  .hackadmin-kpi-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .hackadmin-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .hackadmin-tabs-bar {
+    gap: 7px;
+  }
+  .hackadmin-tab-btn {
+    font-size: 12px;
+    padding: 8px 13px;
+  }
+  .hackadmin-content-section {
+    padding: 16px;
+    border-radius: 15px;
+  }
+  .hackadmin-table-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hackadmin-search-box {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+  }
+  .hackadmin-modal-card {
+    padding: 22px 17px;
+    border-radius: 15px;
+  }
+}
+
+@media (max-width: 420px) {
+  .hackadmin-page {
+    padding: 17px 10px 30px;
+  }
+  .hackadmin-brand h1 {
+    font-size: 20px;
+  }
+  .hackadmin-topbar-actions {
+    grid-template-columns: 1fr;
+  }
+  .hackadmin-kpi-value {
+    font-size: 22px;
+  }
+}

@@ -97,20 +97,6 @@ function Header() {
 
         {/* Right Actions */}
         <div className="header-right-section">
-          {/* Quick Notification Icon */}
-          <Link
-            to="/notifications"
-            className="icon-action-btn"
-            title="Notifications"
-          >
-            <Bell size={19} />
-            {unreadCount > 0 && <span className="action-badge">{unreadCount}</span>}
-          </Link>
-
-          {/* Quick Chat Icon */}
-          <Link to="/chat" className="icon-action-btn" title="Messages">
-            <MessageSquare size={19} />
-          </Link>
 
           {/* User Profile Pill */}
           <div className="user-profile-menu">
@@ -167,6 +153,24 @@ function Header() {
                 >
                   <Sparkles size={16} />
                   Admin Console
+                </Link>
+                <Link
+                  to="/hackathon-admin"
+                  className="dropdown-item"
+                  onClick={() => setUserDropdownOpen(false)}
+                  style={{ color: "#14b8a6" }}
+                >
+                  <Sparkles size={16} />
+                  Hackathon Admin
+                </Link>
+                <Link
+                  to="/super-admin"
+                  className="dropdown-item"
+                  onClick={() => setUserDropdownOpen(false)}
+                  style={{ color: "#e11d48" }}
+                >
+                  <Sparkles size={16} />
+                  Developer Console
                 </Link>
                 <div className="dropdown-divider" />
                 <button className="dropdown-item logout" onClick={handleLogout}>

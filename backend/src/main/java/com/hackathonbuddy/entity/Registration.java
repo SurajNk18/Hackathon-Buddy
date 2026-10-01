@@ -30,6 +30,13 @@ public class Registration {
 
     private String status; // REGISTERED, WITHDRAWN, COMPLETED
 
+    private String teamName;
+
+    private String role;
+
+    @Column(length = 1000)
+    private String motivation;
+
     private LocalDateTime registeredAt;
 
     @PrePersist

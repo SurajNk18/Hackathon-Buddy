@@ -64,7 +64,8 @@ export const hackathonAPI = {
 // ─── REGISTRATIONS ──────────────────────────────────────────
 export const registrationAPI = {
   getMyRegistrations: () => api.get("/registrations"),
-  register: (hackathonId) => api.post(`/registrations/${hackathonId}`),
+  register: (hackathonId, formData = {}) =>
+    api.post(`/registrations/${hackathonId}`, formData),
   withdraw: (hackathonId) => api.delete(`/registrations/${hackathonId}`),
 };
 
@@ -121,9 +122,40 @@ export const adminAPI = {
   getStats: () => api.get("/admin/stats"),
 };
 
+// ─── SUPER ADMIN ────────────────────────────────────────────
+export const superAdminAPI = {
+  getStats: () => api.get("/super-admin/stats"),
+  getUsers: () => api.get("/super-admin/users"),
+  getRoles: () => api.get("/super-admin/roles"),
+  assignRole: (userId, roleName) =>
+    api.put(`/super-admin/users/${userId}/assign-role?roleName=${roleName}`),
+  toggleStatus: (userId) =>
+    api.put(`/super-admin/users/${userId}/toggle-status`),
+  deleteUser: (userId) => api.delete(`/super-admin/users/${userId}`),
+  resetPassword: (userId, newPassword) =>
+    api.put(`/super-admin/users/${userId}/reset-password?newPassword=${newPassword}`),
+  createAdmin: (data) => api.post("/super-admin/create-admin", data),
+};
+
+// ─── HACKATHON ADMIN ────────────────────────────────────────
+export const hackathonAdminAPI = {
+  getMyHackathons: () => api.get("/hackathon-admin/my-hackathons"),
+  getRegistrations: (hackathonId) =>
+    api.get(`/hackathon-admin/hackathons/${hackathonId}/registrations`),
+  sendAnnouncement: (data) => api.post("/hackathon-admin/announcements", data),
+  getAnnouncements: () => api.get("/hackathon-admin/announcements"),
+  getStats: () => api.get("/hackathon-admin/stats"),
+};
+
 // ─── DASHBOARD ──────────────────────────────────────────────
 export const dashboardAPI = {
   getStats: () => api.get("/dashboard/stats"),
+};
+
+// ─── CHAT ───────────────────────────────────────────────────
+export const chatAPI = {
+  getMessages: (conversationId) =>
+    api.get(`/chat/${conversationId}/messages`),
 };
 
 export default api;

@@ -215,7 +215,6 @@ function Dashboard() {
             <div className="welcome-illustration">
               <div className="illustration-person">👨‍💻</div>
               <div className="illustration-person second">👩‍💻</div>
-              <div className="illustration-person third">🚀</div>
             </div>
           </section>
 
@@ -269,7 +268,13 @@ function Dashboard() {
                           type="button"
                           className={isRegistered ? "registered-btn" : ""}
                           style={isRegistered ? { background: "#10b981", color: "white", borderColor: "#10b981" } : {}}
-                          onClick={() => toggleHackathonRegistration(hackathon.id)}
+                          onClick={() => {
+                            if (isRegistered) {
+                              toggleHackathonRegistration(hackathon.id);
+                            } else {
+                              navigate("/hackathons");
+                            }
+                          }}
                         >
                           {isRegistered ? "✓ Registered" : "Register Now"}
                         </button>

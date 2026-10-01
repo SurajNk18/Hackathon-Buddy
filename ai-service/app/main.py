@@ -20,6 +20,9 @@ def read_root():
 def health_check():
     return {"status": "up", "service": "ai-service"}
 
-from app.routers import matching
+from app.routers import matching, ideas, skills, admin_analytics
 
 app.include_router(matching.router)
+app.include_router(ideas.router)
+app.include_router(skills.router)
+app.include_router(admin_analytics.router)

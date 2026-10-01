@@ -56,6 +56,7 @@ public class RegistrationController {
     @PostMapping("/{hackathonId}")
     public ResponseEntity<ApiResponse<String>> register(
             @PathVariable Long hackathonId,
+            @RequestBody(required = false) com.hackathonbuddy.dto.request.HackathonRegistrationRequest request,
             @AuthenticationPrincipal UserDetails userDetails) {
         User user = getUser(userDetails);
         Hackathon hackathon = hackathonRepository.findById(hackathonId)
@@ -66,9 +67,16 @@ public class RegistrationController {
                     .success(false).message("Already registered for this hackathon").build());
         }
 
-        Registration registration = Registration.builder()
-                .user(user).hackathon(hackathon).status("REGISTERED").build();
-        registrationRepository.save(registration);
+        Registration.RegistrationBuilder builder = Registration.builder()
+                .user(user).hackathon(hackathon).status("REGISTERED");
+
+        if (request != null) {
+            builder.teamName(request.getTeamName());
+            builder.role(request.getRole());
+            builder.motivation(request.getMotivation());
+        }
+
+        registrationRepository.save(builder.build());
 
         // Log activity and create notification
         activityService.logActivity(user, "REGISTRATION",

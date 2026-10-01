@@ -45,10 +45,22 @@ public class DataInitializer implements CommandLineRunner {
                     Role.builder().name("DEVELOPER").build(),
                     Role.builder().name("ORGANIZER").build(),
                     Role.builder().name("COMPANY").build(),
-                    Role.builder().name("ADMIN").build()
+                    Role.builder().name("ADMIN").build(),
+                    Role.builder().name("HACKATHON_ADMIN").build(),
+                    Role.builder().name("SUPER_ADMIN").build()
             );
             roleRepository.saveAll(roles);
             log.info("Initialized {} roles", roles.size());
+        } else {
+            // Ensure new roles exist even if roles table is already populated
+            if (roleRepository.findByName("HACKATHON_ADMIN").isEmpty()) {
+                roleRepository.save(Role.builder().name("HACKATHON_ADMIN").build());
+                log.info("Added HACKATHON_ADMIN role");
+            }
+            if (roleRepository.findByName("SUPER_ADMIN").isEmpty()) {
+                roleRepository.save(Role.builder().name("SUPER_ADMIN").build());
+                log.info("Added SUPER_ADMIN role");
+            }
         }
     }
 
@@ -203,6 +215,48 @@ public class DataInitializer implements CommandLineRunner {
                     .build();
             userRepository.save(admin);
             log.info("Admin user created: admin@hackathonbuddy.com / admin123");
+        }
+
+        // Create Super Admin user
+        if (!userRepository.existsByEmail("superadmin@hackathonbuddy.com")) {
+            Role superAdminRole = roleRepository.findByName("SUPER_ADMIN")
+                    .orElseThrow(() -> new RuntimeException("SUPER_ADMIN role not found"));
+
+            User superAdmin = User.builder()
+                    .firstName("Super")
+                    .lastName("Admin")
+                    .email("superadmin@hackathonbuddy.com")
+                    .password(passwordEncoder.encode("superadmin123"))
+                    .role(superAdminRole)
+                    .primaryRole("Main Developer / System Owner")
+                    .location("Developer HQ")
+                    .bio("Main developer with complete system control. Manages credentials, roles, and access for all administrators.")
+                    .isActive(true)
+                    .profileComplete(true)
+                    .build();
+            userRepository.save(superAdmin);
+            log.info("Super Admin user created: superadmin@hackathonbuddy.com / superadmin123");
+        }
+
+        // Create Hackathon Admin user
+        if (!userRepository.existsByEmail("hackadmin@hackathonbuddy.com")) {
+            Role hackathonAdminRole = roleRepository.findByName("HACKATHON_ADMIN")
+                    .orElseThrow(() -> new RuntimeException("HACKATHON_ADMIN role not found"));
+
+            User hackathonAdmin = User.builder()
+                    .firstName("Hackathon")
+                    .lastName("Organizer")
+                    .email("hackadmin@hackathonbuddy.com")
+                    .password(passwordEncoder.encode("hackadmin123"))
+                    .role(hackathonAdminRole)
+                    .primaryRole("Hackathon Organizer")
+                    .location("Event Management Center")
+                    .bio("Hackathon organizer responsible for managing events, circulating information, and coordinating with participants.")
+                    .isActive(true)
+                    .profileComplete(true)
+                    .build();
+            userRepository.save(hackathonAdmin);
+            log.info("Hackathon Admin user created: hackadmin@hackathonbuddy.com / hackadmin123");
         }
     }
 

@@ -15,6 +15,8 @@ import Chat from "./pages/Chat/Chat";
 import Notifications from "./pages/Notifications/Notifications";
 import Profile from "./pages/Profile/Profile";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
+import HackathonAdminDashboard from "./pages/HackathonAdmin/HackathonAdminDashboard";
+import SuperAdminDashboard from "./pages/SuperAdmin/SuperAdminDashboard";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
           <Route path="/create-profile" element={<CreateProfile />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/hackathon-admin" element={<HackathonAdminDashboard />} />
+          <Route path="/super-admin" element={<SuperAdminDashboard />} />
           <Route path="/hackathons" element={<Hackathon />} />
           <Route path="/teams" element={<Teams />} />
           <Route path="/matching" element={<Navigate to="/teams" replace />} />

@@ -123,6 +123,11 @@ function Chat() {
 
   const activeChat = conversations.find((c) => c.id === selectedChatId) || conversations[0];
   const messages = messagesByChat[selectedChatId] || [];
+  const messagesEndRef = React.useRef(null);
+
+  React.useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   const filteredConversations = useMemo(() => {
     return conversations.filter((c) => {
@@ -168,8 +173,8 @@ function Chat() {
     setTimeout(() => {
       const autoReply = {
         id: Date.now() + 1,
-        sender: activeChat.name.includes("Priya") ? "Priya Singh" : "Rohan Mehta",
-        short: activeChat.name.includes("Priya") ? "P" : "R",
+        sender: activeChat?.name?.includes("Priya") ? "Priya Singh" : "Rohan Mehta",
+        short: activeChat?.name?.includes("Priya") ? "P" : "R",
         type: "received",
         text: "Got it! Looking great, I'll review and test right away.",
         time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
@@ -326,6 +331,7 @@ function Chat() {
                 </div>
               </div>
             ))}
+            <div ref={messagesEndRef} />
           </div>
         </section>
 

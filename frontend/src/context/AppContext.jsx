@@ -491,6 +491,40 @@ export function AppProvider({ children }) {
       return { success: true, user: initialAdmin, isAdmin: true };
     }
 
+    // Super Admin fallback
+    if (cleanEmail === "superadmin@hackathonbuddy.com" && password === "superadmin123") {
+      const superAdminUser = {
+        ...initialAdmin,
+        id: "superadmin-1",
+        fullName: "Super Admin",
+        firstName: "Super",
+        lastName: "Admin",
+        email: "superadmin@hackathonbuddy.com",
+        primaryRole: "Main Developer / System Owner",
+        role: "SUPER_ADMIN",
+      };
+      setCurrentUser(superAdminUser);
+      setIsLoggedIn(true);
+      return { success: true, user: superAdminUser, isAdmin: true };
+    }
+
+    // Hackathon Admin fallback
+    if (cleanEmail === "hackadmin@hackathonbuddy.com" && password === "hackadmin123") {
+      const hackAdminUser = {
+        ...initialAdmin,
+        id: "hackadmin-1",
+        fullName: "Hackathon Organizer",
+        firstName: "Hackathon",
+        lastName: "Organizer",
+        email: "hackadmin@hackathonbuddy.com",
+        primaryRole: "Hackathon Organizer",
+        role: "HACKATHON_ADMIN",
+      };
+      setCurrentUser(hackAdminUser);
+      setIsLoggedIn(true);
+      return { success: true, user: hackAdminUser, isAdmin: true };
+    }
+
     const found = registeredUsers.find(
       (u) => u.email.toLowerCase() === cleanEmail && u.password === password
     );
@@ -665,13 +699,13 @@ export function AppProvider({ children }) {
   };
 
   // Hackathons
-  const toggleHackathonRegistration = async (hackathonId) => {
+  const toggleHackathonRegistration = async (hackathonId, formData = {}) => {
     setRegisteredHackathons((prev) => {
       if (prev.includes(hackathonId)) {
         try { registrationAPI.withdraw(hackathonId); } catch (e) { /* ok */ }
         return prev.filter((id) => id !== hackathonId);
       } else {
-        try { registrationAPI.register(hackathonId); } catch (e) { /* ok */ }
+        try { registrationAPI.register(hackathonId, formData); } catch (e) { /* ok */ }
         const hackathon = hackathons.find(h => h.id === hackathonId);
         if (hackathon) {
           addNotification({
