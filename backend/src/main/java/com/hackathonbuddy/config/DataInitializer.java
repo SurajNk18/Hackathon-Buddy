@@ -47,6 +47,7 @@ public class DataInitializer implements CommandLineRunner {
                     Role.builder().name("COMPANY").build(),
                     Role.builder().name("ADMIN").build(),
                     Role.builder().name("HACKATHON_ADMIN").build(),
+                    Role.builder().name("DEVELOPER_ADMIN").build(),
                     Role.builder().name("SUPER_ADMIN").build()
             );
             roleRepository.saveAll(roles);
@@ -60,6 +61,10 @@ public class DataInitializer implements CommandLineRunner {
             if (roleRepository.findByName("SUPER_ADMIN").isEmpty()) {
                 roleRepository.save(Role.builder().name("SUPER_ADMIN").build());
                 log.info("Added SUPER_ADMIN role");
+            }
+            if (roleRepository.findByName("DEVELOPER_ADMIN").isEmpty()) {
+                roleRepository.save(Role.builder().name("DEVELOPER_ADMIN").build());
+                log.info("Added DEVELOPER_ADMIN role");
             }
         }
     }
@@ -257,6 +262,27 @@ public class DataInitializer implements CommandLineRunner {
                     .build();
             userRepository.save(hackathonAdmin);
             log.info("Hackathon Admin user created: hackadmin@hackathonbuddy.com / hackadmin123");
+        }
+
+        // Create Developer Admin user
+        if (!userRepository.existsByEmail("devadmin@hackathonbuddy.com")) {
+            Role devAdminRole = roleRepository.findByName("DEVELOPER_ADMIN")
+                    .orElseThrow(() -> new RuntimeException("DEVELOPER_ADMIN role not found"));
+
+            User devAdmin = User.builder()
+                    .firstName("Developer")
+                    .lastName("Admin")
+                    .email("devadmin@hackathonbuddy.com")
+                    .password(passwordEncoder.encode("devadmin123"))
+                    .role(devAdminRole)
+                    .primaryRole("Developer Manager")
+                    .location("Tech Hub")
+                    .bio("Developer Admin responsible for managing developer profiles, technical resources, and developer activity on the platform.")
+                    .isActive(true)
+                    .profileComplete(true)
+                    .build();
+            userRepository.save(devAdmin);
+            log.info("Developer Admin user created: devadmin@hackathonbuddy.com / devadmin123");
         }
     }
 

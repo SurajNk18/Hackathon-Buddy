@@ -146,6 +146,7 @@ public class AuthServiceImpl implements AuthService {
         boolean isAdmin = user.getRole() != null &&
                 ("ADMIN".equalsIgnoreCase(user.getRole().getName()) ||
                  "HACKATHON_ADMIN".equalsIgnoreCase(user.getRole().getName()) ||
+                 "DEVELOPER_ADMIN".equalsIgnoreCase(user.getRole().getName()) ||
                  "SUPER_ADMIN".equalsIgnoreCase(user.getRole().getName()));
 
         return UserResponse.builder()

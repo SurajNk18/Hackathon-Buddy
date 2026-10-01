@@ -44,8 +44,8 @@ function Dashboard() {
   const firstLetter = userName.charAt(0).toUpperCase();
 
   const menuItems = [
-    { label: "Dashboard", icon: LayoutDashboard, path: "/dashboard", active: true },
-    { label: "Admin Console", icon: ShieldCheck, path: "/admin" },
+    { label: "Dashboard", icon: LayoutDashboard, path: "/student/dashboard", active: true },
+    ...(currentUser?.role?.toUpperCase().includes("ADMIN") ? [{ label: "Admin Console", icon: ShieldCheck, path: "/admin" }] : []),
     { label: "Hackathons", icon: Trophy, path: "/hackathons" },
     { label: "Teams", icon: Users, path: "/teams" },
     { label: "AI Hub", icon: Brain, path: "/ai-hub" },

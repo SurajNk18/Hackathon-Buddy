@@ -16,7 +16,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Handle 401 responses
+// Handle 401/403 responses
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -30,6 +30,9 @@ api.interceptors.response.use(
       ) {
         window.location.href = "/login";
       }
+    }
+    if (error.response && error.response.status === 403) {
+      console.warn("Access Denied (403):", error.response.data?.message || "You do not have permission.");
     }
     return Promise.reject(error);
   }
@@ -145,6 +148,16 @@ export const hackathonAdminAPI = {
   sendAnnouncement: (data) => api.post("/hackathon-admin/announcements", data),
   getAnnouncements: () => api.get("/hackathon-admin/announcements"),
   getStats: () => api.get("/hackathon-admin/stats"),
+};
+
+// ─── DEVELOPER ADMIN ────────────────────────────────────────
+export const developerAdminAPI = {
+  getStats: () => api.get("/developer-admin/stats"),
+  getDevelopers: () => api.get("/developer-admin/developers"),
+  getUsers: () => api.get("/developer-admin/users"),
+  toggleStatus: (userId) =>
+    api.put(`/developer-admin/developers/${userId}/toggle-status`),
+  getActivity: () => api.get("/developer-admin/activity"),
 };
 
 // ─── DASHBOARD ──────────────────────────────────────────────

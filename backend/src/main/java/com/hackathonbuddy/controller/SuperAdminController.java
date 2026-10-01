@@ -193,6 +193,7 @@ public class SuperAdminController {
         String roleName = user.getRole() != null ? user.getRole().getName() : "STUDENT";
         boolean isAdmin = "ADMIN".equalsIgnoreCase(roleName) ||
                            "HACKATHON_ADMIN".equalsIgnoreCase(roleName) ||
+                           "DEVELOPER_ADMIN".equalsIgnoreCase(roleName) ||
                            "SUPER_ADMIN".equalsIgnoreCase(roleName);
         return UserResponse.builder()
                 .id(user.getId())

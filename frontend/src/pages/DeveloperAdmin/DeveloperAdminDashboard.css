@@ -1,0 +1,149 @@
+/* =========================================================
+   DEVELOPER ADMIN DASHBOARD
+   Blue/Indigo accent theme for developer management
+========================================================= */
+
+.devadmin-page {
+  min-height: calc(100vh - 68px);
+  background: #f4f7fb;
+  padding: 32px 30px 60px;
+  color: #172b4d;
+  max-width: 1540px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.devadmin-topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; flex-wrap: wrap; margin-bottom: 30px; padding-bottom: 24px;
+  border-bottom: 1px solid #e3e8f0;
+}
+
+.devadmin-brand { display: flex; align-items: center; gap: 14px; }
+
+.devadmin-badge-icon {
+  width: 50px; height: 50px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white; box-shadow: 0 8px 20px rgba(99, 102, 241, 0.25);
+}
+
+.devadmin-brand h1 { font-size: 26px; font-weight: 800; margin: 0 0 3px; color: #172b4d; letter-spacing: -0.5px; }
+.devadmin-subtext { color: #64748b; font-size: 13px; }
+.devadmin-topbar-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+.devadmin-back-btn {
+  display: flex; align-items: center; gap: 7px; min-height: 42px; padding: 9px 16px;
+  background: #ffffff; border: 1px solid #dce3ed; border-radius: 10px;
+  color: #334155; font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.devadmin-back-btn:hover { background: #eef2ff; border-color: #c7d2fe; color: #4f46e5; transform: translateY(-1px); }
+
+/* ─── KPI ──────────────────────────────────────────── */
+.devadmin-kpi-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin-bottom: 30px; }
+
+.devadmin-kpi-card {
+  min-width: 0; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px;
+  padding: 20px; display: flex; align-items: center; gap: 16px;
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04); transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.devadmin-kpi-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08); }
+
+.devadmin-kpi-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.devadmin-kpi-card.blue .devadmin-kpi-icon { background: #dbeafe; color: #2563eb; }
+.devadmin-kpi-card.green .devadmin-kpi-icon { background: #d1fae5; color: #059669; }
+.devadmin-kpi-card.purple .devadmin-kpi-icon { background: #ede9fe; color: #7c3aed; }
+.devadmin-kpi-card.orange .devadmin-kpi-icon { background: #fef3c7; color: #d97706; }
+
+.devadmin-kpi-info { display: flex; flex-direction: column; min-width: 0; }
+.devadmin-kpi-label { font-size: 12.5px; color: #64748b; font-weight: 500; margin-bottom: 2px; }
+.devadmin-kpi-value { font-size: 27px; font-weight: 850; color: #172b4d; line-height: 1.2; }
+.devadmin-kpi-delta { font-size: 11px; font-weight: 600; margin-top: 4px; color: #10b981; }
+
+/* ─── TABS ─────────────────────────────────────────── */
+.devadmin-tabs-bar { display: flex; gap: 10px; margin-bottom: 24px; border-bottom: 1px solid #dfe5ee; padding-bottom: 10px; overflow-x: auto; }
+
+.devadmin-tab-btn {
+  display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 18px;
+  background: transparent; border: 1px solid transparent; border-radius: 10px;
+  color: #64748b; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap;
+  transition: all 0.2s ease;
+}
+.devadmin-tab-btn:hover { color: #4f46e5; background: #eef2ff; }
+.devadmin-tab-btn.active { background: #e0e7ff; border-color: #6366f1; color: #4f46e5; box-shadow: 0 3px 10px rgba(99, 102, 241, 0.12); }
+
+/* ─── CONTENT ──────────────────────────────────────── */
+.devadmin-content-section { background: #ffffff; border: 1px solid #e1e7ef; border-radius: 20px; padding: 28px; box-shadow: 0 4px 18px rgba(15, 23, 42, 0.04); }
+.devadmin-section-title { font-size: 19px; font-weight: 700; color: #172b4d; margin: 0 0 24px; }
+
+.devadmin-table-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+
+.devadmin-search-box {
+  flex: 1; min-width: 280px; max-width: 480px; height: 46px;
+  background: #ffffff; border: 1px solid #dbe3ed; border-radius: 10px;
+  display: flex; align-items: center; gap: 10px; padding: 0 14px; box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+.devadmin-search-box:focus-within { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1); }
+.devadmin-search-box input { width: 100%; background: transparent; border: none; outline: none; color: #172b4d; font-size: 13.5px; }
+.devadmin-search-box input::placeholder { color: #94a3b8; }
+
+/* ─── TABLE ────────────────────────────────────────── */
+.devadmin-table-wrapper { width: 100%; overflow-x: auto; border: 1px solid #e6ebf2; border-radius: 12px; }
+
+.devadmin-data-table { width: 100%; min-width: 800px; border-collapse: collapse; text-align: left; font-size: 13.5px; background: #ffffff; }
+.devadmin-data-table th { padding: 14px 16px; background: #f7f9fc; color: #64748b; font-weight: 700; font-size: 11px; letter-spacing: 0.8px; border-bottom: 1px solid #e5eaf1; }
+.devadmin-data-table td { padding: 14px 16px; border-bottom: 1px solid #edf0f4; color: #475569; vertical-align: middle; }
+.devadmin-data-table tbody tr:hover { background: #fafbff; }
+.devadmin-data-table tbody tr:last-child td { border-bottom: none; }
+
+.dev-user-cell { display: flex; align-items: center; gap: 12px; }
+.dev-user-avatar { width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, #4f46e5, #6366f1); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; font-size: 15px; }
+.dev-user-cell strong { display: block; color: #172b4d; font-weight: 700; }
+.dev-user-cell small { color: #94a3b8; font-size: 12px; }
+
+.dev-role-badge { display: inline-block; padding: 4px 10px; background: #eef2ff; border: 1px solid #c7d2fe; border-radius: 6px; color: #4f46e5; font-size: 11.5px; font-weight: 600; }
+.dev-location { display: flex; align-items: center; gap: 5px; color: #64748b; font-size: 13px; }
+.dev-location svg { color: #94a3b8; }
+
+.dev-profile-badge { padding: 4px 10px; border-radius: 6px; font-size: 11.5px; font-weight: 700; }
+.dev-profile-badge.complete { background: #d1fae5; color: #059669; }
+.dev-profile-badge.incomplete { background: #fef3c7; color: #d97706; }
+
+.dev-status-pill { padding: 4px 10px; border-radius: 6px; font-size: 11.5px; font-weight: 700; }
+.dev-status-pill.active { background: #d1fae5; color: #059669; }
+.dev-status-pill.suspended { background: #fee2e2; color: #dc2626; }
+
+.dev-action-group { display: flex; gap: 6px; }
+.dev-action-btn { width: 34px; height: 34px; border-radius: 8px; border: 1px solid #e5eaf1; background: #ffffff; color: #64748b; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; }
+.dev-action-btn.view:hover { background: #eef2ff; border-color: #c7d2fe; color: #4f46e5; }
+.dev-action-btn.suspend:hover { background: #fee2e2; border-color: #fca5a5; color: #dc2626; }
+.dev-action-btn.activate:hover { background: #d1fae5; border-color: #86efac; color: #059669; }
+
+/* ─── ANALYTICS ────────────────────────────────────── */
+.devadmin-analytics-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.devadmin-analytics-card { background: #fafbff; border: 1px solid #e5eaf1; border-radius: 16px; padding: 24px; }
+.devadmin-analytics-card h3 { font-size: 17px; color: #172b4d; margin: 0 0 4px; }
+.devadmin-analytics-card p { color: #64748b; font-size: 12.5px; margin: 0 0 20px; }
+
+.skill-metric-bars { display: flex; flex-direction: column; gap: 14px; }
+.metric-row { display: flex; flex-direction: column; gap: 6px; }
+.metric-header { display: flex; justify-content: space-between; font-size: 13px; color: #334155; }
+.metric-header small { color: #64748b; }
+.metric-bar { height: 8px; background: #e9edf3; border-radius: 999px; overflow: hidden; }
+.metric-bar div { height: 100%; background: linear-gradient(90deg, #4f46e5, #818cf8); border-radius: 999px; transition: width 0.4s ease; }
+
+/* ─── RESPONSIVE ───────────────────────────────────── */
+@media (max-width: 1200px) { .devadmin-kpi-grid { grid-template-columns: repeat(2, 1fr); } .devadmin-analytics-grid { grid-template-columns: 1fr; } }
+@media (max-width: 650px) {
+  .devadmin-page { padding: 20px 14px 35px; }
+  .devadmin-topbar { flex-direction: column; align-items: stretch; gap: 14px; }
+  .devadmin-kpi-grid { grid-template-columns: 1fr; gap: 12px; }
+  .devadmin-tabs-bar { gap: 7px; } .devadmin-tab-btn { font-size: 12px; padding: 8px 13px; }
+  .devadmin-content-section { padding: 16px; border-radius: 15px; }
+  .devadmin-table-toolbar { flex-direction: column; align-items: stretch; }
+  .devadmin-search-box { width: 100%; min-width: 0; max-width: none; }
+}
+@media (max-width: 420px) { .devadmin-page { padding: 17px 10px 30px; } .devadmin-brand h1 { font-size: 20px; } .devadmin-kpi-value { font-size: 22px; } }

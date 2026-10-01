@@ -12,7 +12,7 @@ export const initialUser = {
   phone: "+91 98765 43210",
   password: "password123",
   primaryRole: "Full Stack Developer",
-  role: "Full Stack Developer",
+  role: "STUDENT",
   location: "Pune, India",
   bio: "Full Stack Developer passionate about building high-impact web apps, AI integrations, and winning hackathons.",
   techSkills: "React, Node.js, Spring Boot, JavaScript, PostgreSQL, Python",
@@ -32,7 +32,7 @@ export const initialAdmin = {
   phone: "+91 98765 00000",
   password: "admin123",
   primaryRole: "Platform Administrator",
-  role: "Platform Administrator",
+  role: "ADMIN",
   location: "HQ Command Center",
   bio: "Platform Administrator with full permissions over hackathon challenges, user moderation, and AI telemetry.",
   techSkills: "System Architecture, Security, Cloud DevOps, AI Orchestration",
@@ -523,6 +523,23 @@ export function AppProvider({ children }) {
       setCurrentUser(hackAdminUser);
       setIsLoggedIn(true);
       return { success: true, user: hackAdminUser, isAdmin: true };
+    }
+
+    // Developer Admin fallback
+    if (cleanEmail === "devadmin@hackathonbuddy.com" && password === "devadmin123") {
+      const devAdminUser = {
+        ...initialAdmin,
+        id: "devadmin-1",
+        fullName: "Developer Admin",
+        firstName: "Developer",
+        lastName: "Admin",
+        email: "devadmin@hackathonbuddy.com",
+        primaryRole: "Developer Manager",
+        role: "DEVELOPER_ADMIN",
+      };
+      setCurrentUser(devAdminUser);
+      setIsLoggedIn(true);
+      return { success: true, user: devAdminUser, isAdmin: true };
     }
 
     const found = registeredUsers.find(

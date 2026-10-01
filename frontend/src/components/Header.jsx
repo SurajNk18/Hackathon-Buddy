@@ -28,15 +28,26 @@ function Header() {
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
 
   const unreadCount = notifications.filter((n) => n.unread).length;
-  const isDashboard = location.pathname === "/dashboard";
+  const isDashboard = 
+    location.pathname === "/student/dashboard" || 
+    location.pathname === "/dashboard" ||
+    location.pathname === "/super-admin/dashboard" ||
+    location.pathname === "/admin/hackathons/dashboard" ||
+    location.pathname === "/admin/developers/dashboard" ||
+    location.pathname === "/admin";
   const isAuthPage = location.pathname === "/" || location.pathname === "/login" || location.pathname === "/create-profile";
+
+  // Derive the user's role name (normalized to uppercase)
+  const userRole = (currentUser?.role || "STUDENT").toUpperCase().replace("ROLE_", "");
 
   if (isAuthPage) {
     return null;
   }
 
-  const navItems = [
-    { label: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
+  const isStudentRole = ["STUDENT", "DEVELOPER", "ORGANIZER", "COMPANY"].includes(userRole);
+
+  const navItems = isStudentRole ? [
+    { label: "Dashboard", icon: LayoutDashboard, path: "/student/dashboard" },
     { label: "Hackathons", icon: Trophy, path: "/hackathons" },
     { label: "Teams", icon: Users, path: "/teams" },
     { label: "AI Hub", icon: Brain, path: "/ai-hub" },
@@ -44,7 +55,7 @@ function Header() {
     { label: "Chat", icon: MessageSquare, path: "/chat" },
     { label: "Notifications", icon: Bell, path: "/notifications", badge: unreadCount },
     { label: "Profile", icon: User, path: "/profile" },
-  ];
+  ] : [];
 
   const handleLogout = () => {
     logout();
@@ -137,41 +148,90 @@ function Header() {
                   <User size={16} />
                   My Profile
                 </Link>
-                <Link
-                  to="/dashboard"
-                  className="dropdown-item"
-                  onClick={() => setUserDropdownOpen(false)}
-                >
-                  <LayoutDashboard size={16} />
-                  Dashboard
-                </Link>
-                <Link
-                  to="/admin"
-                  className="dropdown-item"
-                  onClick={() => setUserDropdownOpen(false)}
-                  style={{ color: "#38bdf8" }}
-                >
-                  <Sparkles size={16} />
-                  Admin Console
-                </Link>
-                <Link
-                  to="/hackathon-admin"
-                  className="dropdown-item"
-                  onClick={() => setUserDropdownOpen(false)}
-                  style={{ color: "#14b8a6" }}
-                >
-                  <Sparkles size={16} />
-                  Hackathon Admin
-                </Link>
-                <Link
-                  to="/super-admin"
-                  className="dropdown-item"
-                  onClick={() => setUserDropdownOpen(false)}
-                  style={{ color: "#e11d48" }}
-                >
-                  <Sparkles size={16} />
-                  Developer Console
-                </Link>
+                {!isStudentRole && (
+                  <Link
+                    to="/notifications"
+                    className="dropdown-item"
+                    onClick={() => setUserDropdownOpen(false)}
+                    style={{ justifyContent: "space-between" }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                      <Bell size={16} />
+                      Notifications
+                    </div>
+                    {unreadCount > 0 && (
+                      <span style={{
+                        background: "#e11d48",
+                        color: "white",
+                        fontSize: "10px",
+                        fontWeight: "bold",
+                        padding: "2px 6px",
+                        borderRadius: "10px"
+                      }}>
+                        {unreadCount}
+                      </span>
+                    )}
+                  </Link>
+                )}
+                {isStudentRole && (
+                  <Link
+                    to="/student/dashboard"
+                    className="dropdown-item"
+                    onClick={() => setUserDropdownOpen(false)}
+                  >
+                    <LayoutDashboard size={16} />
+                    Dashboard
+                  </Link>
+                )}
+                {/* Show role-specific admin links */}
+                {(userRole === "SUPER_ADMIN" || userRole === "ADMIN" || userRole === "HACKATHON_ADMIN" || userRole === "DEVELOPER_ADMIN") && (
+                  <>
+                    {userRole === "SUPER_ADMIN" && (
+                      <Link
+                        to="/super-admin/dashboard"
+                        className="dropdown-item"
+                        onClick={() => setUserDropdownOpen(false)}
+                        style={{ color: "#e11d48" }}
+                      >
+                        <Sparkles size={16} />
+                        Super Admin Console
+                      </Link>
+                    )}
+                    {userRole === "HACKATHON_ADMIN" && (
+                      <Link
+                        to="/admin/hackathons/dashboard"
+                        className="dropdown-item"
+                        onClick={() => setUserDropdownOpen(false)}
+                        style={{ color: "#14b8a6" }}
+                      >
+                        <Sparkles size={16} />
+                        Hackathon Admin
+                      </Link>
+                    )}
+                    {userRole === "DEVELOPER_ADMIN" && (
+                      <Link
+                        to="/admin/developers/dashboard"
+                        className="dropdown-item"
+                        onClick={() => setUserDropdownOpen(false)}
+                        style={{ color: "#6366f1" }}
+                      >
+                        <Sparkles size={16} />
+                        Developer Admin
+                      </Link>
+                    )}
+                    {userRole === "ADMIN" && (
+                      <Link
+                        to="/admin"
+                        className="dropdown-item"
+                        onClick={() => setUserDropdownOpen(false)}
+                        style={{ color: "#38bdf8" }}
+                      >
+                        <Sparkles size={16} />
+                        Admin Console
+                      </Link>
+                    )}
+                  </>
+                )}
                 <div className="dropdown-divider" />
                 <button className="dropdown-item logout" onClick={handleLogout}>
                   <LogOut size={16} />
