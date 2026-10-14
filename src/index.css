@@ -1,0 +1,1586 @@
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+
+  background: #08090f;
+
+  color: #ffffff;
+
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+
+/* =========================================================
+   LANDING PAGE
+========================================================= */
+
+.landing-page {
+  position: relative;
+
+  min-height: 100vh;
+
+  overflow-x: hidden;
+
+  background:
+    radial-gradient(
+      circle at 5% 15%,
+      rgba(72, 59, 180, 0.22),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 92% 70%,
+      rgba(131, 55, 190, 0.18),
+      transparent 28%
+    ),
+    #08090f;
+}
+
+
+/* =========================================================
+   LANDING NAVBAR
+========================================================= */
+
+.landing-navbar {
+  position: relative;
+
+  z-index: 20;
+
+  width: 100%;
+
+  max-width: 1450px;
+
+  margin: 0 auto;
+
+  height: 75px;
+
+  padding: 0 45px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+
+.landing-logo {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+
+.landing-logo-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6558ef,
+      #a64df0
+    );
+
+  font-size: 25px;
+
+  box-shadow:
+    0 8px 25px rgba(110, 82, 240, 0.30);
+}
+
+
+.landing-logo-name {
+  color: #ffffff;
+
+  font-size: 22px;
+
+  font-weight: 900;
+
+  letter-spacing: -0.7px;
+}
+
+
+.landing-logo-name span {
+  color: #7565ed;
+}
+
+
+.landing-nav-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+}
+
+
+.landing-login-btn {
+  border: none;
+
+  background: transparent;
+
+  color: #8e94a4;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  padding: 10px 15px;
+
+  transition: color 0.2s ease;
+}
+
+
+.landing-login-btn:hover {
+  color: #ffffff;
+}
+
+
+.landing-start-btn {
+  border: none;
+
+  padding: 12px 28px;
+
+  border-radius: 25px;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      100deg,
+      #6559ef,
+      #a94ff0
+    );
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+  box-shadow:
+    0 8px 25px rgba(120, 75, 235, 0.22);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.landing-start-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 30px rgba(120, 75, 235, 0.35);
+}
+
+
+/* =========================================================
+   LANDING HERO
+========================================================= */
+
+.landing-hero {
+  position: relative;
+
+  z-index: 5;
+
+  min-height: 650px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  padding:
+    60px 20px 100px;
+}
+
+
+.landing-badge {
+  padding: 8px 18px;
+
+  border-radius: 20px;
+
+  border: 1px solid #20243a;
+
+  background: #111320;
+
+  color: #20d2ed;
+
+  font-size: 12px;
+
+  font-weight: 900;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 35px;
+}
+
+
+.landing-heading {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  margin: 0;
+
+  font-size: clamp(55px, 7vw, 105px);
+
+  line-height: 0.98;
+
+  letter-spacing: -4px;
+
+  font-weight: 950;
+}
+
+
+.heading-white {
+  color: #f7f7f8;
+}
+
+
+.heading-gradient {
+  background:
+    linear-gradient(
+      90deg,
+      #6259ed,
+      #aa4eed
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+}
+
+
+.landing-description {
+  max-width: 820px;
+
+  margin-top: 42px;
+
+  color: #9ba2b3;
+
+  font-size: 18px;
+
+  line-height: 1.65;
+}
+
+
+.landing-buttons {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 18px;
+
+  margin-top: 45px;
+}
+
+
+.primary-button {
+  min-width: 335px;
+
+  height: 70px;
+
+  padding: 0 35px;
+
+  border: none;
+
+  border-radius: 40px;
+
+  background:
+    linear-gradient(
+      100deg,
+      #6359ed,
+      #a94ff0
+    );
+
+  color: #ffffff;
+
+  font-size: 17px;
+
+  font-weight: 900;
+
+  box-shadow:
+    0 15px 40px rgba(115, 75, 235, 0.22);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.primary-button:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 18px 45px rgba(115, 75, 235, 0.35);
+}
+
+
+.secondary-button {
+  min-width: 240px;
+
+  height: 70px;
+
+  padding: 0 30px;
+
+  border-radius: 40px;
+
+  border: 1px solid #30344d;
+
+  background: #181b2d;
+
+  color: #ffffff;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+
+.secondary-button:hover {
+  background: #20233a;
+
+  border-color: #484d70;
+}
+
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.hb-features {
+  position: relative;
+
+  z-index: 5;
+
+  width: 100%;
+
+  padding:
+    40px 20px 100px;
+}
+
+
+.hb-features-box {
+  width: 100%;
+
+  max-width: 1215px;
+
+  min-height: 255px;
+
+  margin: 0 auto;
+
+  padding: 38px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 45px;
+
+  border-radius: 30px;
+
+  border: 1px solid #252941;
+
+  background:
+    linear-gradient(
+      145deg,
+      #11121d,
+      #12131f
+    );
+
+  box-shadow:
+    0 0 35px rgba(89, 60, 185, 0.16);
+}
+
+
+.hb-feature {
+  padding: 5px;
+}
+
+
+.hb-feature-icon {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 17px;
+
+  background: #1d2636;
+
+  font-size: 28px;
+
+  margin-bottom: 22px;
+}
+
+
+.hb-feature h3 {
+  margin-bottom: 15px;
+
+  color: #ffffff;
+
+  font-size: 21px;
+
+  font-weight: 850;
+}
+
+
+.hb-feature p {
+  max-width: 300px;
+
+  color: #667086;
+
+  font-size: 15px;
+
+  line-height: 1.7;
+}
+
+
+.landing-footer {
+  position: relative;
+
+  z-index: 5;
+
+  padding:
+    55px 20px;
+
+  border-top: 1px solid #171a27;
+
+  text-align: center;
+}
+
+
+.landing-footer p {
+  color: #4d5669;
+
+  font-size: 14px;
+}
+
+
+.landing-background-glow {
+  position: fixed;
+
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  filter: blur(120px);
+
+  pointer-events: none;
+}
+
+
+.landing-glow-left {
+  left: -350px;
+  top: 20%;
+
+  background: rgba(68, 58, 190, 0.13);
+}
+
+
+.landing-glow-right {
+  right: -350px;
+  bottom: 0;
+
+  background: rgba(125, 47, 180, 0.13);
+}
+
+
+/* =========================================================
+   LOGIN PAGE
+========================================================= */
+
+.hb-login-page {
+  position: relative;
+
+  min-height: 100vh;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  display: flex;
+
+  justify-content: center;
+
+  background:
+    radial-gradient(
+      circle at 5% 50%,
+      rgba(65, 55, 175, 0.13),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 95% 55%,
+      rgba(120, 45, 170, 0.12),
+      transparent 25%
+    ),
+    #08090f;
+}
+
+
+.hb-login-back {
+  position: absolute;
+
+  top: 25px;
+  left: 30px;
+
+  z-index: 30;
+
+  border: none;
+
+  background: transparent;
+
+  color: #7d8495;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  transition: color 0.2s ease;
+}
+
+
+.hb-login-back:hover {
+  color: #ffffff;
+}
+
+
+.hb-login-wrapper {
+  position: relative;
+
+  z-index: 10;
+
+  width: 100%;
+
+  max-width: 520px;
+
+  padding:
+    80px 20px 60px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+}
+
+
+.hb-login-brand {
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  margin-bottom: 30px;
+}
+
+
+.hb-login-brand-icon {
+  width: 55px;
+  height: 55px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6759ee,
+      #a94ff0
+    );
+
+  font-size: 27px;
+
+  box-shadow:
+    0 10px 30px rgba(110, 82, 240, 0.3);
+}
+
+
+.hb-login-brand-text {
+  color: #ffffff;
+
+  font-size: 25px;
+
+  font-weight: 900;
+}
+
+
+.hb-login-brand-text span {
+  color: #7161ee;
+}
+
+
+.hb-login-title {
+  color: #f7f7f8;
+
+  font-size: 34px;
+
+  font-weight: 950;
+
+  letter-spacing: -1.5px;
+
+  text-align: center;
+}
+
+
+.hb-login-subtitle {
+  margin-top: 12px;
+
+  color: #70788b;
+
+  font-size: 16px;
+}
+
+
+.hb-login-card {
+  width: 100%;
+
+  margin-top: 48px;
+
+  padding: 30px;
+
+  border: 1px solid #22263b;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #12131e,
+      #10111a
+    );
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.40);
+}
+
+
+.hb-login-field {
+  margin-bottom: 25px;
+}
+
+
+.hb-login-field label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #7d8598;
+
+  font-size: 11px;
+
+  font-weight: 900;
+
+  letter-spacing: 1.5px;
+}
+
+
+.hb-login-field input {
+  width: 100%;
+
+  height: 54px;
+
+  padding: 0 18px;
+
+  outline: none;
+
+  border: 1px solid #292d48;
+
+  border-radius: 12px;
+
+  background: #090a10;
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.hb-login-field input::placeholder {
+  color: #454e61;
+}
+
+
+.hb-login-field input:focus {
+  border-color: #7161ee;
+
+  box-shadow:
+    0 0 0 3px rgba(113, 97, 238, 0.1);
+}
+
+
+.hb-login-submit {
+  width: 100%;
+
+  height: 60px;
+
+  margin-top: 3px;
+
+  border: none;
+
+  border-radius: 35px;
+
+  background:
+    linear-gradient(
+      100deg,
+      #6559ef,
+      #a84ff0
+    );
+
+  color: #ffffff;
+
+  font-size: 15px;
+
+  font-weight: 900;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.hb-login-submit:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 35px rgba(118, 75, 235, 0.3);
+}
+
+
+.hb-login-divider {
+  width: 100%;
+
+  height: 1px;
+
+  margin: 35px 0 28px;
+
+  background: #1e2130;
+}
+
+
+.hb-login-create {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 4px;
+
+  color: #6f7789;
+
+  font-size: 14px;
+}
+
+
+.hb-login-create button {
+  border: none;
+
+  background: transparent;
+
+  color: #7565f0;
+
+  font-size: 14px;
+
+  font-weight: 800;
+}
+
+
+.hb-login-create button:hover {
+  color: #a096ff;
+}
+
+
+.hb-login-glow-left {
+  position: fixed;
+
+  left: -280px;
+  top: 25%;
+
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  background: rgba(67, 57, 190, 0.12);
+
+  filter: blur(110px);
+
+  pointer-events: none;
+}
+
+
+.hb-login-glow-right {
+  position: fixed;
+
+  right: -300px;
+  bottom: 0;
+
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  background: rgba(120, 45, 190, 0.11);
+
+  filter: blur(110px);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   CREATE PROFILE PAGE
+========================================================= */
+
+.hb-profile-page {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 100vh;
+
+  overflow-x: hidden;
+
+  display: flex;
+
+  justify-content: center;
+
+  background:
+    radial-gradient(
+      circle at 5% 30%,
+      rgba(65, 55, 175, 0.15),
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at 95% 70%,
+      rgba(125, 45, 185, 0.13),
+      transparent 28%
+    ),
+    #08090f;
+}
+
+
+/* =========================================================
+   PROFILE BACK BUTTON
+========================================================= */
+
+.hb-profile-back {
+  position: fixed;
+
+  top: 25px;
+  left: 30px;
+
+  z-index: 50;
+
+  border: none;
+
+  background: transparent;
+
+  color: #7d8495;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+
+.hb-profile-back:hover {
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   PROFILE WRAPPER
+========================================================= */
+
+.hb-profile-wrapper {
+  position: relative;
+
+  z-index: 10;
+
+  width: 100%;
+
+  max-width: 850px;
+
+  padding:
+    35px 20px 80px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+}
+
+
+/* =========================================================
+   PROFILE BRAND
+========================================================= */
+
+.hb-profile-brand {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 13px;
+
+  margin-bottom: 25px;
+}
+
+
+.hb-profile-brand-icon {
+  width: 55px;
+  height: 55px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6759ee,
+      #a94ff0
+    );
+
+  font-size: 27px;
+
+  box-shadow:
+    0 10px 30px rgba(110, 82, 240, 0.3);
+}
+
+
+.hb-profile-brand-name {
+  color: #ffffff;
+
+  font-size: 25px;
+
+  font-weight: 900;
+
+  letter-spacing: -0.8px;
+}
+
+
+.hb-profile-brand-name span {
+  color: #7161ee;
+}
+
+
+/* =========================================================
+   PROFILE TITLE
+========================================================= */
+
+.hb-profile-title {
+  margin: 0;
+
+  color: #f5f5f7;
+
+  font-size: 34px;
+
+  line-height: 1;
+
+  font-weight: 950;
+
+  letter-spacing: -1.5px;
+
+  text-align: center;
+}
+
+
+.hb-profile-subtitle {
+  margin-top: 12px;
+
+  color: #70788b;
+
+  font-size: 16px;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   PROFILE CARD
+========================================================= */
+
+.hb-profile-card {
+  width: 100%;
+
+  margin-top: 48px;
+
+  padding: 30px;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  column-gap: 30px;
+
+  row-gap: 0;
+
+  border: 1px solid #22263b;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #12131e,
+      #10111a
+    );
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.42);
+}
+
+
+/* =========================================================
+   PROFILE COLUMN
+========================================================= */
+
+.hb-profile-column {
+  width: 100%;
+}
+
+
+/* =========================================================
+   SECTION TITLES
+========================================================= */
+
+.hb-profile-section-title {
+  margin-bottom: 25px;
+
+  font-size: 12px;
+
+  font-weight: 900;
+
+  letter-spacing: 2px;
+}
+
+
+.hb-profile-section-title.purple {
+  color: #7465f2;
+}
+
+
+.hb-profile-section-title.cyan {
+  color: #20d3ed;
+}
+
+
+/* =========================================================
+   PROFILE FIELD
+========================================================= */
+
+.hb-profile-field {
+  width: 100%;
+
+  margin-bottom: 21px;
+}
+
+
+.hb-profile-field label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #7c8497;
+
+  font-size: 11px;
+
+  font-weight: 900;
+
+  letter-spacing: 1.2px;
+}
+
+
+/* =========================================================
+   PROFILE INPUTS
+========================================================= */
+
+.hb-profile-field input,
+.hb-profile-field select {
+  display: block;
+
+  width: 100%;
+
+  height: 54px;
+
+  padding: 0 17px;
+
+  border: 1px solid #292d48;
+
+  border-radius: 12px;
+
+  outline: none;
+
+  background: #090a10;
+
+  color: #e9eaf0;
+
+  font-size: 14px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+
+.hb-profile-field input::placeholder {
+  color: #454e61;
+}
+
+
+.hb-profile-field input:focus,
+.hb-profile-field select:focus {
+  border-color: #7060ee;
+
+  background: #0b0c13;
+
+  box-shadow:
+    0 0 0 3px rgba(112, 96, 238, 0.1);
+}
+
+
+/* SELECT */
+
+.hb-profile-field select {
+  appearance: auto;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   INITIALIZE PROFILE BUTTON
+========================================================= */
+
+.hb-profile-submit {
+  grid-column: 1 / -1;
+
+  width: 100%;
+
+  height: 60px;
+
+  margin-top: 25px;
+
+  border: none;
+
+  border-radius: 35px;
+
+  background:
+    linear-gradient(
+      100deg,
+      #6559ef,
+      #a84ff0
+    );
+
+  color: #ffffff;
+
+  font-size: 15px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.2px;
+
+  box-shadow:
+    0 10px 30px rgba(118, 75, 235, 0.18);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.hb-profile-submit:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 15px 38px rgba(118, 75, 235, 0.32);
+}
+
+
+/* =========================================================
+   PROFILE DIVIDER
+========================================================= */
+
+.hb-profile-divider {
+  grid-column: 1 / -1;
+
+  width: 100%;
+
+  height: 1px;
+
+  margin-top: 35px;
+
+  background: #1d2030;
+}
+
+
+/* =========================================================
+   PROFILE LOGIN
+========================================================= */
+
+.hb-profile-login {
+  grid-column: 1 / -1;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 4px;
+
+  margin-top: 28px;
+
+  color: #6f7789;
+
+  font-size: 14px;
+}
+
+
+.hb-profile-login button {
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: #7565f0;
+
+  font-size: 14px;
+
+  font-weight: 800;
+}
+
+
+.hb-profile-login button:hover {
+  color: #a096ff;
+}
+
+
+/* =========================================================
+   PROFILE GLOWS
+========================================================= */
+
+.hb-profile-glow-left {
+  position: fixed;
+
+  left: -300px;
+  top: 25%;
+
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  background: rgba(67, 57, 190, 0.12);
+
+  filter: blur(110px);
+
+  pointer-events: none;
+}
+
+
+.hb-profile-glow-right {
+  position: fixed;
+
+  right: -300px;
+  bottom: 5%;
+
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  background: rgba(120, 45, 190, 0.12);
+
+  filter: blur(110px);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   PROFILE RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .hb-profile-wrapper {
+    padding:
+      45px 15px 60px;
+  }
+
+
+  .hb-profile-card {
+    grid-template-columns: 1fr;
+
+    padding: 24px;
+  }
+
+
+  .hb-profile-submit {
+    grid-column: 1;
+  }
+
+
+  .hb-profile-divider {
+    grid-column: 1;
+  }
+
+
+  .hb-profile-login {
+    grid-column: 1;
+  }
+
+
+  .hb-profile-column + .hb-profile-column {
+    margin-top: 10px;
+  }
+
+
+  .landing-navbar {
+    padding: 0 20px;
+  }
+
+
+  .landing-logo-name {
+    font-size: 18px;
+  }
+
+
+  .landing-nav-actions {
+    gap: 5px;
+  }
+
+
+  .landing-start-btn {
+    padding: 10px 17px;
+
+    font-size: 12px;
+  }
+
+
+  .landing-hero {
+    min-height: auto;
+
+    padding-top: 70px;
+  }
+
+
+  .landing-heading {
+    font-size: 48px;
+
+    letter-spacing: -2px;
+  }
+
+
+  .landing-description {
+    font-size: 15px;
+  }
+
+
+  .landing-buttons {
+    flex-direction: column;
+
+    width: 100%;
+  }
+
+
+  .primary-button,
+  .secondary-button {
+    width: 100%;
+
+    min-width: 0;
+  }
+
+
+  .hb-features-box {
+    grid-template-columns: 1fr;
+
+    gap: 35px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 450px) {
+
+  .landing-login-btn {
+    display: none;
+  }
+
+
+  .landing-logo-icon {
+    width: 42px;
+    height: 42px;
+
+    font-size: 21px;
+  }
+
+
+  .landing-logo-name {
+    font-size: 17px;
+  }
+
+
+  .landing-heading {
+    font-size: 40px;
+  }
+
+
+  .hb-login-wrapper {
+    padding-top: 70px;
+  }
+
+
+  .hb-login-card {
+    padding: 22px;
+  }
+
+
+  .hb-login-title,
+  .hb-profile-title {
+    font-size: 29px;
+  }
+
+
+  .hb-profile-brand-name,
+  .hb-login-brand-text {
+    font-size: 20px;
+  }
+
+
+  .hb-profile-card {
+    padding: 20px;
+  }
+
+  /* =========================================================
+   FIX CHROME AUTOFILL - PROFILE FORM
+========================================================= */
+
+.hb-profile-field input:-webkit-autofill,
+.hb-profile-field input:-webkit-autofill:hover,
+.hb-profile-field input:-webkit-autofill:focus,
+.hb-profile-field input:-webkit-autofill:active {
+  -webkit-text-fill-color: #e9eaf0 !important;
+
+  -webkit-box-shadow:
+    0 0 0 1000px #090a10 inset !important;
+
+  box-shadow:
+    0 0 0 1000px #090a10 inset !important;
+
+  background-color: #090a10 !important;
+
+  caret-color: #ffffff;
+
+  transition:
+    background-color 9999s ease-in-out 0s;
+}
+
+.hb-login-field input:-webkit-autofill,
+.hb-login-field input:-webkit-autofill:hover,
+.hb-login-field input:-webkit-autofill:focus,
+.hb-login-field input:-webkit-autofill:active {
+  -webkit-text-fill-color: #e9eaf0 !important;
+
+  -webkit-box-shadow:
+    0 0 0 1000px #090a10 inset !important;
+
+  box-shadow:
+    0 0 0 1000px #090a10 inset !important;
+
+  background-color: #090a10 !important;
+
+  caret-color: #ffffff;
+
+  transition:
+    background-color 9999s ease-in-out 0s;
+}
+}
